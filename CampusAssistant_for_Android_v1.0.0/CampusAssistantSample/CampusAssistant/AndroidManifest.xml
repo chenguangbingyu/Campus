@@ -1,0 +1,66 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="org.campusassistant.massample"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="15" />
+    
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <permission android:name="android.permission.BAIDU_LOCATION_SERVICE" />
+
+    <uses-permission android:name="android.permission.BAIDU_LOCATION_SERVICE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCES_MOCK_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_GPS" />
+    <uses-permission android:name="android.permission.CHANGE_CONFIGURATION" />
+
+    <application
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/title_activity_main" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name="org.campusassistant.controller.ActivityCurriculum" >
+        </activity>
+        <activity android:name="org.campusassistant.controller.ActivityCourse" >
+        </activity>
+        <activity android:name="org.campusassistant.controller.ActivityMapClassroomPosition" >
+        </activity>
+        <activity android:name="org.campusassistant.controller.ActivityMyCurriculum" >
+        </activity>
+        <activity android:name="org.campusassistant.controller.ActivityNewsContentView" >
+        </activity>
+        <activity android:name="org.campusassistant.controller.ActivityCampusBuilding" >
+        </activity>
+        <activity android:name="org.campusassistant.controller.ActivityFileExplorer" >
+        </activity>
+        <activity android:name="org.campusassistant.controller.ActivityManual">
+        </activity>
+        <activity android:name="org.campusassistant.controller.ActivityClassroom" >
+        </activity>
+        <activity android:name="org.campusassistant.controller.ActivityNews"></activity>
+        <activity android:name="org.campusassistant.controller.ActivityCampusBuildingView"></activity>
+        <activity android:name="org.campusassistant.controller.ActivityQuerySchedule"></activity>
+        <activity android:name="org.campusassistant.controller.ActivityShareFile"></activity>
+    </application>
+
+</manifest>
