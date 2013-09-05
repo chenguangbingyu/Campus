@@ -1,5 +1,7 @@
 package com.example.actionbarfragmentdemo;
 
+import Database.DAOHelper;
+import Network.Network;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
@@ -7,9 +9,12 @@ import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBar.Tab;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 
 import com.example.actionbarfragmentdemo.adapter.TabFragmentPagerAdapter;
+import com.example.actionbarfragmentdemo.constant.AppConstant;
+import com.example.actionbarfragmentdemo.database.MessageDB;
 
 public class MainActivity extends ActionBarActivity implements android.support.v7.app.ActionBar.TabListener{
 	
@@ -22,7 +27,20 @@ public class MainActivity extends ActionBarActivity implements android.support.v
 	private TabFragmentPagerAdapter mAdapter;
 	
 	
-
+	private void initSimulateServer(){
+		Network network = new Network();
+		network.addTestResponse("getMessages", AppConstant.DEBUG_PROTOCOL_MESSAGES);
+		Log.d(AppConstant.DEBUG_TAG,"add test response");
+	}
+	
+	private void initDB(){
+		DAOHelper.createInstance(this.getApplicationContext(), AppConstant.DB_NAME, AppConstant.DB_VERSION);
+		DAOHelper dbHelper = DAOHelper.getInstance();
+		if(dbHelper != null){
+			dbHelper.addDBTable(MessageDB.TABLE,new MessageDB());
+			Log.d(AppConstant.DEBUG_TAG,"add a table");
+		}
+	}
 		
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -59,76 +77,22 @@ public class MainActivity extends ActionBarActivity implements android.support.v
 			}
 		});
 		
-		
-		
 		for(int i = 0;i < 3; i++){
 			mActionBar.addTab(
 					mActionBar.newTab()
 					.setText("Tab" + (i + 1))
 					.setTabListener(this));
 		}
-		/**
-		Tab tab = mActionBar.newTab()
-				.setText("tab 1")
-				.setTabListener(new TabListener<LaunchUIFragment>(this,"tab 1",LaunchUIFragment.class));
 		
-		mActionBar.addTab(tab);
-		tab = mActionBar.newTab()
-				.setText("tab 2")
-				.setTabListener(new TabListener<CursorLoaderListFragment>(this,"tab 2",CursorLoaderListFragment.class));
-		mActionBar.addTab(tab);
-		tab = mActionBar.newTab()
-				.setText("tab 3")
-				.setTabListener(new TabListener<CommonUIFragment>(this, "tab 3", CommonUIFragment.class));
-		mActionBar.addTab(tab);
 		
-		**/
+		//初始化网络测试信息 
+		initSimulateServer();
+		//初始化数据库
+		initDB();
+
 	}
 	
 	
-	/**
-		public static class TabListener<T extends Fragment> implements android.support.v7.app.ActionBar.TabListener{
-		private Fragment mFragment;
-		private final Activity mActivity;
-		private final String mTag;
-		private final Class<T> mClass;
-
-		public TabListener(Activity activity, String tag, Class<T> clz){
-			this.mTag = tag;
-			this.mClass = clz;
-			this.mActivity = activity;
-		}
-		
-		@Override
-		public void onTabReselected(Tab arg0, FragmentTransaction arg1) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void onTabSelected(Tab arg0, FragmentTransaction arg1) {
-			// TODO Auto-generated method stub
-			if(mFragment == null){
-				mFragment = Fragment.instantiate(mActivity,mClass.getName());
-				
-				arg1.add(android.R.id.content,mFragment,mTag);
-			}else{
-				arg1.attach(mFragment);
-				//不可以commit
-			}
-		}
-
-		@Override
-		public void onTabUnselected(Tab arg0, FragmentTransaction arg1) {
-			// TODO Auto-generated method stub
-			if(mFragment != null){
-				arg1.detach(mFragment);
-				arg1.commit();
-			}
-		}
-		
-	}
-	*/
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.

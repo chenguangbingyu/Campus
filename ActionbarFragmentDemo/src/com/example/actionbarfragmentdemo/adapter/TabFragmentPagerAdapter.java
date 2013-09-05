@@ -5,9 +5,10 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.example.actionbarfragmentdemo.fragment.CommonUIFragment;
-import com.example.actionbarfragmentdemo.fragment.CursorLoaderListFragment;
-import com.example.actionbarfragmentdemo.fragment.LaunchUIFragment;
+import com.example.actionbarfragmentdemo.ui.fragment.CommonUIFragment;
+import com.example.actionbarfragmentdemo.ui.fragment.CursorLoaderListFragment;
+import com.example.actionbarfragmentdemo.ui.fragment.LaunchUIFragment;
+
 import static com.example.actionbarfragmentdemo.MainActivity.ARGUMENTS_NAME;
 import static com.example.actionbarfragmentdemo.MainActivity.MAX_TAB_SIZE;
 

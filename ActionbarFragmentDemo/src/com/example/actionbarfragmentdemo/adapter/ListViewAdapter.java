@@ -74,7 +74,7 @@ public class ListViewAdapter extends BaseAdapter{
 		 }
 		 
 		 Message message = listItems.get(arg0);
-		 listItemView.title.setText(message.getTitle());
+		 listItemView.title.setText(message.getMessageId());
 		 listItemView.content.setText(message.getContent());
 		 
 		 return arg1;

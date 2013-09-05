@@ -1,4 +1,4 @@
-package com.example.actionbarfragmentdemo.fragment;
+package com.example.actionbarfragmentdemo.ui.fragment;
 
 import com.example.actionbarfragmentdemo.R;
 
