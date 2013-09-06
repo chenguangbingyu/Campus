@@ -1,4 +1,4 @@
-package com.campus.prime.common;
+package com.campus.prime.common.utils;
 
 import java.lang.reflect.Type;
 import java.util.List;

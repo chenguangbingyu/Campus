@@ -10,7 +10,7 @@
      >
      
     <ImageView	
-        android:id="@+id/message_listitem_userface"
+        android:id="@+id/message_listitem_avater"
         style="@style/user_face_image"/>
     
     <LinearLayout

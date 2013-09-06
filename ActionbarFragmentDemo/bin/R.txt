@@ -275,10 +275,10 @@ int id left_icon 0x7f050031
 int id link 0x7f050044
 int id listMode 0x7f050001
 int id list_item 0x7f050027
+int id message_listitem_avater 0x7f050045
 int id message_listitem_commentCount 0x7f050049
 int id message_listitem_content 0x7f050047
 int id message_listitem_date 0x7f050048
-int id message_listitem_userface 0x7f050045
 int id message_listitem_username 0x7f050046
 int id middle 0x7f050012
 int id never 0x7f050009

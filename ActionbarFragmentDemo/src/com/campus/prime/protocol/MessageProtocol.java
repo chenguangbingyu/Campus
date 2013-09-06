@@ -6,7 +6,7 @@ import java.util.List;
 import android.content.Context;
 import android.util.Log;
 
-import com.campus.prime.common.JsonUtil;
+import com.campus.prime.common.utils.JsonUtil;
 import com.campus.prime.constant.AppConstant;
 import com.campus.prime.database.MessageDB;
 import com.campus.prime.model.Message;

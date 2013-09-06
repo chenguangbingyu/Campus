@@ -26,7 +26,7 @@ public class MessageListViewAdapter extends BaseAdapter{
 	
 	
 	static class ListItemView{
-		//public ImageView userface;
+		public ImageView avater;
 		public TextView username;;
 		public TextView content;
 		public TextView date;
@@ -38,9 +38,7 @@ public class MessageListViewAdapter extends BaseAdapter{
 		this.listContainer = LayoutInflater.from(context);
 		this.itemViewResource = resource;
 		this.listItems = data;
-		//Log.d(AppConstant.DEBUG_TAG,"adapter init test" + data.get(0).toString());
-		Log.d(AppConstant.DEBUG_TAG,"listViewadapter init");
-		Log.d(AppConstant.DEBUG_TAG,"init" + listItems.size() + "");
+		
 	}
 	
 	
@@ -88,7 +86,6 @@ public class MessageListViewAdapter extends BaseAdapter{
 		 listItemView.content.setText(message.getContent());
 		 listItemView.date.setText(message.getDateTime().toString());
 		 listItemView.commentCount.setText(message.getCommentCount() + "");
-		 Log.d(AppConstant.DEBUG_TAG,"list adapter add item");
 		 return arg1;
 		
 	}
