@@ -1,4 +1,4 @@
-package com.example.actionbarfragmentdemo;
+package com.campus.prime;
 
 import Database.DAOHelper;
 import Network.Network;
@@ -12,16 +12,17 @@ import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 
-import com.example.actionbarfragmentdemo.adapter.TabFragmentPagerAdapter;
-import com.example.actionbarfragmentdemo.constant.AppConstant;
-import com.example.actionbarfragmentdemo.database.MessageDB;
+import com.campus.prime.adapter.TabFragmentPagerAdapter;
+import com.campus.prime.constant.AppConstant;
+import com.campus.prime.database.MessageDB;
+import com.campus.prime.R;
 
 public class MainActivity extends ActionBarActivity implements android.support.v7.app.ActionBar.TabListener{
 	
 	
 	private ViewPager mViewPager;
 	
-	public static final int MAX_TAB_SIZE = 3;
+	public static final int MAX_TAB_SIZE = 2;
 	public static final String ARGUMENTS_NAME = "args";
 	
 	private TabFragmentPagerAdapter mAdapter;
@@ -46,6 +47,8 @@ public class MainActivity extends ActionBarActivity implements android.support.v
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
+		
 		
 		mViewPager = (ViewPager)this.findViewById(R.id.pager);
 		
@@ -77,7 +80,7 @@ public class MainActivity extends ActionBarActivity implements android.support.v
 			}
 		});
 		
-		for(int i = 0;i < 3; i++){
+		for(int i = 0;i < 2; i++){
 			mActionBar.addTab(
 					mActionBar.newTab()
 					.setText("Tab" + (i + 1))
@@ -89,7 +92,7 @@ public class MainActivity extends ActionBarActivity implements android.support.v
 		initSimulateServer();
 		//初始化数据库
 		initDB();
-
+		Log.d(AppConstant.DEBUG_TAG,"acticvity create");
 	}
 	
 	

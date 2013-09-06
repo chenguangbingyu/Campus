@@ -1,4 +1,4 @@
-package com.example.actionbarfragmentdemo.ui.fragment;
+package com.campus.prime.ui.fragment;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -19,12 +19,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
-import com.example.actionbarfragmentdemo.constant.AppConstant;
-import com.example.actionbarfragmentdemo.model.Message;
-import com.example.actionbarfragmentdemo.protocol.MessageProtocol;
-import com.example.actionbarfragmentdemo.protocol.MessageProtocol.ProtocolMessageDelegate;
+import com.campus.prime.adapter.MessageListViewAdapter;
+import com.campus.prime.constant.AppConstant;
+import com.campus.prime.model.Message;
+import com.campus.prime.protocol.MessageProtocol;
+import com.campus.prime.protocol.MessageProtocol.ProtocolMessageDelegate;
+import com.campus.prime.R;
 
-public class CursorLoaderListFragment extends ListFragment implements 
+public class MessagesListFragment extends ListFragment implements 
 		ProtocolMessageDelegate{
 		
 		
@@ -33,9 +35,10 @@ public class CursorLoaderListFragment extends ListFragment implements
 	//网络获取消息失败
 	private static final int MESSAGE_GETMESSAGE_FAILED = 1;
 	
-	private ArrayAdapter<String> mAdapter;
+	//private ArrayAdapter<String> mAdapter;
+	private MessageListViewAdapter mAdapter;
 	//需要在listView中显示的data
-	private List<String> mData;
+	private List<Message> mData;
 	
 	/**
 	 * 处理从网络接受消息线程发送的message
@@ -72,20 +75,7 @@ public class CursorLoaderListFragment extends ListFragment implements
 		//没有server测试
 		network.sendForTest(protocol,MessageProtocol.COMMAND,Network.GET);
 	}
-		
-	@Override
-	public void onActivityCreated(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
-		super.onActivityCreated(savedInstanceState);
-		
-		
-		setEmptyText("No Phone Number");
-		//actionbar上添加menu
-		setHasOptionsMenu(true);
-		
-		mData = new ArrayList<String>();
-
-	}
+	
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -93,17 +83,25 @@ public class CursorLoaderListFragment extends ListFragment implements
 		// TODO Auto-generated method stub
 		//从网络获取消息
 		getMessagesFromNetwork();
+		//初始化mData   又是巨坑无比，，，，，，
+		//mData = new ArrayList<Message>();
 		return super.onCreateView(inflater, container, savedInstanceState);
 	}
 	
 	@Override
-	public void onAttach(Activity activity) {
+	public void onActivityCreated(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-		super.onAttach(activity);
+		super.onActivityCreated(savedInstanceState);
+		
+		setEmptyText("No Messages");
+		//actionbar上添加menu
+		setHasOptionsMenu(true);
+		
 	}
 	
 	private void bindListView(){
-		mAdapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_expandable_list_item_1,mData);
+		//mAdapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_expandable_list_item_1,mData);
+		mAdapter = new MessageListViewAdapter(this.getActivity(), mData, R.layout.messages_listitem);
 		setListAdapter(mAdapter);
 	}
 
@@ -123,15 +121,21 @@ public class CursorLoaderListFragment extends ListFragment implements
 	@Override
 	public void getMessageSuccess(List<Message> messages) {
 		// TODO Auto-generated method stub
-		handler.sendEmptyMessage(MESSAGE_GETMESSAGE_SUCCESS);
+		
+		//log
 		if(messages != null){
 			//获取从网络得到的信息-----messages
 			Iterator<Message> iterator = messages.iterator();
 			while(iterator.hasNext()){
-				mData.add(iterator.next().getContent());
+				Log.d(AppConstant.DEBUG_TAG,"get message success" + iterator.next().toString());
 			}
-			Log.d(AppConstant.DEBUG_TAG,"get message success" + messages.toString());
+			
 		}
+		
+		mData = messages;
+		Log.d(AppConstant.DEBUG_TAG,"mData "+ mData.get(0).toString());
+		
+		handler.sendEmptyMessage(MESSAGE_GETMESSAGE_SUCCESS);
 	}
 
 	@Override

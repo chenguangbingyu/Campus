@@ -1,18 +1,21 @@
-package com.example.actionbarfragmentdemo.adapter;
+package com.campus.prime.adapter;
 
 import java.util.List;
 
-import com.example.actionbarfragmentdemo.R;
-import com.example.actionbarfragmentdemo.model.Message;
+import com.campus.prime.constant.AppConstant;
+import com.campus.prime.model.Message;
+import com.campus.prime.R;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-public class ListViewAdapter extends BaseAdapter{
+public class MessageListViewAdapter extends BaseAdapter{
 
 	
 	
@@ -23,15 +26,21 @@ public class ListViewAdapter extends BaseAdapter{
 	
 	
 	static class ListItemView{
-		public TextView title;
+		//public ImageView userface;
+		public TextView username;;
 		public TextView content;
+		public TextView date;
+		public TextView commentCount;
 	}
 	
-	public ListViewAdapter(Context context,List<Message> data, int resource){
+	public MessageListViewAdapter(Context context,List<Message> data, int resource){
 		this.context = context;
 		this.listContainer = LayoutInflater.from(context);
 		this.itemViewResource = resource;
 		this.listItems = data;
+		//Log.d(AppConstant.DEBUG_TAG,"adapter init test" + data.get(0).toString());
+		Log.d(AppConstant.DEBUG_TAG,"listViewadapter init");
+		Log.d(AppConstant.DEBUG_TAG,"init" + listItems.size() + "");
 	}
 	
 	
@@ -39,6 +48,7 @@ public class ListViewAdapter extends BaseAdapter{
 	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub
+		Log.d(AppConstant.DEBUG_TAG,listItems.size() + "");
 		return listItems.size();
 	}
 
@@ -63,20 +73,22 @@ public class ListViewAdapter extends BaseAdapter{
 			arg1 = listContainer.inflate(this.itemViewResource,null);
 			
 			listItemView= new ListItemView();
-			listItemView.title = (TextView)arg1.findViewById(R.id.title);
-			listItemView.content = (TextView)arg1.findViewById(R.id.content);
-			
+			listItemView.username = (TextView)arg1.findViewById(R.id.message_listitem_username);
+			listItemView.date = (TextView)arg1.findViewById(R.id.message_listitem_date);
+			listItemView.commentCount = (TextView)arg1.findViewById(R.id.message_listitem_commentCount);
+			listItemView.content = (TextView)arg1.findViewById(R.id.message_listitem_content);
 			arg1.setTag(listItemView);
-			
 			
 		 }else{
 			 listItemView = (ListItemView)arg1.getTag();
 		 }
 		 
 		 Message message = listItems.get(arg0);
-		 listItemView.title.setText(message.getMessageId());
+		 listItemView.username.setText(message.getUserId());
 		 listItemView.content.setText(message.getContent());
-		 
+		 listItemView.date.setText(message.getDateTime().toString());
+		 listItemView.commentCount.setText(message.getCommentCount() + "");
+		 Log.d(AppConstant.DEBUG_TAG,"list adapter add item");
 		 return arg1;
 		
 	}

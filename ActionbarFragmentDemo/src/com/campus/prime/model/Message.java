@@ -1,8 +1,8 @@
-package com.example.actionbarfragmentdemo.model;
+package com.campus.prime.model;
 
 import java.util.Date;
 
-import com.example.actionbarfragmentdemo.database.MessageDB;
+import com.campus.prime.database.MessageDB;
 
 import Database.DAOHelper;
 import android.content.ContentValues;

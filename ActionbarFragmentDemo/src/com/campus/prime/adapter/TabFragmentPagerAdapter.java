@@ -1,16 +1,16 @@
-package com.example.actionbarfragmentdemo.adapter;
+package com.campus.prime.adapter;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.example.actionbarfragmentdemo.ui.fragment.CommonUIFragment;
-import com.example.actionbarfragmentdemo.ui.fragment.CursorLoaderListFragment;
-import com.example.actionbarfragmentdemo.ui.fragment.LaunchUIFragment;
+import com.campus.prime.ui.fragment.CommonUIFragment;
+import com.campus.prime.ui.fragment.MessagesListFragment;
+import com.campus.prime.ui.fragment.LaunchUIFragment;
 
-import static com.example.actionbarfragmentdemo.MainActivity.ARGUMENTS_NAME;
-import static com.example.actionbarfragmentdemo.MainActivity.MAX_TAB_SIZE;
+import static com.campus.prime.MainActivity.ARGUMENTS_NAME;
+import static com.campus.prime.MainActivity.MAX_TAB_SIZE;
 
 public class TabFragmentPagerAdapter extends FragmentPagerAdapter{
 		
@@ -25,17 +25,18 @@ public class TabFragmentPagerAdapter extends FragmentPagerAdapter{
 			Fragment ft = null;
 			switch(arg0){
 			case 0:
-				ft = new LaunchUIFragment();
+				ft = new MessagesListFragment();
 				break;
 			case 1:
-				ft = new CursorLoaderListFragment();
+				ft = new LaunchUIFragment();
 				break;
 			default:
+				/*
 				ft = new CommonUIFragment();
-				
 				Bundle args = new Bundle();
 				args.putString(ARGUMENTS_NAME,"TAB" + (arg0 + 1));
 				ft.setArguments(args);
+				*/
 				break;
 					
 			}

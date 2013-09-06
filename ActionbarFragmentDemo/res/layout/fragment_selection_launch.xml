@@ -3,13 +3,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-    <Button android:id="@+id/bt_external"
-        android:layout_width="fill_parent"
+    <com.campus.prime.ui.widget.LinkView 
+        android:id="@+id/link"
         android:layout_height="wrap_content"
-        android:text="qq"/>
-    <Button android:id="@+id/bt_internal"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="wx"/>
-
+        android:layout_gravity="center"
+        />
+    
 </LinearLayout>
