@@ -12,4 +12,7 @@ public class AppConstant {
 	//public static final String DEBUG_PROTOCOL_MESSAGES = "";		
 	
 	public static final String DEBUG_TAG = "Good Luck!";
+	
+	public static final String IMAGE_URL = "http://d.hiphotos.baidu.com/album/w%3D2048/sign=0d2875910e2442a7ae0efaa5e57bac4b/f9198618367adab4d99454518ad4b31c8701e458.jpg/";
+
 }

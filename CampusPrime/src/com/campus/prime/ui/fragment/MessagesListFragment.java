@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import Network.Network;
+import RemoteImage.ImageTools.ImageToolsDelegate;
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
@@ -27,7 +28,7 @@ import com.campus.prime.protocol.MessageProtocol.ProtocolMessageDelegate;
 import com.campus.prime.R;
 
 public class MessagesListFragment extends ListFragment implements 
-		ProtocolMessageDelegate{
+		ProtocolMessageDelegate, ImageToolsDelegate{
 		
 		
 	//网络获取消息成功
@@ -143,6 +144,20 @@ public class MessagesListFragment extends ListFragment implements
 		// TODO Auto-generated method stub
 		handler.sendEmptyMessage(MESSAGE_GETMESSAGE_FAILED);
 		Log.d(AppConstant.DEBUG_TAG,"get messages failed");
+	}
+
+
+	@Override
+	public void downlaodImageFailed() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void downloadImageSuccess() {
+		// TODO Auto-generated method stub
+		
 	}
 		
 

@@ -6,6 +6,8 @@ import com.campus.prime.constant.AppConstant;
 import com.campus.prime.model.Message;
 import com.campus.prime.R;
 
+import RemoteImage.ImageTools;
+import RemoteImage.ImageTools.ImageToolsDelegate;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,13 +19,13 @@ import android.widget.TextView;
 
 public class MessageListViewAdapter extends BaseAdapter{
 
-	
-	
 	private Context context;//运行上下文
 	private LayoutInflater listContainer;//视图容器
-	private List<Message> listItems;//数据集合
+	private List<Message>listItems;//数据集合
 	private int itemViewResource;
 	
+	
+	private ImageToolsDelegate imageToolsDelegate;
 	
 	static class ListItemView{
 		public ImageView avater;
@@ -41,6 +43,10 @@ public class MessageListViewAdapter extends BaseAdapter{
 		
 	}
 	
+	public MessageListViewAdapter setImageToolsDelegate(ImageToolsDelegate delegate){
+		this.imageToolsDelegate = delegate;
+		return this;
+	}
 	
 	
 	@Override
@@ -71,6 +77,7 @@ public class MessageListViewAdapter extends BaseAdapter{
 			arg1 = listContainer.inflate(this.itemViewResource,null);
 			
 			listItemView= new ListItemView();
+			listItemView.avater = (ImageView)arg1.findViewById(R.id.message_listitem_avater);
 			listItemView.username = (TextView)arg1.findViewById(R.id.message_listitem_username);
 			listItemView.date = (TextView)arg1.findViewById(R.id.message_listitem_date);
 			listItemView.commentCount = (TextView)arg1.findViewById(R.id.message_listitem_commentCount);
@@ -82,6 +89,8 @@ public class MessageListViewAdapter extends BaseAdapter{
 		 }
 		 
 		 Message message = listItems.get(arg0);
+		 ImageTools imageTools = new ImageTools().setDelegate(imageToolsDelegate);
+		 imageTools.getImage(context, AppConstant.IMAGE_URL,listItemView.avater );
 		 listItemView.username.setText(message.getUserId());
 		 listItemView.content.setText(message.getContent());
 		 listItemView.date.setText(message.getDateTime().toString());
