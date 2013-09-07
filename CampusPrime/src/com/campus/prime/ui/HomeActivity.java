@@ -1,4 +1,4 @@
-package com.campus.prime;
+package com.campus.prime.ui;
 
 import Database.DAOHelper;
 import Network.Network;
@@ -7,7 +7,9 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBar.OnNavigationListener;
 import android.support.v7.app.ActionBar.Tab;
+import android.support.v7.app.ActionBar.TabListener;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -17,7 +19,7 @@ import com.campus.prime.constant.AppConstant;
 import com.campus.prime.database.MessageDB;
 import com.campus.prime.R;
 
-public class MainActivity extends ActionBarActivity implements android.support.v7.app.ActionBar.TabListener{
+public class HomeActivity extends ActionBarActivity implements TabListener,OnNavigationListener{
 	
 	
 	private ViewPager mViewPager;
@@ -27,6 +29,7 @@ public class MainActivity extends ActionBarActivity implements android.support.v
 	
 	private TabFragmentPagerAdapter mAdapter;
 	
+	private HomeDropdownListAdapter homeDropDownListAdapter;
 	
 	
 	
@@ -54,10 +57,11 @@ public class MainActivity extends ActionBarActivity implements android.support.v
 		
 		mViewPager = (ViewPager)this.findViewById(R.id.pager);
 		
-		final ActionBar mActionBar = getSupportActionBar();
-		mActionBar.setDisplayShowTitleEnabled(false);
-		mActionBar.setDisplayHomeAsUpEnabled(false);
-		mActionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+		final ActionBar actionBar = getSupportActionBar();
+		actionBar.setDisplayShowTitleEnabled(false);
+		actionBar.setDisplayHomeAsUpEnabled(true);
+		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+		
 		
 		mAdapter = new TabFragmentPagerAdapter(getSupportFragmentManager());
 				mViewPager.setAdapter(mAdapter);
@@ -66,7 +70,7 @@ public class MainActivity extends ActionBarActivity implements android.support.v
 			@Override
 			public void onPageSelected(int arg0) {
 				// TODO Auto-generated method stub
-				mActionBar.setSelectedNavigationItem(arg0);
+				actionBar.setSelectedNavigationItem(arg0);
 			}
 			
 			@Override
@@ -83,8 +87,8 @@ public class MainActivity extends ActionBarActivity implements android.support.v
 		});
 		
 		for(int i = 0;i < 2; i++){
-			mActionBar.addTab(
-					mActionBar.newTab()
+			actionBar.addTab(
+					actionBar.newTab()
 					.setText("Tab" + (i + 1))
 					.setTabListener(this));
 		}
@@ -124,6 +128,12 @@ public class MainActivity extends ActionBarActivity implements android.support.v
 	public void onTabUnselected(Tab arg0, FragmentTransaction arg1) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public boolean onNavigationItemSelected(int arg0, long arg1) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

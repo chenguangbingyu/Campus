@@ -46,12 +46,12 @@ public class UserDB extends Database{
 		return "Create Table " + TABLE_NAME + 
 				"(" + 
 				Database._ID + "integer primary key, " + 
-				COLUMN_ID + " text," + 
+				COLUMN_ID + " integer," + 
 				COLUMN_USERNAME + " text," +
 				COLUMN_LOGINNAME + " text," +
 				COLUMN_PASSWORD + " text," +
 				COLUMN_SEX + " integer," +
-				COLUMN_AGE + " numeric," +
+				COLUMN_AGE + " text," +
 				COLUMN_EMAIL + " text," +
 				COLUMN_PHONE + " text," +
 				COLUMN_AVATAR + " text," +

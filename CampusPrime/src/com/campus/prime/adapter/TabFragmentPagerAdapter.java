@@ -9,8 +9,8 @@ import com.campus.prime.ui.fragment.CommonUIFragment;
 import com.campus.prime.ui.fragment.MessagesListFragment;
 import com.campus.prime.ui.fragment.LaunchUIFragment;
 
-import static com.campus.prime.MainActivity.ARGUMENTS_NAME;
-import static com.campus.prime.MainActivity.MAX_TAB_SIZE;
+import static com.campus.prime.ui.HomeActivity.ARGUMENTS_NAME;
+import static com.campus.prime.ui.HomeActivity.MAX_TAB_SIZE;
 
 public class TabFragmentPagerAdapter extends FragmentPagerAdapter{
 		

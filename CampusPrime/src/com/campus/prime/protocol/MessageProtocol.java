@@ -28,13 +28,15 @@ public class MessageProtocol extends ProtocolBase{
 	 * @author absurd
 	 *
 	 */
+	/**
 	public interface ProtocolMessageDelegate{
 		public void getMessageSuccess(List<Message> messages);
 		public void getMessageFailed();
 	}
-	
+	**/
 	//创建delegate的对象
-	ProtocolMessageDelegate delegate;
+	//ProtocolMessageDelegate delegate;
+	ProtocolDelegate<Message> delegate;
 	Context context;
 	
 	public MessageProtocol setContext(Context context){
@@ -42,7 +44,7 @@ public class MessageProtocol extends ProtocolBase{
 		return this;
 	}
 	
-	public MessageProtocol setDelegate(ProtocolMessageDelegate delegate){
+	public MessageProtocol setDelegate(ProtocolDelegate<Message> delegate){
 		this.delegate = delegate;
 		return this;
 	}
@@ -66,6 +68,7 @@ public class MessageProtocol extends ProtocolBase{
 		MessageDB db = (MessageDB)DAOHelper.getInstance().getTable(MessageDB.TABLE);
 		db.clearAll();
 		//解析json
+		@SuppressWarnings("unchecked")
 		List<Message> messages = (List<Message>) JsonUtil.jsonToList(arg0,new TypeToken<List<Message>>(){}.getType());
 		if(messages != null){
 			//添加到数据库

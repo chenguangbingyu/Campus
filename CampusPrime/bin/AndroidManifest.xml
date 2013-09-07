@@ -7,10 +7,8 @@
     <uses-sdk
         android:minSdkVersion="14"
         android:targetSdkVersion="17" />
-    
-    
-	
-	<uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
@@ -19,14 +17,18 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:theme="@style/Theme.AppCompat.Light"
-            android:name="com.campus.prime.MainActivity"
-            android:label="@string/app_name" >
+            android:name="com.campus.prime.ui.HomeActivity"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.AppCompat.Light" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name="com.campus.prime.ui.MessageDetailActivity"
+            android:label="@string/title_activity_message_detail" >
         </activity>
     </application>
 

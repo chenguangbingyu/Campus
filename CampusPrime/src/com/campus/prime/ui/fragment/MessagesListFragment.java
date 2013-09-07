@@ -20,15 +20,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
+import com.campus.prime.adapter.MessageListViewAdapter_delete;
 import com.campus.prime.adapter.MessageListViewAdapter;
 import com.campus.prime.constant.AppConstant;
 import com.campus.prime.model.Message;
 import com.campus.prime.protocol.MessageProtocol;
-import com.campus.prime.protocol.MessageProtocol.ProtocolMessageDelegate;
+import com.campus.prime.protocol.ProtocolDelegate;
 import com.campus.prime.R;
 
 public class MessagesListFragment extends ListFragment implements 
-		ProtocolMessageDelegate, ImageToolsDelegate{
+		ProtocolDelegate<Message>, ImageToolsDelegate{
 		
 		
 	//网络获取消息成功
@@ -102,7 +103,7 @@ public class MessagesListFragment extends ListFragment implements
 	
 	private void bindListView(){
 		//mAdapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_expandable_list_item_1,mData);
-		mAdapter = new MessageListViewAdapter(this.getActivity(), mData, R.layout.messages_listitem);
+		mAdapter = new MessageListViewAdapter(this.getActivity(), mData, R.layout.messages_listitem).setImageToolsDelegate(this);
 		setListAdapter(mAdapter);
 	}
 

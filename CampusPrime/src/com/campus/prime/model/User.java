@@ -13,7 +13,7 @@ import android.util.SparseArray;
 
 
 public class User extends ModelBase{
-	private String userId;
+	private int userId;
 	
 	private String userName;
 	
@@ -64,12 +64,12 @@ public class User extends ModelBase{
 	}
 	
 	
-	public String getUserId() {
+	public int getUserId() {
 		return userId;
 	}
 
 
-	public void setUserId(String userId) {
+	public void setUserId(int userId) {
 		this.userId = userId;
 	}
 

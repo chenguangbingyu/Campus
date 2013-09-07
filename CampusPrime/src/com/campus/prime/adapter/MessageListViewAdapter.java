@@ -2,101 +2,61 @@ package com.campus.prime.adapter;
 
 import java.util.List;
 
+import com.campus.prime.R;
 import com.campus.prime.constant.AppConstant;
 import com.campus.prime.model.Message;
-import com.campus.prime.R;
 
 import RemoteImage.ImageTools;
 import RemoteImage.ImageTools.ImageToolsDelegate;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.ImageView;
-import android.widget.TextView;
 
-public class MessageListViewAdapter extends BaseAdapter{
+public class MessageListViewAdapter extends SingleTypeAdapter<Message>{
 
-	private Context context;//运行上下文
-	private LayoutInflater listContainer;//视图容器
-	private List<Message>listItems;//数据集合
-	private int itemViewResource;
-	
+	private ImageTools imageTools;
 	
 	private ImageToolsDelegate imageToolsDelegate;
 	
-	static class ListItemView{
-		public ImageView avater;
-		public TextView username;;
-		public TextView content;
-		public TextView date;
-		public TextView commentCount;
-	}
 	
-	public MessageListViewAdapter(Context context,List<Message> data, int resource){
-		this.context = context;
-		this.listContainer = LayoutInflater.from(context);
-		this.itemViewResource = resource;
-		this.listItems = data;
-		
-	}
 	
-	public MessageListViewAdapter setImageToolsDelegate(ImageToolsDelegate delegate){
-		this.imageToolsDelegate = delegate;
+	public MessageListViewAdapter setImageToolsDelegate(ImageToolsDelegate imageToolsDelegate){
+		this.imageToolsDelegate = imageToolsDelegate;
 		return this;
 	}
+
 	
-	
-	@Override
-	public int getCount() {
-		// TODO Auto-generated method stub
-		Log.d(AppConstant.DEBUG_TAG,listItems.size() + "");
-		return listItems.size();
+
+	public MessageListViewAdapter(Context context,final List<Message> messages, int layoutResourceId) {
+		super(LayoutInflater.from(context), R.layout.messages_listitem);
+		// TODO Auto-generated constructor stub
+		setItems(messages);
+		this.context = context;
 	}
 
 	@Override
-	public Object getItem(int arg0) {
+	protected int[] getChildViewIds() {
 		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public long getItemId(int arg0) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public View getView(int arg0, View arg1, ViewGroup arg2) {
-		// TODO Auto-generated method stub
-		 ListItemView listItemView= null;
-		 
-		 if(arg1 == null){
-			arg1 = listContainer.inflate(this.itemViewResource,null);
-			
-			listItemView= new ListItemView();
-			listItemView.avater = (ImageView)arg1.findViewById(R.id.message_listitem_avater);
-			listItemView.username = (TextView)arg1.findViewById(R.id.message_listitem_username);
-			listItemView.date = (TextView)arg1.findViewById(R.id.message_listitem_date);
-			listItemView.commentCount = (TextView)arg1.findViewById(R.id.message_listitem_commentCount);
-			listItemView.content = (TextView)arg1.findViewById(R.id.message_listitem_content);
-			arg1.setTag(listItemView);
-			
-		 }else{
-			 listItemView = (ListItemView)arg1.getTag();
-		 }
-		 
-		 Message message = listItems.get(arg0);
-		 ImageTools imageTools = new ImageTools().setDelegate(imageToolsDelegate);
-		 imageTools.getImage(context, AppConstant.IMAGE_URL,listItemView.avater );
-		 listItemView.username.setText(message.getUserId());
-		 listItemView.content.setText(message.getContent());
-		 listItemView.date.setText(message.getDateTime().toString());
-		 listItemView.commentCount.setText(message.getCommentCount() + "");
-		 return arg1;
+		return new int[]{R.id.message_listitem_avater,R.id.message_listitem_commentCount,
+				R.id.message_listitem_content,R.id.message_listitem_date,R.id.message_listitem_username};
 		
 	}
 
+	@Override
+	protected void update(int position, Message item) {
+		// TODO Auto-generated method stub
+		imageTools = new ImageTools().setDelegate(imageToolsDelegate);
+		if(this.context == null){
+			Log.d(AppConstant.DEBUG_TAG,"context is null");
+		}else if(imageView(0) == null){
+			Log.d(AppConstant.DEBUG_TAG,"imageView is null");
+		}
+		imageTools.getImage(this.context, AppConstant.IMAGE_URL, imageView(0));
+		
+		setText(1, item.getCommentCount() + "");
+		setText(2,item.getContent());
+		setText(3,item.getDateTime().toString());
+		setText(4,item.getUserId());
+	}
+	
 }
