@@ -28,6 +28,8 @@ public class MainActivity extends ActionBarActivity implements android.support.v
 	private TabFragmentPagerAdapter mAdapter;
 	
 	
+	
+	
 	private void initSimulateServer(){
 		Network network = new Network();
 		network.addTestResponse("getMessages", AppConstant.DEBUG_PROTOCOL_MESSAGES);
