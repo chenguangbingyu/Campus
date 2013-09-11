@@ -1,4 +1,4 @@
 Campus
 ======
-There is nothing now,but it will be excellent!
+Here is a pile of junk,but it will be excellent!
 ----------------------------------------------
