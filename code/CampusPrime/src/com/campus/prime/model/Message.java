@@ -16,7 +16,7 @@ public class Message extends ModelBase{
 	//message类型
 	private MessageType contentType;
 	//发布message的user
-	private String userId;
+	private int userId;
 	//图片uri
 	private String mediaUrl;
 	//message发布日期
@@ -62,12 +62,12 @@ public class Message extends ModelBase{
 	}
 
 
-	public String getUserId() {
+	public int getUserId() {
 		return userId;
 	}
 
 
-	public void setUserId(String userId) {
+	public void setUserId(int userId) {
 		this.userId = userId;
 	}
 

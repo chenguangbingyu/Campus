@@ -139,7 +139,7 @@ public class FileUtils {
 		return writeSucc;
 	}
 	/**
-	 * 根据文件路基获得文件名
+	 * 根据文件路基获得文件名,url中sign后面的部分为缓存中的文件名
 	 * @param filePath
 	 * @return
 	 */
@@ -147,7 +147,20 @@ public class FileUtils {
 		if(StringUtils.isEmpty(filePath)){
 			return "";
 		}
-		return filePath.substring(filePath.lastIndexOf(File.separator) + 1);
+		return filePath.substring(filePath.lastIndexOf('=') + 1);
 	}
+	
+	/**
+	 * 检查手机存储中是否缓存了文件
+	 * @param context
+	 * @param filename
+	 * @return
+	 */
+	public static boolean isExist(Context context,String filename){
+		File file = new File(context.getFilesDir() + File.separator + filename);
+		return file.exists();
+	}
+	
+	
 	
 }

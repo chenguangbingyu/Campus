@@ -6,5 +6,6 @@
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_message_detail">MessageDetailActivity</string>
     <string name="title_activity_user">UserActivity</string>
+    <string name="title_activity_avater_upload">AvaterUploadActivity</string>
 
 </resources>

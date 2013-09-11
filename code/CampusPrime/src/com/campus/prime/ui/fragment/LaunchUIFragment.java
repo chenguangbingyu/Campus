@@ -1,12 +1,6 @@
 package com.campus.prime.ui.fragment;
 
-import com.campus.prime.constant.AppConstant;
-import com.campus.prime.ui.widget.LinkView;
-import com.campus.prime.R;
-
-import RemoteImage.ImageTools;
 import RemoteImage.ImageTools.ImageToolsDelegate;
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -15,8 +9,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.campus.prime.R;
+import com.campus.prime.common.utils.BitmapManager;
+import com.campus.prime.constant.AppConstant;
+
 public class LaunchUIFragment extends Fragment implements ImageToolsDelegate{
 	
+	
+	private BitmapManager bitmapManager; 
 		
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -38,9 +38,9 @@ public class LaunchUIFragment extends Fragment implements ImageToolsDelegate{
 		super.onActivityCreated(savedInstanceState);
 		Log.d(AppConstant.DEBUG_TAG,"fragment on activity created");
 		ImageView imageView = (ImageView)getActivity().findViewById(R.id.imageView);
-		ImageTools imageTool = new ImageTools().setDelegate(this);
-		imageTool.getImage(this.getActivity(), AppConstant.IMAGE_URL, imageView);
 		
+		bitmapManager = BitmapManager.getInstance();
+		bitmapManager.loadBitmap(AppConstant.IMAGE_URL, imageView, null, 0, 0);
 	}
 	
 

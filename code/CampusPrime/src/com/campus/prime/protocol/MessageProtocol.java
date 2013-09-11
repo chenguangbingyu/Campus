@@ -19,7 +19,7 @@ public class MessageProtocol extends ProtocolBase{
 	
 	public static final String URL = "http://www.freeabsurd.com/";
 	
-	public static final String COMMAND = "getGroupMessages";
+	public static final String COMMAND = "getMessages";
 	
 
 	

@@ -4,19 +4,24 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.lang.ref.SoftReference;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 import Network.Network;
 import android.app.ApplicationErrorReport;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Handler;
 import android.os.Message;
 import android.widget.ImageView;
 
 /**
- * 异步线程加载头像工具类
+ * 异步线程加载图片工具类
  * bindAvatar(ImageView imageView, int userId)
  * @author absurd
  *
@@ -31,6 +36,7 @@ public class BitmapManager {
 	
 	private Bitmap defaultBmp;
 	
+	private static BitmapManager bitmapManager;
 	
 	static{
 		cache = new HashMap<String,SoftReference<Bitmap>>();
@@ -39,14 +45,18 @@ public class BitmapManager {
 		
 	}
 	
-	public BitmapManager() {
-		// TODO Auto-generated constructor stub
+	protected BitmapManager(){
+		
 	}
 	
-	public BitmapManager(Bitmap defaultBmp){ 
-		this.defaultBmp = defaultBmp;  
+	public static BitmapManager getInstance(){ 
+		if(bitmapManager == null){
+			bitmapManager = new BitmapManager();
+		}
+		return bitmapManager;
 	}
 	
+		
 	/**
 	 * 设置默认图片
 	 * @param bmp
@@ -70,7 +80,7 @@ public class BitmapManager {
 		if(bitmap != null){
 			imageView.setImageBitmap(bitmap);
 		}else{
-			//检查SD卡缓存
+			//检查文件中是否缓存图片
 			String filename = FileUtils.getFileName(url);
 			String filepath = imageView.getContext().getFilesDir() + File.separator + filename;
 			
@@ -129,22 +139,52 @@ public class BitmapManager {
 	}
 	
 	
-	private Bitmap downloadBitmap(String url,int width, int height){
+	private Bitmap downloadBitmap(String urlPath,int width, int height){
 		Bitmap bitmap = null;
 		try{
-			//http请求 下载图片
-			
+			//http请求   获取图片
+			URL url = new URL(urlPath);
+			HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+			conn.setRequestMethod("GET");
+			conn.setConnectTimeout(6 * 1000);
+			if(conn.getResponseCode() == 200){
+				InputStream inputStream = conn.getInputStream();
+				byte[] data = (byte[]) readStream(inputStream);
+				bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
+				
+			}
 			if(width > 0 && height > 0){
 				//制定显示图片的大小
 				bitmap = Bitmap.createScaledBitmap(bitmap, width, height, true);
 			}
-			cache.put(url,new SoftReference<Bitmap>(bitmap));
+			cache.put(urlPath,new SoftReference<Bitmap>(bitmap));
 		}catch(Exception e){
 			e.printStackTrace();
 		}
 		
 		return bitmap;
 	}
+	
+	/**
+	 * 读取从网络得到的IO流
+	 * @param inputStream
+	 * @return
+	 * @throws Exception
+	 */
+	private byte[] readStream(InputStream inputStream)throws Exception{
+		ByteArrayOutputStream outStream = new ByteArrayOutputStream();
+		byte[] buffer = new byte[1024];
+		int len = -1;
+		while((len = inputStream.read(buffer)) != -1){
+			outStream.write(buffer,0,len);
+		}
+		outStream.close();
+		inputStream.close();
+		
+		return outStream.toByteArray();
+		
+	}
+	
 	
 	/**
 	 * 从cache中获取图片

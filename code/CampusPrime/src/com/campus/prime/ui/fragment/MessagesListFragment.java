@@ -21,7 +21,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.campus.prime.adapter.MessageListViewAdapter_delete;
 import com.campus.prime.adapter.MessageListViewAdapter;
 import com.campus.prime.constant.AppConstant;
 import com.campus.prime.model.Message;
@@ -104,7 +103,7 @@ public class MessagesListFragment extends ListFragment implements
 	
 	private void bindListView(){
 		//mAdapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_expandable_list_item_1,mData);
-		mAdapter = new MessageListViewAdapter(this.getActivity(), mData, R.layout.messages_listitem).setImageToolsDelegate(this);
+		mAdapter = new MessageListViewAdapter(this.getActivity(), mData, R.layout.messages_listitem);
 		setListAdapter(mAdapter);
 	}
 

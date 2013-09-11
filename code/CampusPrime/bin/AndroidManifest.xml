@@ -30,6 +30,11 @@
             android:name="com.campus.prime.ui.UserActivity"
             android:label="@string/title_activity_user" >
         </activity>
+        <activity
+            android:name="com.campus.prime.ui.AvaterUploadActivity"
+            android:label="@string/title_activity_avater_upload" >
+            
+        </activity>
     </application>
 
 </manifest>

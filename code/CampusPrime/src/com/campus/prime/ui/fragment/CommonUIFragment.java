@@ -3,7 +3,6 @@ package com.campus.prime.ui.fragment;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.campus.prime.adapter.MessageListViewAdapter_delete;
 import com.campus.prime.model.Message;
 import com.campus.prime.R;
 
@@ -22,14 +21,15 @@ public class CommonUIFragment extends ListFragment{
 		Message m2 = new Message("title2","content2");
 		listItems.add(m2);
 	}**/
-	private MessageListViewAdapter_delete adapter = null;
+	
+	//private MessageListViewAdapter_delete adapter = null;
 
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onActivityCreated(savedInstanceState);
-		adapter = new MessageListViewAdapter_delete(this.getActivity(), listItems, R.layout.messages_listitem);
-		setListAdapter(adapter);
+		//adapter = new MessageListViewAdapter_delete(this.getActivity(), listItems, R.layout.messages_listitem);
+		//setListAdapter(adapter);
 	}
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {

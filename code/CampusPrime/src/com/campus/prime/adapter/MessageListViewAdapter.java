@@ -3,6 +3,7 @@ package com.campus.prime.adapter;
 import java.util.List;
 
 import com.campus.prime.R;
+import com.campus.prime.common.utils.BitmapManager;
 import com.campus.prime.constant.AppConstant;
 import com.campus.prime.model.Message;
 
@@ -13,10 +14,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 
 public class MessageListViewAdapter extends SingleTypeAdapter<Message>{
-
+	/**
 	private ImageTools imageTools;
 	
 	private ImageToolsDelegate imageToolsDelegate;
+	
+	
 	
 	
 	
@@ -25,13 +28,17 @@ public class MessageListViewAdapter extends SingleTypeAdapter<Message>{
 		return this;
 	}
 
+	**/
 	
+	
+	private BitmapManager bitmapManager;
 
 	public MessageListViewAdapter(Context context,final List<Message> messages, int layoutResourceId) {
 		super(LayoutInflater.from(context), R.layout.messages_listitem);
 		// TODO Auto-generated constructor stub
 		setItems(messages);
 		this.context = context;
+		bitmapManager = BitmapManager.getInstance();
 	}
 
 	@Override
@@ -45,18 +52,16 @@ public class MessageListViewAdapter extends SingleTypeAdapter<Message>{
 	@Override
 	protected void update(int position, Message item) {
 		// TODO Auto-generated method stub
+		/**
 		imageTools = new ImageTools().setDelegate(imageToolsDelegate);
-		if(this.context == null){
-			Log.d(AppConstant.DEBUG_TAG,"context is null");
-		}else if(imageView(0) == null){
-			Log.d(AppConstant.DEBUG_TAG,"imageView is null");
-		}
-		imageTools.getImage(this.context, AppConstant.IMAGE_URL, imageView(0));
 		
+		imageTools.getImage(this.context, AppConstant.IMAGE_URL, imageView(0));
+		**/
+		bitmapManager.loadBitmap(AppConstant.IMAGE_URL, imageView(0), null, 0, 0);
 		setText(1, item.getCommentCount() + "");
 		setText(2,item.getContent());
 		setText(3,item.getDateTime().toString());
-		setText(4,item.getUserId());
+		setText(4,item.getUserId() + "");
 	}
 	
 	

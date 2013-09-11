@@ -45,7 +45,7 @@ public class MessageDB extends Database{
 				COLUMN_ID + " text," +
 				COLUMN_CONTENT + " text," +
 				COLUMN_CONTENTTYPE + " text," +
-				COLUMN_USERID + " text," +
+				COLUMN_USERID + " integer," +
 				COLUMN_MEDIAURL + " text," +
 				COLUMN_DATETIME + " text," +
 				COLUMN_COMMENTCOUNT + " integer" +
