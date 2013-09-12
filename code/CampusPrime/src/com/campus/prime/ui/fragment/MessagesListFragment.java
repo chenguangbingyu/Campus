@@ -63,7 +63,9 @@ public class MessagesListFragment extends ListFragment implements
 			super.handleMessage(msg);
 		};
 	};
-	
+	/**
+	 * 
+	 */
 	private void getMessagesFromNetwork(){
 		//创建对应的model的protocol实例
 		MessageProtocol protocol = new MessageProtocol().setDelegate(this)
@@ -83,7 +85,7 @@ public class MessagesListFragment extends ListFragment implements
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-		//从网络获取消息
+		//从网络获取消息    
 		getMessagesFromNetwork();
 		//初始化mData   又是巨坑无比，，，，，，
 		//mData = new ArrayList<Message>();

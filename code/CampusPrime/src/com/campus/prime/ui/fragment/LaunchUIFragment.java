@@ -1,20 +1,31 @@
 package com.campus.prime.ui.fragment;
 
-import RemoteImage.ImageTools.ImageToolsDelegate;
+
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import com.campus.prime.R;
 import com.campus.prime.common.utils.BitmapManager;
 import com.campus.prime.constant.AppConstant;
 
-public class LaunchUIFragment extends Fragment implements ImageToolsDelegate{
+public class LaunchUIFragment extends Fragment {
 	
+	private Button photoButton;
+	private Button galleryButton;
+
+	private static final int FLAG_ACTION_IAMGE_CAPTURE = 0;
+	private static final int FLAG_IMAGE_CAPTURE_CROP = 1;
+	private static final int FLAG_IMAGE_GALLERY = 2;
 	
 	private BitmapManager bitmapManager; 
 		
@@ -38,22 +49,39 @@ public class LaunchUIFragment extends Fragment implements ImageToolsDelegate{
 		super.onActivityCreated(savedInstanceState);
 		Log.d(AppConstant.DEBUG_TAG,"fragment on activity created");
 		ImageView imageView = (ImageView)getActivity().findViewById(R.id.imageView);
+		photoButton = (Button)getActivity().findViewById(R.id.photo_button);
+		galleryButton = (Button)getActivity().findViewById(R.id.gallery_button);
+		photoButton.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				//拍照获取图片
+				Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+				//intent.putExtra(MediaStore.EXTRA_OUTPUT, uri); 将图片存入本地存储
+				startActivityForResult(intent, FLAG_ACTION_IAMGE_CAPTURE);
+			}
+		});
+		
+		galleryButton.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				//从相册中挑选图片
+				Intent intent = new Intent();
+				intent.setType("image/*");
+				intent.setAction(Intent.ACTION_GET_CONTENT);
+				startActivityForResult(intent,FLAG_IMAGE_GALLERY);
+
+			}
+		});
 		
 		bitmapManager = BitmapManager.getInstance();
-		bitmapManager.loadBitmap(AppConstant.IMAGE_URL, imageView, null, 0, 0);
+		
 	}
 	
+	
+	
 
-	@Override
-	public void downlaodImageFailed() {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	@Override
-	public void downloadImageSuccess() {
-		// TODO Auto-generated method stub
-		
-	}
 }
