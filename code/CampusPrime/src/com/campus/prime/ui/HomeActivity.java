@@ -13,14 +13,20 @@ import android.support.v7.app.ActionBar.TabListener;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
+import android.view.View;
+import android.view.ViewGroup.LayoutParams;
 
 import com.campus.prime.adapter.HomeDropdownListAdapter;
 import com.campus.prime.adapter.TabFragmentPagerAdapter;
 import com.campus.prime.constant.AppConstant;
 import com.campus.prime.database.MessageDB;
+import com.campus.prime.slidingmenu.SlidingActivityBase;
+import com.campus.prime.slidingmenu.SlidingActivityHelper;
+import com.campus.prime.slidingmenu.SlidingMenu;
 import com.campus.prime.R;
 
-public class HomeActivity extends ActionBarActivity implements TabListener,OnNavigationListener{
+public class HomeActivity extends BaseSlidingActivity implements TabListener,OnNavigationListener{
+	
 	
 	
 	private ViewPager mViewPager;
@@ -28,11 +34,12 @@ public class HomeActivity extends ActionBarActivity implements TabListener,OnNav
 	public static final int MAX_TAB_SIZE = 2;
 	public static final String ARGUMENTS_NAME = "args";
 	
+	
 	private TabFragmentPagerAdapter mAdapter;
 	
 	private HomeDropdownListAdapter homeDropDownListAdapter;
 	
-	
+	private SlidingMenu slidingMenu;
 	
 	private void initSimulateServer(){
 		Network network = new Network();
@@ -97,11 +104,27 @@ public class HomeActivity extends ActionBarActivity implements TabListener,OnNav
 		
 		//初始化网络测试信息 
 		initSimulateServer();
+		initSlidingMenu();
 		//初始化数据库
 		initDB();
 		Log.d(AppConstant.DEBUG_TAG,"acticvity create");
 	}
 	
+	
+	
+	
+	private void initSlidingMenu() {
+        setBehindContentView(R.layout.behind_slidingmenu);
+        // customize the SlidingMenu
+        slidingMenu = getSlidingMenu();
+        slidingMenu.setShadowWidthRes(R.dimen.shadow_width);
+        slidingMenu.setBehindOffsetRes(R.dimen.slidingmenu_offset);
+        // slidingMenu.setFadeDegree(0.35f);
+        slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
+        slidingMenu.setShadowDrawable(R.drawable.slidingmenu_shadow);
+        //slidingMenu.setShadowWidth(20);
+        slidingMenu.setBehindScrollScale(0);
+    }
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -136,5 +159,7 @@ public class HomeActivity extends ActionBarActivity implements TabListener,OnNav
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+
 
 }
