@@ -39,7 +39,7 @@ code<br>
 >├ com.campus.prime.ui.widget --自定义view组件包<br>
 
 
-** 2、CampusPrime/libs/目录**<br>
+**2、CampusPrime/libs/目录**<br>
 libs目录用于存放项目引用的第三方jar包。
 
 libs目录里的jar包文件：
