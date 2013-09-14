@@ -16,14 +16,14 @@ import android.view.LayoutInflater;
 public class MessageListViewAdapter extends SingleTypeAdapter<Message>{
 	
 	
-	private BitmapManager bitmapManager;
+	private BitmapManager mBitmapManager;
 
 	public MessageListViewAdapter(Context context,final List<Message> messages, int layoutResourceId) {
 		super(LayoutInflater.from(context), R.layout.messages_listitem);
 		// TODO Auto-generated constructor stub
 		setItems(messages);
 		this.context = context;
-		bitmapManager = BitmapManager.getInstance();
+		mBitmapManager = BitmapManager.getInstance();
 	}
 
 	@Override
@@ -37,7 +37,7 @@ public class MessageListViewAdapter extends SingleTypeAdapter<Message>{
 	@Override
 	protected void update(int position, Message item) {
 		// TODO Auto-generated method stub
-		bitmapManager.loadBitmap(AppConstant.IMAGE_URL, imageView(0), null, 0, 0);
+		mBitmapManager.loadBitmap(AppConstant.IMAGE_URL, imageView(0), null, 0, 0);
 		setText(1, item.getCommentCount() + "");
 		setText(2,item.getContent());
 		setText(3,item.getDateTime().toString());

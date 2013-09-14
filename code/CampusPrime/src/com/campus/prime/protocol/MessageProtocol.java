@@ -37,16 +37,16 @@ public class MessageProtocol extends ProtocolBase{
 	**/
 	//创建delegate的对象
 	//ProtocolMessageDelegate delegate;
-	ProtocolDelegate<Message> delegate;
-	Context context;
+	ProtocolDelegate<Message> mDelegate;
+	Context mContext;
 	
 	public MessageProtocol setContext(Context context){
-		this.context = context;
+		this.mContext = context;
 		return this;
 	}
 	
 	public MessageProtocol setDelegate(ProtocolDelegate<Message> delegate){
-		this.delegate = delegate;
+		this.mDelegate = delegate;
 		return this;
 	}
 	
@@ -77,13 +77,13 @@ public class MessageProtocol extends ProtocolBase{
 			Iterator<Message> iterator = messages.iterator();
 			while(iterator.hasNext()){
 				message = iterator.next();
-				message.setContext(context);
+				message.setContext(mContext);
 				Log.d(AppConstant.DEBUG_TAG,message.toString());
 				message.saveToDB();
 				
 			}
 		}
-		delegate.getMessageSuccess(messages);
+		mDelegate.getMessageSuccess(messages);
 		return true;
 	}
 	

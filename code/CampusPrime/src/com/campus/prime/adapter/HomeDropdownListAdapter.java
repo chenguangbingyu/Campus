@@ -16,8 +16,8 @@ import android.widget.ImageView;
 
 public class HomeDropdownListAdapter extends SingleTypeAdapter<Object>{
 	
-	private final LayoutInflater inflater;
-	private final BitmapManager bitmapManager;
+	private final LayoutInflater mInflater;
+	private final BitmapManager mBitmapManager;
 	
 	
 	private static final int ACTION_PROFILE = 0;
@@ -57,9 +57,9 @@ public class HomeDropdownListAdapter extends SingleTypeAdapter<Object>{
 	public HomeDropdownListAdapter(final Context context,final User user){
 		super(context,R.layout.org_item);
 		
-		inflater = LayoutInflater.from(context);
+		mInflater = LayoutInflater.from(context);
 		setOrgs(user);
-		bitmapManager = BitmapManager.getInstance();
+		mBitmapManager = BitmapManager.getInstance();
 	}
 
 	@Override
@@ -73,7 +73,7 @@ public class HomeDropdownListAdapter extends SingleTypeAdapter<Object>{
 	public View getDropDownView(int position, View convertView, ViewGroup parent) {
 		// TODO Auto-generated method stub
 		if(convertView == null){
-			convertView = initialize(inflater.inflate(R.layout.org_dropdown_item, null));
+			convertView = initialize(mInflater.inflate(R.layout.org_dropdown_item, null));
 			
 		}
 		update(position,convertView,getItem(position));
@@ -117,8 +117,8 @@ public class HomeDropdownListAdapter extends SingleTypeAdapter<Object>{
 			break;
 		default:
 			//User user = (User)item;
-			setText(0,"Absur");
-			bitmapManager.loadBitmap(AppConstant.IMAGE_URL, imageView(1), null, 0, 0);
+			setText(0,"Absurd");
+			mBitmapManager.loadBitmap(AppConstant.IMAGE_URL, imageView(1), null, 0, 0);
 		}
 	}
 }

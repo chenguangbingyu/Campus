@@ -27,9 +27,6 @@ public class TabFragmentPagerAdapter extends FragmentPagerAdapter{
 			case 0:
 				ft = new MessagesListFragment();
 				break;
-			case 1:
-				ft = new LaunchUIFragment();
-				break;
 			default:
 				break;
 					

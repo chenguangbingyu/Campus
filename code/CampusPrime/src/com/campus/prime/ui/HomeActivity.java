@@ -34,17 +34,17 @@ public class HomeActivity extends BaseSlidingActivity implements TabListener,OnN
 	
 	
 	
-	private ViewPager mViewPager;
 	
-	public static final int MAX_TAB_SIZE = 2;
+	
+	public static final int MAX_TAB_SIZE = 1;
 	public static final String ARGUMENTS_NAME = "args";
 	
-	
+	private ViewPager mViewPager;
 	private TabFragmentPagerAdapter mAdapter;
 	
-	private HomeDropdownListAdapter homeDropDownListAdapter;
+	private HomeDropdownListAdapter mHomeDropDownListAdapter;
 	
-	private SlidingMenu slidingMenu;
+	private SlidingMenu mSlidingMenu;
 	
 	private void initSimulateServer(){
 		Network network = new Network();
@@ -86,12 +86,13 @@ public class HomeActivity extends BaseSlidingActivity implements TabListener,OnN
 	private void configureActionBar(ActionBar actionBar){
 		actionBar.setDisplayShowTitleEnabled(false);
 		actionBar.setDisplayHomeAsUpEnabled(false);
+		//Òþ²ØÍ¼±ê  it's a fuck!
 		actionBar.setIcon(null);
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
 		
-		homeDropDownListAdapter = new HomeDropdownListAdapter(this, new User());
+		mHomeDropDownListAdapter = new HomeDropdownListAdapter(this, new User());
 		//SpinnerAdapter adapter = ArrayAdapter.createFromResource(this, R.array.test, android.R.layout.simple_spinner_dropdown_item);
-		actionBar.setListNavigationCallbacks(homeDropDownListAdapter, new OnNavigationListener() {
+		actionBar.setListNavigationCallbacks(mHomeDropDownListAdapter, new OnNavigationListener() {
 			
 			@Override
 			public boolean onNavigationItemSelected(int arg0, long arg1) {
@@ -135,7 +136,7 @@ public class HomeActivity extends BaseSlidingActivity implements TabListener,OnN
 			}
 		});
 		
-		for(int i = 0;i < 2; i++){
+		for(int i = 0;i < 1; i++){
 			actionBar.addTab(
 					actionBar.newTab()
 					.setText("Tab" + (i + 1))
@@ -149,14 +150,14 @@ public class HomeActivity extends BaseSlidingActivity implements TabListener,OnN
 	private void initSlidingMenu() {
         setBehindContentView(R.layout.behind_slidingmenu);
         // customize the SlidingMenu
-        slidingMenu = getSlidingMenu();
-        slidingMenu.setShadowWidthRes(R.dimen.shadow_width);
-        slidingMenu.setBehindOffsetRes(R.dimen.slidingmenu_offset);
+        mSlidingMenu = getSlidingMenu();
+        mSlidingMenu.setShadowWidthRes(R.dimen.shadow_width);
+        mSlidingMenu.setBehindOffsetRes(R.dimen.slidingmenu_offset);
         // slidingMenu.setFadeDegree(0.35f);
-        slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
-        slidingMenu.setShadowDrawable(R.drawable.slidingmenu_shadow);
+        mSlidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
+        mSlidingMenu.setShadowDrawable(R.drawable.slidingmenu_shadow);
         //slidingMenu.setShadowWidth(20);
-        slidingMenu.setBehindScrollScale(0);
+        mSlidingMenu.setBehindScrollScale(0);
     }
 	
 	@Override

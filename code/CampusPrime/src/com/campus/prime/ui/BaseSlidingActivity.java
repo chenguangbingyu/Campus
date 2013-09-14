@@ -12,7 +12,7 @@ import com.campus.prime.slidingmenu.SlidingMenu;
 
 public class BaseSlidingActivity extends BaseActivity implements SlidingActivityBase{
 
-	private SlidingActivityHelper slidingHelper;
+	private SlidingActivityHelper mSlidingHelper;
 	
 	
 	
@@ -20,8 +20,8 @@ public class BaseSlidingActivity extends BaseActivity implements SlidingActivity
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		slidingHelper = new SlidingActivityHelper(this);
-		slidingHelper.onCreate(savedInstanceState);
+		mSlidingHelper = new SlidingActivityHelper(this);
+		mSlidingHelper.onCreate(savedInstanceState);
 	}
 	
 	
@@ -29,7 +29,7 @@ public class BaseSlidingActivity extends BaseActivity implements SlidingActivity
 	protected void onPostCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onPostCreate(savedInstanceState);
-		slidingHelper.onPostCreate(savedInstanceState);
+		mSlidingHelper.onPostCreate(savedInstanceState);
 	}
 	
 	
@@ -41,7 +41,7 @@ public class BaseSlidingActivity extends BaseActivity implements SlidingActivity
 		if(v != null){
 			return v;
 		}
-		return slidingHelper.findViewById(id);
+		return mSlidingHelper.findViewById(id);
 	}
 	
 	
@@ -49,7 +49,7 @@ public class BaseSlidingActivity extends BaseActivity implements SlidingActivity
 	protected void onSaveInstanceState(Bundle outState) {
 		// TODO Auto-generated method stub
 		super.onSaveInstanceState(outState);
-		slidingHelper.onSaveInstanceState(outState);
+		mSlidingHelper.onSaveInstanceState(outState);
 	}
 	
 	
@@ -70,7 +70,7 @@ public class BaseSlidingActivity extends BaseActivity implements SlidingActivity
 	public void setContentView(View view, LayoutParams params) {
 		// TODO Auto-generated method stub
 		super.setContentView(view,params);
-		slidingHelper.registerAboveContentView(view, params);
+		mSlidingHelper.registerAboveContentView(view, params);
 	}
 	
 	
@@ -78,7 +78,7 @@ public class BaseSlidingActivity extends BaseActivity implements SlidingActivity
 	@Override
 	public void setBehindContentView(View view, LayoutParams layoutParams) {
 		// TODO Auto-generated method stub
-		slidingHelper.setBehindContentView(view, layoutParams);
+		mSlidingHelper.setBehindContentView(view, layoutParams);
 	}
 
 	@Override
@@ -96,38 +96,38 @@ public class BaseSlidingActivity extends BaseActivity implements SlidingActivity
 	@Override
 	public SlidingMenu getSlidingMenu() {
 		// TODO Auto-generated method stub
-		return slidingHelper.getSlidingMenu();
+		return mSlidingHelper.getSlidingMenu();
 	}
 
 	@Override
 	public void toggle() {
 		// TODO Auto-generated method stub
-		slidingHelper.toggle();
+		mSlidingHelper.toggle();
 	}
 
 	@Override
 	public void showContent() {
 		// TODO Auto-generated method stub
-		slidingHelper.showContent();
+		mSlidingHelper.showContent();
 	}
 
 	@Override
 	public void showMenu() {
 		// TODO Auto-generated method stub
-		slidingHelper.showMenu();
+		mSlidingHelper.showMenu();
 	}
 
 	@Override
 	public void showSecondaryMenu() {
 		// TODO Auto-generated method stub
-		slidingHelper.showSecondaryMenu();
+		mSlidingHelper.showSecondaryMenu();
 		
 	}
 
 	@Override
 	public void setSlidingActionBarEnabled(boolean slidingActionBarEnabled) {
 		// TODO Auto-generated method stub
-		slidingHelper.setSlidingActionBarEnabled(slidingActionBarEnabled);
+		mSlidingHelper.setSlidingActionBarEnabled(slidingActionBarEnabled);
 	}
 	
 	

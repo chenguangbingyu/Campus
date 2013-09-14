@@ -19,17 +19,17 @@ public class UserProtocol extends ProtocolBase{
 	
 	public static final String COMMAND = "getUserInfo";
 
-	private ProtocolDelegate<User> delegate;
-	private Context context;
+	private ProtocolDelegate<User> mDelegate;
+	private Context mContext;
 	
 	
 	public UserProtocol setDelegate(ProtocolDelegate<User> delegate){
-		this.delegate = delegate;
+		this.mDelegate = delegate;
 		return this;
 	}
 	
 	public UserProtocol setContext(Context context){
-		this.context = context;
+		this.mContext = context;
 		return this;
 	}
 	
@@ -51,11 +51,11 @@ public class UserProtocol extends ProtocolBase{
 			Iterator<User> iterator = users.iterator();
 			while(iterator.hasNext()){
 				user = iterator.next();
-				user.setContext(context);
+				user.setContext(mContext);
 				user.saveToDB();
 			}
 		}
-		delegate.getMessageSuccess(users);
+		mDelegate.getMessageSuccess(users);
 		return true;
 	}
 
