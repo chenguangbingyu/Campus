@@ -31,12 +31,6 @@ public class TabFragmentPagerAdapter extends FragmentPagerAdapter{
 				ft = new LaunchUIFragment();
 				break;
 			default:
-				/*
-				ft = new CommonUIFragment();
-				Bundle args = new Bundle();
-				args.putString(ARGUMENTS_NAME,"TAB" + (arg0 + 1));
-				ft.setArguments(args);
-				*/
 				break;
 					
 			}

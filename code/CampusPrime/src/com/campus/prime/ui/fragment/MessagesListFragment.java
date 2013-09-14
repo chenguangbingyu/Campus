@@ -7,6 +7,9 @@ import java.util.List;
 import Network.Network;
 import RemoteImage.ImageTools.ImageToolsDelegate;
 import android.app.Activity;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.ListFragment;
@@ -26,11 +29,14 @@ import com.campus.prime.constant.AppConstant;
 import com.campus.prime.model.Message;
 import com.campus.prime.protocol.MessageProtocol;
 import com.campus.prime.protocol.ProtocolDelegate;
+import com.campus.prime.ui.CreateMessageActivity;
 import com.campus.prime.R;
 
 public class MessagesListFragment extends ListFragment implements 
 		ProtocolDelegate<Message>, ImageToolsDelegate{
 		
+	
+	private static final int FLAG_CREATE_MESSAGE = 0;
 		
 	//网络获取消息成功
 	private static final int MESSAGE_GETMESSAGE_SUCCESS = 0;
@@ -114,14 +120,50 @@ public class MessagesListFragment extends ListFragment implements
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		// TODO Auto-generated method stub
 		super.onCreateOptionsMenu(menu, inflater);
+		/**
 		MenuItem item = menu.add("Search");
 		item.setIcon(android.R.drawable.ic_menu_search);
 		item.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
 		SearchView sv = new SearchView(getActivity());
 		sv.setOnQueryTextListener(null);
 		item.setActionView(sv);
+		**/
+		inflater.inflate(R.menu.message_list_actions,menu);
+		
 	}
 
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// TODO Auto-generated method stub
+		switch(item.getItemId()){
+			case R.id.action_edit:
+				//转到edit——fragment
+				Intent intent = new Intent();
+				intent.setClass(getActivity(), CreateMessageActivity.class);
+				startActivityForResult(intent, FLAG_CREATE_MESSAGE);
+				return true;
+			case R.id.action_refresh:
+				return true;
+			default :
+				return super.onOptionsItemSelected(item);
+			
+		}
+		
+	}
+	
+	
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		// TODO Auto-generated method stub
+		super.onActivityResult(requestCode, resultCode, data);
+		if(requestCode == FLAG_CREATE_MESSAGE){
+			return;
+		}
+	}
+	
+	
+	
+	
 	@Override
 	public void getMessageSuccess(List<Message> messages) {
 		// TODO Auto-generated method stub

@@ -2,6 +2,7 @@ package com.campus.prime.ui;
 
 import Database.DAOHelper;
 import Network.Network;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
@@ -14,12 +15,16 @@ import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.view.Window;
 import android.view.ViewGroup.LayoutParams;
+import android.widget.ArrayAdapter;
+import android.widget.SpinnerAdapter;
 
 import com.campus.prime.adapter.HomeDropdownListAdapter;
 import com.campus.prime.adapter.TabFragmentPagerAdapter;
 import com.campus.prime.constant.AppConstant;
 import com.campus.prime.database.MessageDB;
+import com.campus.prime.model.User;
 import com.campus.prime.slidingmenu.SlidingActivityBase;
 import com.campus.prime.slidingmenu.SlidingActivityHelper;
 import com.campus.prime.slidingmenu.SlidingMenu;
@@ -62,14 +67,50 @@ public class HomeActivity extends BaseSlidingActivity implements TabListener,OnN
 		setContentView(R.layout.activity_main);
 		
 		
-		
-		mViewPager = (ViewPager)this.findViewById(R.id.pager);
-		
 		final ActionBar actionBar = getSupportActionBar();
-		actionBar.setDisplayShowTitleEnabled(false);
-		actionBar.setDisplayHomeAsUpEnabled(true);
-		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+		configureActionBar(actionBar);
 		
+		initTabFragmentPager(actionBar);
+		initSlidingMenu();
+		
+		//初始化网络测试信息 
+		initSimulateServer();
+		//初始化数据库
+		initDB();
+		Log.d(AppConstant.DEBUG_TAG,"acticvity create");
+	}
+	
+	/**
+	 * 设置actionBar
+	 */
+	private void configureActionBar(ActionBar actionBar){
+		actionBar.setDisplayShowTitleEnabled(false);
+		actionBar.setDisplayHomeAsUpEnabled(false);
+		actionBar.setIcon(null);
+		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
+		
+		homeDropDownListAdapter = new HomeDropdownListAdapter(this, new User());
+		//SpinnerAdapter adapter = ArrayAdapter.createFromResource(this, R.array.test, android.R.layout.simple_spinner_dropdown_item);
+		actionBar.setListNavigationCallbacks(homeDropDownListAdapter, new OnNavigationListener() {
+			
+			@Override
+			public boolean onNavigationItemSelected(int arg0, long arg1) {
+				// TODO Auto-generated method stub
+				return false;
+			}
+		});
+		
+	}
+	
+	
+	
+	
+	
+	/**
+	 * 初始化TabFragmentPage
+	 */
+	private void initTabFragmentPager(final ActionBar actionBar){
+		mViewPager = (ViewPager)this.findViewById(R.id.pager);
 		
 		mAdapter = new TabFragmentPagerAdapter(getSupportFragmentManager());
 				mViewPager.setAdapter(mAdapter);
@@ -100,19 +141,11 @@ public class HomeActivity extends BaseSlidingActivity implements TabListener,OnN
 					.setText("Tab" + (i + 1))
 					.setTabListener(this));
 		}
-		
-		
-		//初始化网络测试信息 
-		initSimulateServer();
-		initSlidingMenu();
-		//初始化数据库
-		initDB();
-		Log.d(AppConstant.DEBUG_TAG,"acticvity create");
 	}
 	
-	
-	
-	
+	/**
+	 * 初始化slidingmenu
+	 */
 	private void initSlidingMenu() {
         setBehindContentView(R.layout.behind_slidingmenu);
         // customize the SlidingMenu

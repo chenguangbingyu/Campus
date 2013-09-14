@@ -32,7 +32,7 @@ import com.campus.prime.model.ModelBase;
  *
  * @param <V>
  */
-public abstract class SingleTypeAdapter<V extends ModelBase> extends TypeAdapter {
+public abstract class SingleTypeAdapter<V> extends TypeAdapter {
 
   private static final Object[] EMPTY = new Object[0];
 

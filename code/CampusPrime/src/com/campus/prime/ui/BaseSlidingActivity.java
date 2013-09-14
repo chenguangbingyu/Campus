@@ -10,9 +10,11 @@ import com.campus.prime.slidingmenu.SlidingActivityBase;
 import com.campus.prime.slidingmenu.SlidingActivityHelper;
 import com.campus.prime.slidingmenu.SlidingMenu;
 
-public class BaseSlidingActivity extends ActionBarActivity implements SlidingActivityBase{
+public class BaseSlidingActivity extends BaseActivity implements SlidingActivityBase{
 
 	private SlidingActivityHelper slidingHelper;
+	
+	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

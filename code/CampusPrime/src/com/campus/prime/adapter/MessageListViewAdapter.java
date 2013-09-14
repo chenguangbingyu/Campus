@@ -14,21 +14,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 
 public class MessageListViewAdapter extends SingleTypeAdapter<Message>{
-	/**
-	private ImageTools imageTools;
-	
-	private ImageToolsDelegate imageToolsDelegate;
-	
-	
-	
-	
-	
-	public MessageListViewAdapter setImageToolsDelegate(ImageToolsDelegate imageToolsDelegate){
-		this.imageToolsDelegate = imageToolsDelegate;
-		return this;
-	}
-
-	**/
 	
 	
 	private BitmapManager bitmapManager;
@@ -52,11 +37,6 @@ public class MessageListViewAdapter extends SingleTypeAdapter<Message>{
 	@Override
 	protected void update(int position, Message item) {
 		// TODO Auto-generated method stub
-		/**
-		imageTools = new ImageTools().setDelegate(imageToolsDelegate);
-		
-		imageTools.getImage(this.context, AppConstant.IMAGE_URL, imageView(0));
-		**/
 		bitmapManager.loadBitmap(AppConstant.IMAGE_URL, imageView(0), null, 0, 0);
 		setText(1, item.getCommentCount() + "");
 		setText(2,item.getContent());
