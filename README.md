@@ -18,7 +18,7 @@ Here is a pile of junk,but it will be excellent!
 >├ README.md --项目帮助及项目信息 <br>
 
 ## **二、源代码目录结构** ##
-code<br>
+>├ code<br>
 >├ CampusPrime  andrdoid客户端源代码<br> 
 >├ deps 工程依赖库文件<br>
 
@@ -43,7 +43,7 @@ libs目录用于存放项目引用的第三方jar包。
 
 libs目录里的jar包文件：
 
->├  libs
+>├  libs<br>
 >├  android-support-v4.jar --v4兼容包<br>
 >├  gson-2.2.2.jar --解析json的包<br>
 >├  mas.jar --百度框架sdk<br>
