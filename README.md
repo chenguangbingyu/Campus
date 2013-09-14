@@ -49,6 +49,17 @@ libs
 >├  gson-2.2.2.jar --解析json的包<br>
 >├  mas.jar --百度框架sdk<br>
 >├  bcs-sdk-java_1.4.5.jar --百度云存储SDK<br>
->├  
->├  
->├  
+>├  commons-codec-1.3
+>├  commons-logging-1.1.1
+>├  flexjson-2.1
+>├  httpclient-4.1.1
+>├  httpcore-4.1
+>├  log4j-1.2.16 --以上包为bcs-sdk-java_1.4.5.jar所依赖的包
+
+
+# **参与者** #
+- absurd、
+- 猫叶灵
+- 晨光冰雨
+- Vacant Leon
+
