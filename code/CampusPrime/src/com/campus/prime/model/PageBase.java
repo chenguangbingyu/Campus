@@ -1,6 +1,5 @@
 package com.campus.prime.model;
 
-import java.util.List;
 
 public class PageBase {
 	private int count;

@@ -1,12 +1,17 @@
 package com.campus.prime.model;
 
-public class Academy {
+public class GroupItem extends ItemBase{
 	private int id;
 	
 	private String name;
 	
+	private String avatar;
+	
 	private String description;
 
+	
+	
+	
 	public int getId() {
 		return id;
 	}
@@ -23,6 +28,14 @@ public class Academy {
 		this.name = name;
 	}
 
+	public String getAvatar() {
+		return avatar;
+	}
+
+	public void setAvatar(String avatar) {
+		this.avatar = avatar;
+	}
+
 	public String getDescription() {
 		return description;
 	}
@@ -30,6 +43,7 @@ public class Academy {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	
 	
 	
 }

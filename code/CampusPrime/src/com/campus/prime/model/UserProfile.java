@@ -1,8 +1,7 @@
 package com.campus.prime.model;
 
 import java.util.Date;
-
-
+import java.util.List;
 
 public class UserProfile {
 	private int id;
@@ -26,6 +25,8 @@ public class UserProfile {
 	private Academy academy;
 	
 	private String grade;
+	
+		
 
 	public String getNick_name() {
 		return nick_name;

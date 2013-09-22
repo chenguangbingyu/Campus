@@ -1,6 +1,6 @@
 package com.campus.prime.model;
 
-public class UserInfoItem{
+public class UserProfileItem extends ItemBase{
 	private int id;
 	
 	private String email;
@@ -28,7 +28,6 @@ public class UserInfoItem{
 	public void setAvatar(String avatar) {
 		this.avatar = avatar;
 	}
-	
 	
 	
 }
