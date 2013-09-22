@@ -24,7 +24,7 @@ import android.widget.TextView;
 
 import java.text.NumberFormat;
 
-import com.campus.prime.common.utils.ViewUtils;
+import com.campus.prime.utils.ViewUtils;
 
 /**
  * Updater for child views indexed from a root view

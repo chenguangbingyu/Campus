@@ -11,7 +11,7 @@ import com.campus.prime.model.ModelBase;
  *
  * @param <T>
  */
-public interface ProtocolDelegate<T extends ModelBase> {
-	public void getMessageSuccess(List<T> list);
+public interface ProtocolDelegate<T extends Object> {
+	public void getMessageSuccess(T t);
 	public void getMessageFailed();
 }

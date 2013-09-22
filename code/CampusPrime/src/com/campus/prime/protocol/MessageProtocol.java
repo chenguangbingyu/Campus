@@ -1,43 +1,21 @@
 package com.campus.prime.protocol;
 
-import java.util.Iterator;
-import java.util.List;
-
 import android.content.Context;
-import android.util.Log;
-
-import com.campus.prime.common.utils.JsonUtil;
-import com.campus.prime.constant.AppConstant;
 import com.campus.prime.database.MessageDB;
-import com.campus.prime.model.Message;
-import com.google.gson.reflect.TypeToken;
+import com.campus.prime.model.MessagesList;
+import com.campus.prime.utils.JsonUtil;
 
 import Database.DAOHelper;
 import Protocol.ProtocolBase;
 
 public class MessageProtocol extends ProtocolBase{
 	
-	public static final String URL = "http://www.freeabsurd.com/";
+	public static final String URL = "http://0.campusv.duapp.com/api/circle/messages/user_timeline/2/";
 	
-	public static final String COMMAND = "getMessages";
+	public static final String COMMAND = "";
 	
 
-	
-	/**
-	 * 创建委托
-	 * 观察者模式
-	 * @author absurd
-	 *
-	 */
-	/**
-	public interface ProtocolMessageDelegate{
-		public void getMessageSuccess(List<Message> messages);
-		public void getMessageFailed();
-	}
-	**/
-	//创建delegate的对象
-	//ProtocolMessageDelegate delegate;
-	ProtocolDelegate<Message> mDelegate;
+	ProtocolDelegate<MessagesList> mDelegate;
 	Context mContext;
 	
 	public MessageProtocol setContext(Context context){
@@ -45,7 +23,7 @@ public class MessageProtocol extends ProtocolBase{
 		return this;
 	}
 	
-	public MessageProtocol setDelegate(ProtocolDelegate<Message> delegate){
+	public MessageProtocol setDelegate(ProtocolDelegate<MessagesList> delegate){
 		this.mDelegate = delegate;
 		return this;
 	}
@@ -69,6 +47,9 @@ public class MessageProtocol extends ProtocolBase{
 		MessageDB db = (MessageDB)DAOHelper.getInstance().getTable(MessageDB.TABLE);
 		db.clearAll();
 		//解析json
+		MessagesList messages = (MessagesList)JsonUtil.jsonToModel(arg0, MessagesList.class);
+		/**
+		 * 缓存
 		@SuppressWarnings("unchecked")
 		List<Message> messages = (List<Message>) JsonUtil.jsonToList(arg0,new TypeToken<List<Message>>(){}.getType());
 		if(messages != null){
@@ -83,6 +64,7 @@ public class MessageProtocol extends ProtocolBase{
 				
 			}
 		}
+		**/
 		mDelegate.getMessageSuccess(messages);
 		return true;
 	}

@@ -1,4 +1,4 @@
-package com.campus.prime.common.utils;
+package com.campus.prime.utils;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;

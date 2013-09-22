@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.campus.prime.common.utils;
+package com.campus.prime.utils;
 
 import static android.view.View.GONE;
 import static android.view.View.INVISIBLE;

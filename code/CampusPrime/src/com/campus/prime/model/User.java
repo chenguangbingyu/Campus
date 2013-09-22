@@ -21,7 +21,7 @@ public class User extends ModelBase{
 	
 	private String password;
  
-	//ÓÃ»§ÀàĞÍ  ÓÃÓÚÇø·ÖÓÃ»§ÊÇ¸öÈË »¹ÊÇ  ×éÖ¯   0±íÊ¾¸öÈË  1 ±íÊ¾ ÍÅÌå
+
 	private int userType;   
 	
 	private int sex;
@@ -31,9 +31,9 @@ public class User extends ModelBase{
 	private String email;
 	
 	private String phone;
-	//Í·Ïñ
+
 	private String avatar;
-	//Token
+
 	private String token;
 	
 	
@@ -49,16 +49,16 @@ public class User extends ModelBase{
 	
 	public String getSexStr(){
 		if(sex == 0){
-			return "ÄĞ";
+			return "ç”·";
 		}else if(sex == 1){
-			return "Å®";
+			return "å¥³";
 		}else{
 			return "E.T";
 		}
 	}
 	
 	public void setSexStr(String sex){
-		if (sex == "ÄĞ"){
+		if (sex == "ï¿½ï¿½"){
 			this.sex = 0;
 		}else if(sex == "Å®"){
 			this.sex = 1;
@@ -176,9 +176,7 @@ public class User extends ModelBase{
 	}
 
 
-	/**
-	 * ´æÈëÊı¾İ¿â
-	 */
+
 	@Override
 	public boolean saveToDB() {
 		// TODO Auto-generated method stub
@@ -201,9 +199,7 @@ public class User extends ModelBase{
 		
 	}
 	
-	/**
-	 * ´ÓÊı¾İ¿âÖĞ²éÑ¯ÏûÏ¢
-	 */
+
 	@Override
 	public SparseArray<ModelBase> readFromDB() {
 		// TODO Auto-generated method stub

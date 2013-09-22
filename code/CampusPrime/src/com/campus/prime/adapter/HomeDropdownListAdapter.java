@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.campus.prime.R;
-import com.campus.prime.common.utils.BitmapManager;
 import com.campus.prime.constant.AppConstant;
 import com.campus.prime.model.User;
+import com.campus.prime.utils.BitmapManager;
 
 import android.content.Context;
 import android.view.LayoutInflater;

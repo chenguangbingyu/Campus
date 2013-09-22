@@ -2,7 +2,6 @@ package com.campus.prime.ui;
 
 
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 
@@ -129,10 +128,6 @@ public class BaseSlidingActivity extends BaseActivity implements SlidingActivity
 		// TODO Auto-generated method stub
 		mSlidingHelper.setSlidingActionBarEnabled(slidingActionBarEnabled);
 	}
-	
-	
-	
-	
 	
 
 }

@@ -26,14 +26,14 @@ import android.widget.ListView;
 
 import com.campus.prime.adapter.MessageListViewAdapter;
 import com.campus.prime.constant.AppConstant;
-import com.campus.prime.model.Message;
+import com.campus.prime.model.MessagesList;
 import com.campus.prime.protocol.MessageProtocol;
 import com.campus.prime.protocol.ProtocolDelegate;
 import com.campus.prime.ui.CreateMessageActivity;
 import com.campus.prime.R;
 
 public class MessagesListFragment extends ListFragment implements 
-		ProtocolDelegate<Message>, ImageToolsDelegate{
+		ProtocolDelegate<MessagesList>, ImageToolsDelegate{
 		
 	
 	private static final int FLAG_CREATE_MESSAGE = 0;
@@ -43,17 +43,14 @@ public class MessagesListFragment extends ListFragment implements
 	//网络获取消息失败
 	private static final int MESSAGE_GETMESSAGE_FAILED = 1;
 	
-	//private ArrayAdapter<String> mAdapter;
 	private MessageListViewAdapter mAdapter;
 	//需要在listView中显示的data
-	private List<Message> mData;
+	private MessagesList mData;
 	
 	/**
 	 * 处理从网络接受消息线程发送的message
 	 */
 	Handler handler = new Handler(){
-		
-		
 		@Override
 		public void handleMessage(android.os.Message msg) {
 			switch(msg.what){
@@ -70,20 +67,16 @@ public class MessagesListFragment extends ListFragment implements
 		};
 	};
 	/**
-	 * 
+	 * 从网络获取消息 
 	 */
 	private void getMessagesFromNetwork(){
 		//创建对应的model的protocol实例
 		MessageProtocol protocol = new MessageProtocol().setDelegate(this)
 				.setContext(this.getActivity());
-		//创建Network实例
 		Network network = new Network();
-		//设置URL
 		network.setURL(MessageProtocol.URL + MessageProtocol.COMMAND);
 		//发送http请求
-		//network.send(protocol, Network.POST);
-		//没有server测试
-		network.sendForTest(protocol,MessageProtocol.COMMAND,Network.GET);
+		network.send(protocol, Network.GET);
 	}
 	
 	
@@ -102,16 +95,14 @@ public class MessagesListFragment extends ListFragment implements
 	public void onActivityCreated(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onActivityCreated(savedInstanceState);
-		
 		setEmptyText("No Messages");
 		//actionbar上添加menu
 		setHasOptionsMenu(true);
 		
 	}
-	
+
 	private void bindListView(){
-		//mAdapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_expandable_list_item_1,mData);
-		mAdapter = new MessageListViewAdapter(this.getActivity(), mData, R.layout.messages_listitem);
+		mAdapter = new MessageListViewAdapter(this.getActivity(), mData.getResults(), R.layout.messages_listitem);
 		setListAdapter(mAdapter);
 	}
 
@@ -120,16 +111,7 @@ public class MessagesListFragment extends ListFragment implements
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		// TODO Auto-generated method stub
 		super.onCreateOptionsMenu(menu, inflater);
-		/**
-		MenuItem item = menu.add("Search");
-		item.setIcon(android.R.drawable.ic_menu_search);
-		item.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
-		SearchView sv = new SearchView(getActivity());
-		sv.setOnQueryTextListener(null);
-		item.setActionView(sv);
-		**/
 		inflater.inflate(R.menu.message_list_actions,menu);
-		
 	}
 
 	@Override
@@ -137,7 +119,7 @@ public class MessagesListFragment extends ListFragment implements
 		// TODO Auto-generated method stub
 		switch(item.getItemId()){
 			case R.id.action_edit:
-				//转到edit——fragment
+				// 转到edit_fragment
 				Intent intent = new Intent();
 				intent.setClass(getActivity(), CreateMessageActivity.class);
 				startActivityForResult(intent, FLAG_CREATE_MESSAGE);
@@ -146,11 +128,9 @@ public class MessagesListFragment extends ListFragment implements
 				return true;
 			default :
 				return super.onOptionsItemSelected(item);
-			
 		}
 		
 	}
-	
 	
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -161,26 +141,13 @@ public class MessagesListFragment extends ListFragment implements
 		}
 	}
 	
-	
-	
-	
 	@Override
-	public void getMessageSuccess(List<Message> messages) {
+	public void getMessageSuccess(MessagesList messages) {
 		// TODO Auto-generated method stub
-		
-		//log
 		if(messages != null){
-			//获取从网络得到的信息-----messages
-			Iterator<Message> iterator = messages.iterator();
-			while(iterator.hasNext()){
-				Log.d(AppConstant.DEBUG_TAG,"get message success" + iterator.next().toString());
-			}
-			
+			Log.d(AppConstant.DEBUG_TAG,"get message success" + messages.getResults().toString());
 		}
-		
 		mData = messages;
-		Log.d(AppConstant.DEBUG_TAG,"mData "+ mData.get(0).toString());
-		
 		handler.sendEmptyMessage(MESSAGE_GETMESSAGE_SUCCESS);
 	}
 

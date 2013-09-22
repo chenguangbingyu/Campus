@@ -1,4 +1,4 @@
-package com.campus.prime.common.utils;
+package com.campus.prime.utils;
 
 import java.lang.reflect.Type;
 import java.util.List;
@@ -52,6 +52,7 @@ public class JsonUtil {
 		}
 		return obj;
 	}
+	
 	/**
 	 * 将json格式转换成list对象
 	 * @param jsonStr

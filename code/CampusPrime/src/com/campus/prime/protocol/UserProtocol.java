@@ -3,9 +3,9 @@ package com.campus.prime.protocol;
 import java.util.Iterator;
 import java.util.List;
 
-import com.campus.prime.common.utils.JsonUtil;
 import com.campus.prime.database.UserDB;
 import com.campus.prime.model.User;
+import com.campus.prime.utils.JsonUtil;
 
 import android.content.Context;
 import android.view.accessibility.AccessibilityRecord;
@@ -55,7 +55,7 @@ public class UserProtocol extends ProtocolBase{
 				user.saveToDB();
 			}
 		}
-		mDelegate.getMessageSuccess(users);
+		//mDelegate.getMessageSuccess(users);
 		return true;
 	}
 

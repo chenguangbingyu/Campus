@@ -15,8 +15,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.campus.prime.R;
-import com.campus.prime.common.utils.BitmapManager;
 import com.campus.prime.constant.AppConstant;
+import com.campus.prime.utils.BitmapManager;
 
 public class LaunchUIFragment extends Fragment {
 	

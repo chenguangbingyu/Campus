@@ -23,7 +23,6 @@ public class CreateMessageActivity extends BaseActivity {
 		actionBar.setDisplayHomeAsUpEnabled(true);
 		actionBar.setDisplayShowTitleEnabled(false);
 		
-		
 	}
 
 	@Override
