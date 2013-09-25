@@ -2,53 +2,123 @@ package com.campus.prime.ui;
 
 import Database.DAOHelper;
 import Network.Network;
-import android.graphics.drawable.ColorDrawable;
+import RemoteImage.ImageTools.ImageToolsDelegate;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.ViewPager;
-import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.os.Handler;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBar.OnNavigationListener;
-import android.support.v7.app.ActionBar.Tab;
-import android.support.v7.app.ActionBar.TabListener;
-import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
-import android.view.ViewGroup.LayoutParams;
-import android.widget.ArrayAdapter;
-import android.widget.SpinnerAdapter;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ListView;
 
+import com.campus.prime.R;
 import com.campus.prime.adapter.HomeDropdownListAdapter;
-import com.campus.prime.adapter.TabFragmentPagerAdapter;
+import com.campus.prime.adapter.MessageListViewAdapter;
+import com.campus.prime.bean.MessagesList;
+import com.campus.prime.bean.User;
 import com.campus.prime.constant.AppConstant;
 import com.campus.prime.database.MessageDB;
-import com.campus.prime.model.User;
-import com.campus.prime.slidingmenu.SlidingActivityBase;
-import com.campus.prime.slidingmenu.SlidingActivityHelper;
+import com.campus.prime.protocol.MessageProtocol;
+import com.campus.prime.protocol.ProtocolDelegate;
 import com.campus.prime.slidingmenu.SlidingMenu;
-import com.campus.prime.R;
 
-public class HomeActivity extends BaseSlidingActivity implements TabListener,OnNavigationListener{
+
+/**
+ * 主页面  
+ * @author absurd
+ *
+ */
+public class HomeActivity extends BaseSlidingActivity implements 
+		ProtocolDelegate<MessagesList>, ImageToolsDelegate{
 	
-	
-	
-	
-	
-	public static final int MAX_TAB_SIZE = 1;
+		
 	public static final String ARGUMENTS_NAME = "args";
-	
-	private ViewPager mViewPager;
-	private TabFragmentPagerAdapter mAdapter;
+	private static final int FLAG_CREATE_MESSAGE = 0;
+	//网络获取消息成功
+	private static final int MESSAGE_GETMESSAGE_SUCCESS = 0;
+	//网络获取消息失败
+	private static final int MESSAGE_GETMESSAGE_FAILED = 1;
 	
 	private HomeDropdownListAdapter mHomeDropDownListAdapter;
-	
 	private SlidingMenu mSlidingMenu;
+		
+	private Context context;
+	private MessageListViewAdapter mAdapter;
+	//需要在listView中显示的data
+	private MessagesList mData;
+	private ListView mListView;
 	
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
+		context = this;
+		
+		
+		mListView = (ListView)findViewById(R.id.listview);
+		mListView.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+					long arg3) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent();
+				intent.setClass(context,MessageDetailActivity.class);
+				startActivity(intent);
+			}
+		});
+		
+		final ActionBar actionBar = getSupportActionBar();
+		configureActionBar(actionBar);
+		initSlidingMenu();
+		//初始化网络测试信息 
+		initSimulateServer();
+		//初始化数据库
+		initDB();
+		getMessagesFromNetwork();
+		Log.d(AppConstant.DEBUG_TAG,"acticvity create");
+	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.message_list_actions, menu);
+		return true;
+	}
+
+	/**
+	 * 处理从网络接受消息线程发送的message
+	 */
+	Handler handler = new Handler(){
+		@Override
+		public void handleMessage(android.os.Message msg) {
+			switch(msg.what){
+			case MESSAGE_GETMESSAGE_SUCCESS:
+				//将接受到的信息绑定到listView
+				mAdapter = new MessageListViewAdapter(context, mData.getResults(), R.layout.messages_listitem);
+				mListView.setAdapter(mAdapter);
+				break;
+			case MESSAGE_GETMESSAGE_FAILED:
+				break;
+			default:
+				break;
+			}
+			super.handleMessage(msg);
+		};
+	};
+	
+	
+
 	private void initSimulateServer(){
 		Network network = new Network();
-		network.addTestResponse("getMessages", AppConstant.DEBUG_PROTOCOL_MESSAGES);
+		//network.addTestResponse("getMessages", AppConstant.DEBUG_PROTOCOL_MESSAGES);
 		Log.d(AppConstant.DEBUG_TAG,"add test response");
 	}
 	
@@ -60,92 +130,43 @@ public class HomeActivity extends BaseSlidingActivity implements TabListener,OnN
 			Log.d(AppConstant.DEBUG_TAG,"add a table");
 		}
 	}
-		
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
-		
-		
-		final ActionBar actionBar = getSupportActionBar();
-		configureActionBar(actionBar);
-		
-		initTabFragmentPager(actionBar);
-		initSlidingMenu();
-		
-		//初始化网络测试信息 
-		initSimulateServer();
-		//初始化数据库
-		initDB();
-		Log.d(AppConstant.DEBUG_TAG,"acticvity create");
-	}
+	
 	
 	/**
-	 * 设置actionBar
+	 * configure ActionBar
+	 * @param actionBar
 	 */
 	private void configureActionBar(ActionBar actionBar){
-		actionBar.setDisplayShowTitleEnabled(false);
-		actionBar.setDisplayHomeAsUpEnabled(false);
-		//隐藏图标  it's a fuck!
-		actionBar.setIcon(null);
+		
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
 		
 		mHomeDropDownListAdapter = new HomeDropdownListAdapter(this, new User());
-		//SpinnerAdapter adapter = ArrayAdapter.createFromResource(this, R.array.test, android.R.layout.simple_spinner_dropdown_item);
 		actionBar.setListNavigationCallbacks(mHomeDropDownListAdapter, new OnNavigationListener() {
 			
 			@Override
 			public boolean onNavigationItemSelected(int arg0, long arg1) {
 				// TODO Auto-generated method stub
-				return false;
+				Intent intent = new Intent();
+				switch(arg0){
+				case 1:
+					intent.setClass(context, UserProfileActivity.class);
+					startActivity(intent);
+					break;
+				case 2:
+					intent.setClass(context, GroupDetailActivity.class);
+					startActivity(intent);
+					break;
+				default:
+					return false;
+				}
+				return true;
 			}
 		});
 		
 	}
 	
-	
-	
-	
-	
 	/**
-	 * 初始化TabFragmentPage
-	 */
-	private void initTabFragmentPager(final ActionBar actionBar){
-		mViewPager = (ViewPager)this.findViewById(R.id.pager);
-		
-		mAdapter = new TabFragmentPagerAdapter(getSupportFragmentManager());
-				mViewPager.setAdapter(mAdapter);
-		mViewPager.setOnPageChangeListener(new OnPageChangeListener() {
-			
-			@Override
-			public void onPageSelected(int arg0) {
-				// TODO Auto-generated method stub
-				actionBar.setSelectedNavigationItem(arg0);
-			}
-			
-			@Override
-			public void onPageScrolled(int arg0, float arg1, int arg2) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void onPageScrollStateChanged(int arg0) {
-				// TODO Auto-generated method stub
-				
-			}
-		});
-		
-		for(int i = 0;i < 1; i++){
-			actionBar.addTab(
-					actionBar.newTab()
-					.setText("Tab" + (i + 1))
-					.setTabListener(this));
-		}
-	}
-	
-	/**
-	 * 初始化slidingmenu
+	 * init sliding menu
 	 */
 	private void initSlidingMenu() {
         setBehindContentView(R.layout.behind_slidingmenu);
@@ -160,40 +181,78 @@ public class HomeActivity extends BaseSlidingActivity implements TabListener,OnN
         mSlidingMenu.setBehindScrollScale(0);
     }
 	
+	
+	
+	/**
+	 * 从网络获取消息 
+	 */
+	private void getMessagesFromNetwork(){
+		//创建对应的model的protocol实例
+		MessageProtocol protocol = new MessageProtocol().setDelegate(this)
+				.setContext(this);
+		Network network = new Network();
+		network.setURL(MessageProtocol.URL + MessageProtocol.COMMAND);
+		//发送http请求
+		network.send(protocol, Network.GET);
+	}
+	
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
-		return true;
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// TODO Auto-generated method stub
+		switch(item.getItemId()){
+			case R.id.action_edit:
+				// 转到edit_fragment
+				Intent intent = new Intent();
+				intent.setClass(this, CreateMessageActivity.class);
+				startActivityForResult(intent, FLAG_CREATE_MESSAGE);
+				return true;
+			case R.id.action_refresh:
+				return true;
+			default :
+				return super.onOptionsItemSelected(item);
+		}
+		
+	}
+	
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		// TODO Auto-generated method stub
+		super.onActivityResult(requestCode, resultCode, data);
+		if(requestCode == FLAG_CREATE_MESSAGE){
+			return;
+		}
+	}
+	
+	@Override
+	public void getMessageSuccess(MessagesList messages) {
+		// TODO Auto-generated method stub
+		if(messages != null){
+			Log.d(AppConstant.DEBUG_TAG,"get message success" + messages.getResults().toString());
+		}
+		mData = messages;
+		handler.sendEmptyMessage(MESSAGE_GETMESSAGE_SUCCESS);
+	}
+
+	@Override
+	public void getMessageFailed() {
+		// TODO Auto-generated method stub
+		handler.sendEmptyMessage(MESSAGE_GETMESSAGE_FAILED);
+		Log.d(AppConstant.DEBUG_TAG,"get messages failed");
 	}
 
 
 	@Override
-	public void onTabReselected(Tab arg0, FragmentTransaction arg1) {
+	public void downlaodImageFailed() {
 		// TODO Auto-generated method stub
 		
 	}
 
 
 	@Override
-	public void onTabSelected(Tab arg0, FragmentTransaction arg1) {
-		// TODO Auto-generated method stub
-		mViewPager.setCurrentItem(arg0.getPosition());
-	}
-
-
-	@Override
-	public void onTabUnselected(Tab arg0, FragmentTransaction arg1) {
+	public void downloadImageSuccess() {
 		// TODO Auto-generated method stub
 		
 	}
-
-	@Override
-	public boolean onNavigationItemSelected(int arg0, long arg1) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-
-
+	
+	
 }

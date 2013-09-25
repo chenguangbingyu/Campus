@@ -9,6 +9,13 @@ import com.campus.prime.slidingmenu.SlidingActivityBase;
 import com.campus.prime.slidingmenu.SlidingActivityHelper;
 import com.campus.prime.slidingmenu.SlidingMenu;
 
+
+/**
+ * 实现sldingMenu控件的activity的父类
+ * 这个类不需要细看
+ * @author absurd
+ *
+ */
 public class BaseSlidingActivity extends BaseActivity implements SlidingActivityBase{
 
 	private SlidingActivityHelper mSlidingHelper;

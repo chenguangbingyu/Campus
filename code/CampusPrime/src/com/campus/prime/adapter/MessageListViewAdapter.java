@@ -3,8 +3,8 @@ package com.campus.prime.adapter;
 import java.util.List;
 
 import com.campus.prime.R;
+import com.campus.prime.bean.MessageItem;
 import com.campus.prime.constant.AppConstant;
-import com.campus.prime.model.MessageItem;
 import com.campus.prime.utils.BitmapManager;
 
 import RemoteImage.ImageTools;
@@ -12,11 +12,14 @@ import RemoteImage.ImageTools.ImageToolsDelegate;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.ImageView;
 
 public class MessageListViewAdapter extends SingleTypeAdapter<MessageItem>{
 	
 	
 	private BitmapManager mBitmapManager;
+	
 
 	public MessageListViewAdapter(Context context,final List<MessageItem> messages, int layoutResourceId) {
 		super(LayoutInflater.from(context), R.layout.messages_listitem);
@@ -34,6 +37,8 @@ public class MessageListViewAdapter extends SingleTypeAdapter<MessageItem>{
 		
 	}
 
+		
+	
 	@Override
 	protected void update(int position, MessageItem item) {
 		// TODO Auto-generated method stub
@@ -43,5 +48,6 @@ public class MessageListViewAdapter extends SingleTypeAdapter<MessageItem>{
 		setText(3,item.getLocation());
 		setText(4,item.getMedia());
 	}
+	
 	
 }

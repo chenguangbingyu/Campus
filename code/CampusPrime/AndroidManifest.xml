@@ -22,25 +22,32 @@
             android:theme="@style/Theme.Campus" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name="com.campus.prime.ui.UserActivity"
-            android:label="@string/title_activity_user" 
-            android:theme="@style/Theme.Campus">
-        </activity>
-        <activity
-            android:name="com.campus.prime.ui.AvaterUploadActivity"
-            android:label="@string/title_activity_avater_upload" >
-        </activity>
-        <activity
             android:name="com.campus.prime.ui.CreateMessageActivity"
-            android:label="@string/title_activity_create_message" 
-            android:theme="@style/Theme.AppCompat.Light">
+            android:label="@string/title_activity_create_message"
+            android:theme="@style/Theme.Campus" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.campus.prime.ui.HomeActivity"/>
+                android:value="com.campus.prime.ui.HomeActivity" />
+        </activity>
+        <activity
+            android:name="com.campus.prime.ui.UserProfileActivity"
+            android:label="@string/title_activity_user_profile"
+            android:theme="@style/Theme.AppCompat.Light" >
+        </activity>
+        <activity
+            android:name="com.campus.prime.ui.GroupDetailActivity"
+            android:label="@string/title_activity_group_detail"
+            android:theme="@style/Theme.AppCompat.Light" >
+        </activity>
+        <activity
+            android:theme="@style/Theme.Campus"
+            android:name="com.campus.prime.ui.MessageDetailActivity"
+            android:label="@string/title_activity_message_detail" >
         </activity>
     </application>
 

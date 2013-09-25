@@ -12,11 +12,14 @@
     <string name="action_refresh">refresh</string>
     <string name="title_activity_create_message">CreateMessageActivity</string>
 
-    
     <string-array name="test">
         <item>邓名侨</item>
         <item>刘天喜</item>
         <item>其黄石</item>
         <item>蔡宏远</item>
     </string-array>
+
+    <string name="title_activity_user_profile">UserProfileActivity</string>
+    <string name="title_activity_group_detail">GroupDetailActivity</string>
+
 </resources>

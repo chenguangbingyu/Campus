@@ -1,8 +1,9 @@
 package com.campus.prime.protocol;
 
 import android.content.Context;
+
+import com.campus.prime.bean.MessagesList;
 import com.campus.prime.database.MessageDB;
-import com.campus.prime.model.MessagesList;
 import com.campus.prime.utils.JsonUtil;
 
 import Database.DAOHelper;

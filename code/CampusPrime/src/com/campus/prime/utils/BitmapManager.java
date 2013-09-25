@@ -38,6 +38,8 @@ public class BitmapManager {
 	
 	private static BitmapManager bitmapManager;
 	
+	private static Object classLock = BitmapManager.class;
+	
 	static{
 		cache = new HashMap<String,SoftReference<Bitmap>>();
 		pool = Executors.newFixedThreadPool(5);//Ïß³Ì³Ø
@@ -50,10 +52,13 @@ public class BitmapManager {
 	}
 	
 	public static BitmapManager getInstance(){ 
-		if(bitmapManager == null){
-			bitmapManager = new BitmapManager();
+		synchronized(classLock){
+			if(bitmapManager == null){
+				bitmapManager = new BitmapManager();
+			}
+			return bitmapManager;
 		}
-		return bitmapManager;
+		
 	}
 	
 		

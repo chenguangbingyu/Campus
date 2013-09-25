@@ -2,7 +2,7 @@ package com.campus.prime.protocol;
 
 import java.util.List;
 
-import com.campus.prime.model.ModelBase;
+import com.campus.prime.bean.ModelBase;
 
 
 /**

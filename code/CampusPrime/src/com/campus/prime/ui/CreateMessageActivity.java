@@ -12,6 +12,11 @@ import android.support.v7.app.ActionBar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+/**
+ * 用户创建 发布消息的acticity
+ * @author absurd
+ *
+ */
 public class CreateMessageActivity extends BaseActivity {
 
 	@Override
