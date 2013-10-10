@@ -1,5 +1,7 @@
 package com.campus.prime.bean;
 
+import java.util.List;
+
 
 public class PageBase {
 	private int count;
@@ -7,6 +9,7 @@ public class PageBase {
 	private String next;
 	
 	private String previous;
+	
 	
 	public int getCount() {
 		return count;
@@ -31,6 +34,6 @@ public class PageBase {
 	public void setPrevious(String previous) {
 		this.previous = previous;
 	}
-
+	
 	
 }

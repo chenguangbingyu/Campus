@@ -27,32 +27,25 @@ public class JsonUtil {
 	
 	
 	/**
-	 * 将对象转换成json格式
-	 * @param ts
+	 * jsonStr转换为bean
+	 * @param jsonStr
+	 * @param type
 	 * @return
 	 */
-	public static String objectToJson(Object ts){
-		String jsonStr = null;
-		if(gson != null){
-			jsonStr = gson.toJson(ts);
-		}
-		return jsonStr;
+	public static <V> V fromJson(String jsonStr,Type type){
+		return gson.fromJson(jsonStr, type);
+	
 	}
 	
 	/**
-	 * 将json转换为bean对象
-	 * @param jsonStr
-	 * @param cl
+	 * object 转换为json
 	 * @return
 	 */
-	public static Object jsonToModel(String jsonStr,Class<?> cl){
-		Object obj = null;
-		if(gson != null){
-			obj = gson.fromJson(jsonStr, cl);
-		}
-		return obj;
+	public static String toJson(final Object object){
+			return gson.toJson(object);
 	}
-	
+
+		
 	/**
 	 * 将json格式转换成list对象
 	 * @param jsonStr
@@ -67,27 +60,5 @@ public class JsonUtil {
 		return objList;
 	}
 	
-	/**
-	 * 将json格式转换成List对象，并准确制定类型
-	 * @param jsonStr
-	 * @param type
-	 * @return
-	 */
-	public static List<?> jsonToList(String jsonStr,Type type){
-		List<?> objList = null;
-		if(gson != null){
-			objList = gson.fromJson(jsonStr, type);
-		}
-		return objList;
-	}
-	
-	public static Map<?, ?> jsonToMap(String jsonStr){
-		Map<?, ?> objMap = null;
-		if(gson != null){
-			Type type = new TypeToken<Map<?, ?>>(){}.getType();
-			objMap = gson.fromJson(jsonStr,type);
-		}
-		return objMap;
-	}
-	
+		
 }

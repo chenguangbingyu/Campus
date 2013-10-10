@@ -20,13 +20,16 @@ public class MessageListViewAdapter extends SingleTypeAdapter<MessageItem>{
 	
 	private BitmapManager mBitmapManager;
 	
-
-	public MessageListViewAdapter(Context context,final List<MessageItem> messages, int layoutResourceId) {
-		super(LayoutInflater.from(context), R.layout.messages_listitem);
-		// TODO Auto-generated constructor stub
-		setItems(messages);
+	
+	public MessageListViewAdapter(Context context,int layoutResourceId){
+		super(LayoutInflater.from(context),layoutResourceId);
 		this.context = context;
 		mBitmapManager = BitmapManager.getInstance();
+	}
+
+	public MessageListViewAdapter(Context context,final List<MessageItem> messages, int layoutResourceId) {
+		this(context,layoutResourceId);
+		setItems(messages);
 	}
 
 	@Override

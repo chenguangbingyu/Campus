@@ -18,6 +18,7 @@ import android.support.v7.app.ActionBar.TabListener;
 import android.view.Menu;
 
 import com.campus.prime.R;
+import com.campus.prime.ui.fragment.HomeFragment;
 import com.campus.prime.ui.fragment.UserBasicFragment;
 import com.campus.prime.ui.fragment.UserGroupsFragment;
 import com.campus.prime.ui.fragment.UserRecentFragment;
@@ -65,7 +66,7 @@ public class UserProfileActivity extends BaseTabActivity{
 			Fragment ft = null;
 			switch(arg0){
 			case 0:
-				ft =  new UserBasicFragment();
+				ft =  new HomeFragment(); 
 				break;
 			case 1:
 				ft = new UserRecentFragment();

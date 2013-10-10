@@ -12,7 +12,7 @@ public class MessageItem extends ItemBase{
 
 	private int id;
 	
-	private UserProfileItem user;
+	//private UserProfileItem user;
 
 	private String content;
 	
@@ -20,11 +20,11 @@ public class MessageItem extends ItemBase{
 	
 	private String media;
 
-	private Date created;
+	//private Date created;
 	
-	private String group;
+	//private String group;
 	
-		
+/**		
 	public Date getCreated() {
 		return created;
 	}
@@ -40,7 +40,7 @@ public class MessageItem extends ItemBase{
 	public void setGroup(String group) {
 		this.group = group;
 	}
-
+**/
 	public int getId() {
 		return id;
 	}
@@ -72,7 +72,7 @@ public class MessageItem extends ItemBase{
 	public void setMedia(String media) {
 		this.media = media;
 	}
-	
+	/**
 	public UserProfileItem getUser() {
 		return user;
 	}
@@ -80,7 +80,7 @@ public class MessageItem extends ItemBase{
 	public void setUser(UserProfileItem user) {
 		this.user = user;
 	}
-
+**/
 	@Override
 	public String toString() {
 		return "MessageItem [id=" + id + ", content=" + content + ", location="
