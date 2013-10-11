@@ -127,9 +127,9 @@ public class CampusClient {
 						type);
 			}else
 				return null;
-		}
-		if(isEmpty(code))
+		}else if(isEmpty(code)){
 			return null;
+		}
 		throw createException(EntityUtils.toString(response.getEntity(),CHARSET_UTF8),
 					code);
 	}

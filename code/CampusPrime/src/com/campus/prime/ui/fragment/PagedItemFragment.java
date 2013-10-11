@@ -1,7 +1,9 @@
 package com.campus.prime.ui.fragment;
 
+import java.io.IOException;
 import java.util.List;
 
+import org.apache.http.client.ClientProtocolException;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -9,10 +11,12 @@ import android.support.v4.content.Loader;
 import android.text.format.DateUtils;
 import android.view.View;
 import android.widget.AbsListView;
-import android.widget.ListView;
 import android.widget.AbsListView.OnScrollListener;
+import android.widget.ListView;
 
 import com.campus.prime.bean.MessageItem;
+import com.campus.prime.bean.PageBase;
+import com.campus.prime.https.MessageService;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.Mode;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
@@ -24,9 +28,28 @@ public abstract class PagedItemFragment<E> extends ItemListFragment<E>{
 	public static final int DOWN = 3;
 	
 	/**
+	 * Entity Page
+	 */
+	protected PageBase currentPage;
+	
+	/**
 	 * Scroll direction
 	 */
 	protected int direction = 2;
+	
+	/**
+	 * service for loading data
+	 */
+	protected MessageService service;
+	
+	
+	protected PageBase getCurrentPage(){
+		return currentPage;
+	}
+	
+	protected void setCurrentPage(PageBase page){
+		this.currentPage = page;
+	}
 	
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -55,6 +78,7 @@ public abstract class PagedItemFragment<E> extends ItemListFragment<E>{
 				firstItem = firstVisibleItem;
 				lastItem = firstVisibleItem + visibleItemCount - 2;
 				
+				
 			}
 		});
 		listView.setOnRefreshListener(new OnRefreshListener<ListView>() {
@@ -74,11 +98,34 @@ public abstract class PagedItemFragment<E> extends ItemListFragment<E>{
 		
 	}
 	
-	public class GetDataTask extends AsyncTask<Void,Void,MessageItem>{
+
+	@Override
+	public Loader<List<E>> onCreateLoader(int arg0, Bundle arg1) {
+		// TODO Auto-generated method stub
+		// intialize MessageService
+		service = new MessageService();
+		return new AsyncLoader<List<E>>(getActivity()) {
+
+			@Override
+			protected List<E> loadData() {
+				// TODO Auto-generated method stub
+				return load();
+			}
+		};
+	}
+	
+	public class GetDataTask extends AsyncTask<Void,Void,List<E>>{
 
 		@Override
-		protected MessageItem doInBackground(Void... arg0) {
+		protected List<E> doInBackground(Void... arg0) {
 			// TODO Auto-generated method stub
+			if(direction == UP)
+				return first();
+			else if(direction == DOWN)
+				return next();
+			else
+				return null;
+			/**
 			try {  
                 Thread.sleep(500);  
             } catch (InterruptedException e) {  
@@ -89,25 +136,48 @@ public abstract class PagedItemFragment<E> extends ItemListFragment<E>{
 					item.setLocation("location");
 					item.setMedia("media");
 				return item;
+				**/
 		}
 			
 		@SuppressWarnings("unchecked")
 		@Override
-		protected void onPostExecute(MessageItem result) {
+		protected void onPostExecute(List<E> result) {
 			// TODO Auto-generated method stub
 			if(direction == UP){
-				items.add(0,(E)result);
+				items = result;
 				getListAdapter().setItems(items);
 			}else if(direction == DOWN){
-				items.add(items.size(),(E)result);
-				getListAdapter().setItems(items);
+				//items.add(items.size(),(E)result);
+				if(result != null){
+					items.addAll(result);
+					getListAdapter().setItems(items);
+				}
 			}
 			listView.onRefreshComplete();
 			super.onPostExecute(result);
 		}
 	}
 	
+	/**
+	 * async load data
+	 * @return
+	 */
+	protected abstract List<E> load();
+	/**
+	 * get first page
+	 */
+	protected abstract List<E> first();
 	
+	/**
+	 * get next page
+	 */
+	protected abstract List<E> next();
 	
+	/**
+	 * has next page
+	 */
+	protected boolean hasNext(){
+			return (currentPage == null || currentPage.getNext() == null) ? false : true;
+	}
 	
 }

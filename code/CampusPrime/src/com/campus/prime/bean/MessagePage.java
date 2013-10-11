@@ -9,8 +9,9 @@ public class MessagePage extends PageBase{
 		this.results = results;
 	}
 	
-	public List<MessageItem> getResults(){
+	@Override
+	public List<MessageItem> getResults() {
+		// TODO Auto-generated method stub
 		return results;
 	}
-	
 }

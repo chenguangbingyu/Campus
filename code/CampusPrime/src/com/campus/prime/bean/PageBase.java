@@ -3,7 +3,7 @@ package com.campus.prime.bean;
 import java.util.List;
 
 
-public class PageBase {
+public abstract class PageBase {
 	private int count;
 	
 	private String next;
@@ -35,5 +35,5 @@ public class PageBase {
 		this.previous = previous;
 	}
 	
-	
+	public abstract List<?> getResults();
 }

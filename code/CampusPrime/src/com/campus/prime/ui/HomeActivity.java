@@ -63,7 +63,7 @@ public class HomeActivity extends BaseSlidingActivity {
 		DAOHelper dbHelper = DAOHelper.getInstance();
 		if(dbHelper != null){
 			dbHelper.addDBTable(MessageDB.TABLE,new MessageDB());
-			Log.d(AppConstant.DEBUG_TAG,"add a table");
+			Log.d(AppConstant.TAG,"add a table");
 		}
 	}
 	
