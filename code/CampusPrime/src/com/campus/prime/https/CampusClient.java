@@ -38,7 +38,6 @@ import com.campus.prime.utils.JsonUtil;
 import com.campus.prime.utils.LogFactory;
 
 public class CampusClient {
-	private static final String TAG = "CustomHttpClient";
 	private static final CommonLog log = LogFactory.createLog();
 	
 	private static final String CHARSET_UTF8 = HTTP.UTF_8;
@@ -123,8 +122,9 @@ public class CampusClient {
 		int code = response.getStatusLine().getStatusCode();
 		if(isOk(code)){
 			if(type != null){
-				return parseJson(EntityUtils.toString(response.getEntity(),CHARSET_UTF8),
-						type);
+				String jsonString = EntityUtils.toString(response.getEntity());
+				log.i(jsonString);
+				return parseJson(jsonString,type);
 			}else
 				return null;
 		}else if(isEmpty(code)){
@@ -360,11 +360,11 @@ public class CampusClient {
 			//超时设置
 			//从连接池中取连接的超时时间
 			ConnManagerParams.setTimeout(params, 1000);
-			int ConnectionTimeOut = 3000;
+			int ConnectionTimeOut = 9000;
 			//设置连接超时
 			HttpConnectionParams.setConnectionTimeout(params, ConnectionTimeOut);
 			//设置请求超时
-			HttpConnectionParams.setSoTimeout(params, 4000);
+			HttpConnectionParams.setSoTimeout(params, 9000);
 			
 			//设置支持HTTP和HTTPS两种模式
 			SchemeRegistry schReg = new SchemeRegistry();

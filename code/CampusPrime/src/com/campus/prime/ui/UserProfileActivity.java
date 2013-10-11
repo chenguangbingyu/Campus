@@ -55,18 +55,18 @@ public class UserProfileActivity extends BaseTabActivity{
 	
 	public static class TabAdapter extends FragmentPagerAdapter{
 
+		
 		public TabAdapter(FragmentManager fm) {
 			super(fm);
 			// TODO Auto-generated constructor stub
 		}
-
 		@Override
 		public Fragment getItem(int arg0) {
 			// TODO Auto-generated method stub
 			Fragment ft = null;
 			switch(arg0){
 			case 0:
-				ft =  new HomeFragment(); 
+				ft = new HomeFragment();
 				break;
 			case 1:
 				ft = new UserRecentFragment();

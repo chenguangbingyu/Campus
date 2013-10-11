@@ -1,5 +1,6 @@
 package com.campus.prime.ui.fragment;
 
+
 import com.campus.prime.R;
 
 import android.os.Bundle;
@@ -16,4 +17,5 @@ public class UserGroupsFragment extends Fragment{
 		View rootView = inflater.inflate(R.layout.user_groups, container,false);
 		return rootView;
 	}
+	
 }

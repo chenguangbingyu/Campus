@@ -1,5 +1,7 @@
 package com.campus.prime.ui.fragment;
 
+import java.lang.reflect.Field;
+
 import com.campus.prime.R;
 
 import android.os.Bundle;
@@ -16,4 +18,5 @@ public class UserRecentFragment extends Fragment{
 		View rootView = inflater.inflate(R.layout.user_recent, container,false);
 		return rootView;
 	}
+	
 }

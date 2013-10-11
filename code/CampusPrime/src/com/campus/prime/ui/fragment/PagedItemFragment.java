@@ -57,7 +57,7 @@ public abstract class PagedItemFragment<E> extends ItemListFragment<E>{
 		super.onViewCreated(view, savedInstanceState);
 		
 		// Configure PullToRefreshListView
-		listView.setMode(Mode.BOTH);
+		listView.setMode(Mode.DISABLED);
 		listView.setOnScrollListener(new OnScrollListener() {
 			private int firstItem;
 			private int lastItem;
@@ -114,6 +114,20 @@ public abstract class PagedItemFragment<E> extends ItemListFragment<E>{
 		};
 	}
 	
+
+	@Override
+	public void onLoadFinished(Loader<List<E>> arg0, List<E> arg1) {
+		// TODO Auto-generated method stub
+		if(!isUsable())
+			return;
+		this.items = arg1;
+		getListAdapter().setItems(items);
+		showList();
+		// set mode of PullToRefereshListView
+		if(items != null)
+			listView.setMode(Mode.BOTH);
+	}
+	
 	public class GetDataTask extends AsyncTask<Void,Void,List<E>>{
 
 		@Override
@@ -125,34 +139,24 @@ public abstract class PagedItemFragment<E> extends ItemListFragment<E>{
 				return next();
 			else
 				return null;
-			/**
-			try {  
-                Thread.sleep(500);  
-            } catch (InterruptedException e) {  
-            }  
-			MessageItem item = new MessageItem();
-					item.setId(0);
-					item.setContent("refresh add");
-					item.setLocation("location");
-					item.setMedia("media");
-				return item;
-				**/
 		}
 			
 		@SuppressWarnings("unchecked")
 		@Override
 		protected void onPostExecute(List<E> result) {
 			// TODO Auto-generated method stub
+			if(!isUsable())
+				return;
 			if(direction == UP){
 				items = result;
-				getListAdapter().setItems(items);
 			}else if(direction == DOWN){
 				//items.add(items.size(),(E)result);
 				if(result != null){
 					items.addAll(result);
-					getListAdapter().setItems(items);
 				}
 			}
+			getListAdapter().setItems(items);
+			showList();
 			listView.onRefreshComplete();
 			super.onPostExecute(result);
 		}

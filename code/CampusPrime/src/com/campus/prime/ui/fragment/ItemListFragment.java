@@ -81,8 +81,7 @@ public abstract class ItemListFragment<E> extends Fragment implements
 	public void onActivityCreated(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onActivityCreated(savedInstanceState);
-		
-		if(!items.isEmpty())
+		if(items != null && (!items.isEmpty()))
 			setListShown(true,false);
 		
 		getLoaderManager().initLoader(0,null,this);
@@ -116,7 +115,7 @@ public abstract class ItemListFragment<E> extends Fragment implements
 		// TODO Auto-generated method stub
 		super.onViewCreated(view, savedInstanceState);
 		
-		listView = (PullToRefreshListView)view.findViewById(android.R.id.list);
+		listView = (PullToRefreshListView)view.findViewById(R.id.list);
 		listView.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
@@ -145,19 +144,32 @@ public abstract class ItemListFragment<E> extends Fragment implements
 			}
 		});
 		progressBar = (ProgressBar)view.findViewById(R.id.pb_loading);
-		emptyView = (TextView)view.findViewById(android.R.id.empty);
+		emptyView = (TextView)view.findViewById(R.id.empty);
 		
 		
 	}
 	
+	/**
+	 * is fragment usable in UI-Thread
+	 * @return
+	 */
+	protected boolean isUsable(){
+		return getActivity() != null;
+	}
 	
 	
-	
+	/**
+	 * configure listView
+	 */
 	protected void configureList(){
 		this.adapter = createAdapter();
 		listView.setAdapter(adapter);
 	}
 	
+	/**
+	 * create adapter for listView
+	 * @return
+	 */
 	protected SingleTypeAdapter<E> createAdapter(){
 		SingleTypeAdapter<E> wrapped = createAdapter(items);
 		return wrapped;
@@ -185,7 +197,9 @@ public abstract class ItemListFragment<E> extends Fragment implements
 		}
 	}
 	
-	
+	/**
+	 * force to refresh
+	 */
 	protected void forceRefresh(){
 		Bundle bundle = new Bundle();
 		bundle.putInt(FORCE_REFRESH,FORCE);
@@ -202,22 +216,27 @@ public abstract class ItemListFragment<E> extends Fragment implements
 	}
 	
 	
-	
+	/**
+	 * set listView show
+	 * @param shown
+	 * @param animate
+	 * @return
+	 */
 	public ItemListFragment<E> setListShown(final boolean shown,
 			final boolean animate){
 		if(shown == listShown){
 			if(shown){
-				if(items.isEmpty())
-					hide(listView).show(emptyView);
-				else
+				if(items != null && (!items.isEmpty()))
 					hide(emptyView).show(listView);
+				else
+					hide(listView).show(emptyView);
 			}
 			return this;
 		}
 		listShown = shown;
 		
 		if(shown){
-			if(!items.isEmpty())
+			if((items != null) && (!items.isEmpty()))
 				hide(progressBar).hide(emptyView).fadeIn(listView,animate)
 				.show(listView);
 			else
@@ -256,13 +275,6 @@ public abstract class ItemListFragment<E> extends Fragment implements
 	
 	
 	
-	@Override
-	public void onLoadFinished(Loader<List<E>> arg0, List<E> arg1) {
-		// TODO Auto-generated method stub
-		this.items = arg1;
-		getListAdapter().setItems(items);
-		showList();
-	}
 	
 	protected void showList(){
 		setListShown(true,isResumed());
