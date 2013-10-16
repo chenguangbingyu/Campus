@@ -84,8 +84,14 @@ public abstract class ItemListFragment<E> extends Fragment implements
 		if(items != null && (!items.isEmpty()))
 			setListShown(true,false);
 		
-		getLoaderManager().initLoader(0,null,this);
 			
+	}
+	
+	@Override
+	public void onStart() {
+		// TODO Auto-generated method stub
+		super.onStart();
+		getLoaderManager().initLoader(0, null, this);
 	}
 	
 	

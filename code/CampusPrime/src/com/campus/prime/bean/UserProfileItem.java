@@ -3,31 +3,50 @@ package com.campus.prime.bean;
 public class UserProfileItem extends ItemBase{
 	private int id;
 	
-	private String email;
-	
-	private String username;
+	private String nick_name;
 	
 	private String avatar;
 	
-	
-	public String getEmail() {
-		return email;
+	private char user_type;
+
+	public int getId() {
+		return id;
 	}
-	public void setEmail(String email) {
-		this.email = email;
+
+	public void setId(int id) {
+		this.id = id;
 	}
-	public String getUsername() {
-		return username;
+
+	public String getNick_name() {
+		return nick_name;
 	}
-	public void setUsername(String username) {
-		this.username = username;
+
+	public void setNick_name(String nick_name) {
+		this.nick_name = nick_name;
 	}
+
 	public String getAvatar() {
 		return avatar;
 	}
+
 	public void setAvatar(String avatar) {
 		this.avatar = avatar;
 	}
+
+	public char getUser_type() {
+		return user_type;
+	}
+
+	public void setUser_type(char user_type) {
+		this.user_type = user_type;
+	}
+
+	@Override
+	public String toString() {
+		return "UserProfileItem [id=" + id + ", nick_name=" + nick_name
+				+ ", avatar=" + avatar + ", user_type=" + user_type + "]";
+	}
+	
 	
 	
 }

@@ -2,7 +2,9 @@ package com.campus.prime.https;
 
 public class CampusService {
 	
-	protected final CampusClient client;
+	private CampusClient client;
+	
+	//private String token = "eb3d139ec756bc8dab04d4d391b60dbbafacdeec";
 	
 	public CampusService() {
 		// TODO Auto-generated constructor stub
@@ -12,8 +14,10 @@ public class CampusService {
 		// TODO Auto-generated constructor stub
 		this.client = client;
 	}
+
 	
 	public CampusClient getClient(){
+		//this.client = client.setCredential(token);
 		return this.client;
 	}
 	
@@ -21,5 +25,6 @@ public class CampusService {
 	public CampusRequest createRequest(){
 		return new CampusRequest();
 	}
+	
 	
 }

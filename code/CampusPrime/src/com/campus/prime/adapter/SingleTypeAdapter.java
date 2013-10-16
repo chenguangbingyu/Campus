@@ -25,7 +25,6 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-import com.campus.prime.bean.ModelBase;
 
 /**
  * Adapter for lists where only a single view type is used

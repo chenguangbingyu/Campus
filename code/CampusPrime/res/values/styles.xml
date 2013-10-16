@@ -1,35 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
     <!--
         Base application theme, dependent on API level. This theme is replaced
-        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
     -->
     <style name="AppBaseTheme" parent="android:Theme.Light">
         <!--
             Theme customizations available in newer API levels can go in
             res/values-vXX/styles.xml, while customizations related to
-            backward-compatibility can go here.
+            backward-compatibility can go here.
         -->
     </style>
-
 
     <style name="AppTheme" parent="android:Theme.Holo.Light.DarkActionBar">
         <item name="android:actionBarStyle">@style/ActionBar</item>
     </style>
-    
-    
+
     <style name="ActionBar" parent="@android:style/Widget.Holo.Light.ActionBar.Solid.Inverse">
-	    <item name="android:background">@color/sa_green</item>
-	    <item name="android:backgroundStacked">@color/stacked_green</item>
-	    <item name="android:backgroundSplit">@color/sa_green</item>
-	</style>
-	
-    
+        <item name="android:background">@color/sa_green</item>
+        <item name="android:backgroundStacked">@color/stacked_green</item>
+        <item name="android:backgroundSplit">@color/sa_green</item>
+    </style>
+
     <style name="AvatarActionBar">
         <item name="android:layout_width">28dp</item>
         <item name="android:layout_height">28dp</item>
     </style>
-    
+
     <style name="TitleText">
         <item name="android:textSize">17sp</item>
         <item name="android:paddingBottom">2dp</item>
@@ -37,9 +35,9 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">wrap_content</item>
     </style>
-    
+
     <style name="ListTitleText" parent="TitleText"></style>
-    
+
     <style name="DropdownItem">
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">wrap_content</item>
@@ -48,16 +46,15 @@
         <item name="android:paddingTop">10dp</item>
         <item name="android:paddingBottom">10dp</item>
     </style>
-    
-     <style name="ListView">
+
+    <style name="ListView">
         <item name="android:dividerHeight">2dp</item>
         <item name="android:divider">@drawable/list_divider</item>
         <item name="android:cacheColorHint">@android:color/transparent</item>
         <item name="android:fadingEdge">none</item>
     </style>
-    
-     
-     <style name="SubtitleText">
+
+    <style name="SubtitleText">
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/text_light</item>
         <item name="android:layout_height">wrap_content</item>
@@ -65,7 +62,7 @@
     </style>
 
     <style name="ListSubtitleText" parent="SubtitleText"></style>
-    
+
     <style name="Spinner">
         <item name="android:indeterminate">true</item>
         <item name="android:indeterminateDrawable">@drawable/spinner</item>
@@ -77,14 +74,21 @@
         <item name="android:layout_width">64dp</item>
         <item name="android:layout_height">64dp</item>
     </style>
-    
+
     <style name="user_face_image">
-		<item name="android:layout_width">40.0dip</item>
-		<item name="android:layout_height">40.0dip</item>
-		<item name="android:scaleType">fitCenter</item>
-		<item name="android:padding">1.0dip</item>
-		<item name="android:clickable">true</item>
-		<item name="android:background">@drawable/widget_dface_border</item>
-		<item name="android:src">@drawable/widget_dface_loading</item>
-    </style> 
+        <item name="android:layout_width">40.0dip</item>
+        <item name="android:layout_height">40.0dip</item>
+        <item name="android:scaleType">fitCenter</item>
+        <item name="android:padding">1.0dip</item>
+        <item name="android:clickable">true</item>
+        <item name="android:background">@drawable/widget_dface_border</item>
+        <item name="android:src">@drawable/widget_dface_loading</item>
+    </style>
+
+    <style name="LoginFormContainer">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">16dp</item>
+    </style>
+
 </resources>

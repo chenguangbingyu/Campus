@@ -1,5 +1,8 @@
 package com.campus.prime.app;
 
-public class AppContext {
+import com.campus.prime.bean.Token;
 
+
+public class AppContext {
+	
 }

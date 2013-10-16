@@ -9,7 +9,9 @@ public class GroupProfile {
 	
 	private String avatar;
 	
-	private School school;
+	private UserProfileItem founder;
+	
+	private String created;
 	
 	private int total;
 
@@ -45,12 +47,20 @@ public class GroupProfile {
 		this.avatar = avatar;
 	}
 
-	public School getSchool() {
-		return school;
+	public UserProfileItem getFounder() {
+		return founder;
 	}
 
-	public void setSchool(School school) {
-		this.school = school;
+	public void setFounder(UserProfileItem founder) {
+		this.founder = founder;
+	}
+
+	public String getCreated() {
+		return created;
+	}
+
+	public void setCreated(String created) {
+		this.created = created;
 	}
 
 	public int getTotal() {
@@ -60,7 +70,14 @@ public class GroupProfile {
 	public void setTotal(int total) {
 		this.total = total;
 	}
+
+	@Override
+	public String toString() {
+		return "GroupProfile [id=" + id + ", name=" + name + ", description="
+				+ description + ", avatar=" + avatar + ", founder=" + founder
+				+ ", created=" + created + ", total=" + total + "]";
+	}
+
 	
 	
-		
 }

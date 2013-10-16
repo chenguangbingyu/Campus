@@ -2,20 +2,14 @@ package com.campus.prime.adapter;
 
 import java.util.List;
 
+import android.content.Context;
+import android.view.LayoutInflater;
+
 import com.campus.prime.R;
-import com.campus.prime.bean.MessageItem;
-import com.campus.prime.constant.AppConstant;
+import com.campus.prime.bean.Message;
 import com.campus.prime.utils.BitmapManager;
 
-import RemoteImage.ImageTools;
-import RemoteImage.ImageTools.ImageToolsDelegate;
-import android.content.Context;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.ImageView;
-
-public class MessageListViewAdapter extends SingleTypeAdapter<MessageItem>{
+public class MessageListViewAdapter extends SingleTypeAdapter<Message>{
 	
 	
 	private BitmapManager mBitmapManager;
@@ -27,7 +21,7 @@ public class MessageListViewAdapter extends SingleTypeAdapter<MessageItem>{
 		mBitmapManager = BitmapManager.getInstance();
 	}
 
-	public MessageListViewAdapter(Context context,final List<MessageItem> messages, int layoutResourceId) {
+	public MessageListViewAdapter(Context context,final List<Message> messages, int layoutResourceId) {
 		this(context,layoutResourceId);
 		setItems(messages);
 	}
@@ -43,9 +37,9 @@ public class MessageListViewAdapter extends SingleTypeAdapter<MessageItem>{
 		
 	
 	@Override
-	protected void update(int position, MessageItem item) {
+	protected void update(int position, Message item) {
 		// TODO Auto-generated method stub
-		mBitmapManager.loadBitmap(AppConstant.IMAGE_URL, imageView(0), null, 0, 0);
+		mBitmapManager.loadBitmap(item.getUser().getAvatar(), imageView(0), null, 0, 0);
 		setText(1, item.getId() + "");
 		setText(2,item.getContent());
 		setText(3,item.getLocation());

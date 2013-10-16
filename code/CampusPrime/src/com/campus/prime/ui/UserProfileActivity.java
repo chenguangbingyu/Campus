@@ -8,18 +8,11 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
-import android.support.v4.view.ViewPager.OnPageChangeListener;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBar.OnNavigationListener;
-import android.support.v7.app.ActionBar.Tab;
-import android.support.v7.app.ActionBar.TabListener;
 import android.view.Menu;
 
 import com.campus.prime.R;
 import com.campus.prime.ui.fragment.HomeFragment;
-import com.campus.prime.ui.fragment.UserBasicFragment;
 import com.campus.prime.ui.fragment.UserGroupsFragment;
 import com.campus.prime.ui.fragment.UserRecentFragment;
 

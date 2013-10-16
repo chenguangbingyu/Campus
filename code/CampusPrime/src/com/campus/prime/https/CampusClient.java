@@ -8,6 +8,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.HttpVersion;
@@ -19,11 +20,13 @@ import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
+import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.conn.ClientConnectionManager;
 import org.apache.http.conn.params.ConnManagerParams;
 import org.apache.http.conn.scheme.PlainSocketFactory;
 import org.apache.http.conn.scheme.Scheme;
 import org.apache.http.conn.scheme.SchemeRegistry;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
 import org.apache.http.params.BasicHttpParams;
@@ -32,6 +35,8 @@ import org.apache.http.params.HttpParams;
 import org.apache.http.params.HttpProtocolParams;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
+
+import android.util.Base64;
 
 import com.campus.prime.utils.CommonLog;
 import com.campus.prime.utils.JsonUtil;
@@ -42,6 +47,44 @@ public class CampusClient {
 	
 	private static final String CHARSET_UTF8 = HTTP.UTF_8;
 	private static HttpClient customHttpClient;
+	
+	
+	protected static final String HEADER_CONTENT_TYPE = "Content-Type";
+	
+	protected static final String HEADER_ACCEPT = "Accept";
+	
+	protected static final String HEADER_AUTHORIZATION = "Authorization";
+	
+	protected static final String JSON = "application/json";
+	
+	protected static final String AUTH_TOKEN = "Token";
+	
+	protected static final String AUTH_BASIC = "Basic";
+	
+	
+	
+	private String credential;
+	
+	
+	public CampusClient setCredential(final String username,final String password){
+		if(username != null && username.length() > 0 && password != null
+				&& password.length() > 0)
+			credential = "Basic "+ 
+				Base64.encodeToString((username+':'+password).getBytes(), Base64.NO_WRAP);
+		else
+			credential =null;
+		return this;
+				
+	}
+	
+	
+	public CampusClient setCredential(String token){
+		if(token != null && token.length() > 0)
+			credential = AUTH_TOKEN +  ' ' + token;
+		else
+			credential = null;
+		return this;
+	}
 
 	
 	public CampusClient(){
@@ -154,7 +197,7 @@ public class CampusClient {
 	}
 	
 	/**
-	 * HttpClient POST·½·¨
+	 * HttpClient POST
 	 * @param context
 	 * @param url
 	 * @param nameValuePairs
@@ -169,6 +212,28 @@ public class CampusClient {
 		return handleResponse(response, type);
 	}
 	
+	/**
+	 * HttpClient POST methos /post a json
+	 * @param url
+	 * @param type
+	 * @param jsonObject
+	 * @param nameValuePairs
+	 * @return
+	 * @throws Exception
+	 */
+	public <V> V post(final String url,final Class<V> type,
+			String jsonObject,NameValuePair... nameValuePairs)throws Exception{
+		String requestUrl = urlParse(url,nameValuePairs);
+		HttpPost httpPost = new HttpPost(requestUrl);
+		httpPost = (HttpPost)configureRequest(httpPost);
+		httpPost.setEntity(new StringEntity(jsonObject));
+		
+		HttpClient client = getHttpClient();
+		
+		HttpResponse response = client.execute(httpPost);
+		return handleResponse(response,type);
+	}
+	
 	
 	/**
 	 * create HttpPost
@@ -178,11 +243,12 @@ public class CampusClient {
 	 * @throws UnsupportedEncodingException 
 	 */
 	private HttpPost createPost(final String url,NameValuePair...nameValuePairs) throws UnsupportedEncodingException{
-		String requestUrl = urlParse(url, nameValuePairs);
+		//String requestUrl = urlParse(url, nameValuePairs);
 		List<NameValuePair> params = getParams(nameValuePairs);
 
 		UrlEncodedFormEntity urlEncoded = new UrlEncodedFormEntity(params,CHARSET_UTF8);
-		HttpPost httpPost = new HttpPost(requestUrl);
+		HttpPost httpPost = new HttpPost(url);
+		httpPost = (HttpPost)configureRequest(httpPost);
 		httpPost.setEntity(urlEncoded);
 		return httpPost;
 	}
@@ -208,6 +274,7 @@ public class CampusClient {
 	private HttpGet createGet(final String url,NameValuePair...nameValuePairs){
 		String requestUrl = urlParse(url, nameValuePairs);
 		HttpGet httpGet = new HttpGet(requestUrl);
+		httpGet = (HttpGet)configureRequest(httpGet);
 		return httpGet;
 	}
 	
@@ -224,6 +291,7 @@ public class CampusClient {
 		
 		UrlEncodedFormEntity urlEncoded = new UrlEncodedFormEntity(params,CHARSET_UTF8);
 		HttpPut httpPut = new HttpPut(requestUrl);
+		httpPut = (HttpPut)configureRequest(httpPut);
 		httpPut.setEntity(urlEncoded);
 		
 		return httpPut;
@@ -233,6 +301,7 @@ public class CampusClient {
 	public <V> V put(final String url,Class<V> type,
 			NameValuePair...nameValuePairs)throws Exception{
 		HttpPut httpPut = createPut(url, nameValuePairs);
+		httpPut = (HttpPut)configureRequest(httpPut);
 		HttpClient httpClient = getHttpClient();
 		HttpResponse response = httpClient.execute(httpPut);
 		
@@ -248,6 +317,7 @@ public class CampusClient {
 			NameValuePair...nameValuePairs){
 		String requestUrl = urlParse(url, nameValuePairs);
 		HttpDelete httpDelete = new HttpDelete(requestUrl);
+		httpDelete = (HttpDelete)configureRequest(httpDelete);
 		return httpDelete;
 	}
 	
@@ -262,6 +332,7 @@ public class CampusClient {
 	public <V> V get(final String url,Class<V> type,
 			NameValuePair...nameValuePairs) throws Exception{
 		HttpGet httpGet = createGet(url, nameValuePairs);
+		
 		HttpClient httpClient = getHttpClient();
 		HttpResponse response = httpClient.execute(httpGet);
 		
@@ -272,6 +343,7 @@ public class CampusClient {
 	public CampusResponse get(CampusRequest request) 
 			throws ClientProtocolException, IOException{
 		HttpGet httpGet= new HttpGet(request.generateUri());
+		httpGet = (HttpGet)configureRequest(httpGet);
 		HttpClient httpClient = getHttpClient();
 		HttpResponse response = httpClient.execute(httpGet);
 		int code = response.getStatusLine().getStatusCode();
@@ -293,6 +365,8 @@ public class CampusClient {
 	}
 	
 	
+	
+	
 	/**
 	 * delete this method will throw an Exception
 	 * 
@@ -306,6 +380,7 @@ public class CampusClient {
 	public void delete(final String url,
 			NameValuePair...nameValuePairs)throws Exception{
 		HttpDelete httpDelete = createDelete(url, nameValuePairs);
+		httpDelete = (HttpDelete)configureRequest(httpDelete);
 		HttpClient httpClient = getHttpClient();
 		HttpResponse response = httpClient.execute(httpDelete);
 		int code = response.getStatusLine().getStatusCode();
@@ -314,6 +389,17 @@ public class CampusClient {
 					code);
 	}
 	
+	/**
+	 * configure httpPost httpGet and so on
+	 * @param request
+	 */
+	protected HttpRequestBase configureRequest(HttpRequestBase request){
+		if(credential != null)
+			request.setHeader(HEADER_AUTHORIZATION,credential);
+		request.setHeader(HEADER_CONTENT_TYPE,JSON);
+		request.setHeader(HEADER_ACCEPT,JSON);
+		return request;
+	}
 	
 	
 	

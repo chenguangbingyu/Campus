@@ -6,6 +6,8 @@ public class UserProfile {
 	private int id;
 	
 	private String nick_name;
+	
+	private String real_name;
 		
 	private char sex;
 	
@@ -16,14 +18,8 @@ public class UserProfile {
 	private String avatar;
 	
 	private String description;
-	
-	private String real_name;
-	
-	private School school;
 
 	private Academy academy;
-	
-	private String grade;
 	
 	
 	public int getId(){
@@ -89,13 +85,6 @@ public class UserProfile {
 		this.real_name = real_name;
 	}
 
-	public School getSchool() {
-		return school;
-	}
-
-	public void setSchool(School school) {
-		this.school = school;
-	}
 
 	public Academy getAcademy() {
 		return academy;
@@ -104,15 +93,14 @@ public class UserProfile {
 	public void setAcademy(Academy academy) {
 		this.academy = academy;
 	}
-
-	public String getGrade() {
-		return grade;
+	@Override
+	public String toString() {
+		return "UserProfile [id=" + id + ", nick_name=" + nick_name
+				+ ", real_name=" + real_name + ", sex=" + sex + ", birthday="
+				+ birthday + ", user_type=" + user_type + ", avatar=" + avatar
+				+ ", description=" + description + ", academy=" + academy + "]";
 	}
+	
+	
 
-	public void setGrade(String grade) {
-		this.grade = grade;
-	}
-	
-	
-	
 }

@@ -8,10 +8,9 @@ public class GroupItem extends ItemBase{
 	private String avatar;
 	
 	private String description;
+	
+	private int total;
 
-	
-	
-	
 	public int getId() {
 		return id;
 	}
@@ -43,6 +42,22 @@ public class GroupItem extends ItemBase{
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
+	public int getTotal() {
+		return total;
+	}
+
+	public void setTotal(int total) {
+		this.total = total;
+	}
+
+	@Override
+	public String toString() {
+		return "GroupItem [id=" + id + ", name=" + name + ", avatar=" + avatar
+				+ ", description=" + description + ", total=" + total + "]";
+	}
+
+	
 	
 	
 	

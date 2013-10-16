@@ -1,22 +1,19 @@
 package com.campus.prime.bean;
 
-import java.util.Date;
 
 
-public class Comment extends ItemBase{
+public class Comment{
 	private int id;
 	
-	private Date created;
+	private String created;
 	
 	private String content;
 	
-	private String location;
+	private UserProfileItem user;
 	
 	private int message;
 	
-	private UserProfile user;
-	
-	private String reply;
+	private UserProfileItem reply;
 
 	public int getId() {
 		return id;
@@ -26,11 +23,11 @@ public class Comment extends ItemBase{
 		this.id = id;
 	}
 
-	public Date getCreated() {
+	public String getCreated() {
 		return created;
 	}
 
-	public void setCreated(Date created) {
+	public void setCreated(String created) {
 		this.created = created;
 	}
 
@@ -42,12 +39,12 @@ public class Comment extends ItemBase{
 		this.content = content;
 	}
 
-	public String getLocation() {
-		return location;
+	public UserProfileItem getUser() {
+		return user;
 	}
 
-	public void setLocation(String location) {
-		this.location = location;
+	public void setUser(UserProfileItem user) {
+		this.user = user;
 	}
 
 	public int getMessage() {
@@ -58,23 +55,21 @@ public class Comment extends ItemBase{
 		this.message = message;
 	}
 
-	public UserProfile getUser() {
-		return user;
-	}
-
-	public void setUser(UserProfile user) {
-		this.user = user;
-	}
-
-	public String getReply() {
+	public UserProfileItem getReply() {
 		return reply;
 	}
 
-	public void setReply(String reply) {
+	public void setReply(UserProfileItem reply) {
 		this.reply = reply;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return "Comment [id=" + id + ", created=" + created + ", content="
+				+ content + ", user=" + user + ", message=" + message
+				+ ", reply=" + reply + "]";
+	}
+
 	
 	
 }

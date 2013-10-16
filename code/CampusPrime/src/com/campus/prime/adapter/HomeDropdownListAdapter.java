@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.campus.prime.R;
-import com.campus.prime.bean.User;
+import com.campus.prime.bean.UserProfile;
 import com.campus.prime.constant.AppConstant;
 import com.campus.prime.utils.BitmapManager;
 
@@ -42,7 +42,7 @@ public class HomeDropdownListAdapter extends SingleTypeAdapter<Object>{
 	}
 	
 	
-	private HomeDropdownListAdapter setOrgs(final User user){
+	private HomeDropdownListAdapter setOrgs(final UserProfile user){
 		List<Object> all = new ArrayList<Object>(NON_ORG_ITEMS + 1);
 		all.add(user);
 		all.add(new Object());
@@ -54,7 +54,7 @@ public class HomeDropdownListAdapter extends SingleTypeAdapter<Object>{
 	
 	
 	
-	public HomeDropdownListAdapter(final Context context,final User user){
+	public HomeDropdownListAdapter(final Context context,final UserProfile user){
 		super(context,R.layout.org_item);
 		
 		mInflater = LayoutInflater.from(context);
