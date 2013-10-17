@@ -94,7 +94,7 @@ public class MessageService extends CampusService {
 		try{
 			String url = Urls.MESSAGES_GROUP_TIMELINE + id + '/';
 			log.i(url);
-			page = getClient().get(url,MessagePage.class,(NameValuePair)null);
+			page = getClient().setCredential(Auth.token).get(url,MessagePage.class,(NameValuePair[])null);
 		}catch(Exception e){
 			e.printStackTrace();
 			return null;

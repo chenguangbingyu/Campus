@@ -1,9 +1,6 @@
 package com.campus.prime.ui.fragment;
 
-import java.io.IOException;
 import java.util.List;
-
-import org.apache.http.client.ClientProtocolException;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -14,7 +11,6 @@ import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.ListView;
 
-import com.campus.prime.bean.MessageItem;
 import com.campus.prime.bean.PageBase;
 import com.campus.prime.https.MessageService;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
@@ -162,6 +158,9 @@ public abstract class PagedItemFragment<E> extends ItemListFragment<E>{
 		}
 	}
 	
+	/**
+	 * refresh messages
+	 */
 	/**
 	 * async load data
 	 * @return

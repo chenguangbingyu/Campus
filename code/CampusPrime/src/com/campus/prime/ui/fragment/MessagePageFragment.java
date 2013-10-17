@@ -15,6 +15,8 @@ import com.campus.prime.bean.MessagePage;
 
 public class MessagePageFragment extends PagedItemFragment<Message>{
 	
+	
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -30,15 +32,17 @@ public class MessagePageFragment extends PagedItemFragment<Message>{
 		return new MessageListViewAdapter(getActivity(),R.layout.messages_listitem);
 	}
 
-
+	
+	
+	
 	@SuppressWarnings("unchecked" )
 	@Override
 	protected List<Message> load() {
 		// TODO Auto-generated method stub
 		List<Message> result = null;
 		try {
-			currentPage = service.getUser(230);
-			
+			//currentPage = service.getUser(230);
+			currentPage = service.getPublic();
 		} catch (ClientProtocolException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -70,7 +74,6 @@ public class MessagePageFragment extends PagedItemFragment<Message>{
 				return null;
 		}
 		return null;
-		
 	}
 
 }

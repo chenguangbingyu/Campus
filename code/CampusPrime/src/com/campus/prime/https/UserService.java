@@ -6,6 +6,7 @@ import org.apache.http.NameValuePair;
 
 import com.campus.prime.app.Auth;
 import com.campus.prime.bean.Token;
+import com.campus.prime.bean.UserPage;
 import com.campus.prime.bean.UserProfile;
 import com.campus.prime.utils.CommonLog;
 import com.campus.prime.utils.LogFactory;
@@ -41,6 +42,25 @@ public class UserService extends CampusService{
 			return token;
 		}
 		return token;
+	}
+	/**
+	 * register a new user
+	 * @param username
+	 * @param email
+	 * @param password
+	 * @return
+	 */
+	public UserProfile register(String username,String email,String password){
+		UserProfile user = null;
+		String url = Urls.USER_REGISTER;
+		try{
+			String jsonObject =  "{\"username\":\"" + username + "\",\"email\":\"" + "\",\"password\":\"" + password + "\"}";
+			user = getClient().post(url, UserProfile.class, jsonObject,(NameValuePair[])null);
+		}catch(Exception e){
+			e.printStackTrace();
+			return user;
+		}
+		return user;
 	}
 	
 	/**
@@ -101,6 +121,26 @@ public class UserService extends CampusService{
 			return null;
 		}
 		return user;
+	}
+	
+	
+	/**
+	 * get group's users
+	 * @param groupId
+	 * @return
+	 */
+	public UserPage getUsers(int groupId){
+		UserPage page = null;
+		String url = Urls.USERS_GROUP + groupId + '/';
+		log.i(url);
+		try {
+			page = getClient().setCredential(Auth.token).get(url,UserPage.class,(NameValuePair[])null);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return page;
+		}
+		return page;
 	}
 	
 	

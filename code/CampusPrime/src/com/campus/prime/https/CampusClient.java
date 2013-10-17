@@ -166,7 +166,7 @@ public class CampusClient {
 		if(isOk(code)){
 			if(type != null){
 				String jsonString = EntityUtils.toString(response.getEntity());
-				log.i(jsonString);
+				log.i("user register" + jsonString);
 				return parseJson(jsonString,type);
 			}else
 				return null;
@@ -353,7 +353,6 @@ public class CampusClient {
 						request.getType());
 				return new CampusResponse(body);
 			}
-			
 			else
 				return new CampusResponse(null);
 		}

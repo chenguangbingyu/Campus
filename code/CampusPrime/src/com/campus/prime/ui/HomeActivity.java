@@ -4,11 +4,17 @@ import static com.campus.prime.constant.AppConstant.SETTING_INFOS;
 import static com.campus.prime.constant.AppConstant.TOKEN;
 import static com.campus.prime.constant.AppConstant.USERNAME;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.Collection;
+import java.util.List;
+
+import org.apache.http.client.ClientProtocolException;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -24,14 +30,21 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.campus.prime.R;
+import com.campus.prime.adapter.GroupsDropDownListAdapter;
 import com.campus.prime.adapter.HomeDropdownListAdapter;
 import com.campus.prime.app.Auth;
+import com.campus.prime.bean.GroupItem;
+import com.campus.prime.bean.GroupPage;
+import com.campus.prime.bean.MessagePage;
 import com.campus.prime.bean.UserProfile;
 import com.campus.prime.constant.AppConstant;
+import com.campus.prime.https.GroupService;
+import com.campus.prime.https.MessageService;
 import com.campus.prime.https.UserService;
 import com.campus.prime.slidingmenu.SlidingMenu;
 import com.campus.prime.ui.fragment.AsyncLoader;
 import com.campus.prime.ui.fragment.HomeFragment;
+import com.campus.prime.ui.fragment.HomeFragment.MessagesUpdateListenser;
 import com.campus.prime.utils.CommonLog;
 import com.campus.prime.utils.LogFactory;
 import com.weibo.sdk.android.Oauth2AccessToken;
@@ -50,7 +63,7 @@ import com.weibo.sdk.android.util.AccessTokenKeeper;
  */
 
 public class HomeActivity extends BaseSlidingActivity 
-		implements LoaderCallbacks<UserProfile>{
+		implements LoaderCallbacks<List<GroupItem>>{
 	/**
 	 * log
 	 */
@@ -60,7 +73,10 @@ public class HomeActivity extends BaseSlidingActivity
 	 * Adapter
 	 */
 	private HomeDropdownListAdapter mHomeDropDownListAdapter;
+	private GroupsDropDownListAdapter mGroupsDownListAdapter;
 	private SlidingMenu mSlidingMenu;
+	
+	private HomeFragment mHomeFragment;
 	
 	/**
 	 * UserService
@@ -69,7 +85,13 @@ public class HomeActivity extends BaseSlidingActivity
 	private Button mWeiboButton;
 	private TextView mAuthInfoTextView;
 	private Button mLogginButton;
+	private Button mRegisterButton;
 	
+	/**
+	 * current showed Group
+	 * -1 refer to public
+	 */
+	private int mCurrentGroup = -1;
 		
 	
 	/**
@@ -85,8 +107,9 @@ public class HomeActivity extends BaseSlidingActivity
 		
 		FragmentManager fm = getSupportFragmentManager();
 		FragmentTransaction ft = fm.beginTransaction();
-		HomeFragment f = new HomeFragment();
-		ft.add(R.id.container,f);
+		mHomeFragment= new HomeFragment();
+		
+		ft.add(R.id.container,mHomeFragment);
 		ft.commit();
 		
 		
@@ -96,8 +119,6 @@ public class HomeActivity extends BaseSlidingActivity
 		
 		initView();
 		getInfos();
-		
-		
 		
 		/*
 		// get accessToken from sharedPreference
@@ -113,27 +134,33 @@ public class HomeActivity extends BaseSlidingActivity
         }
 		
 		*/
-		
-		
 	}
 	
 	@Override
 	protected void onStart() {
 		// TODO Auto-generated method stub
 		super.onStart();
-		getSupportLoaderManager().initLoader(0, null, this);
+		if(Auth.isAuth()){
+			getSupportLoaderManager().initLoader(0, null, this);
+		}
 	}
 	
 	private void getInfos(){
-		SharedPreferences infos = getSharedPreferences(SETTING_INFOS, 0);
-		Auth.token = infos.getString(TOKEN,null);
-		Auth.username = infos.getString(USERNAME,null);
-		mLog.i(Auth.token);
-		mLog.i(Auth.username);
+		if(!Auth.isAuth()){
+			SharedPreferences infos = getSharedPreferences(SETTING_INFOS, 0);
+			if(infos == null)
+				return;
+			Auth.token = infos.getString(TOKEN,null);
+			Auth.username = infos.getString(USERNAME,null);
+			mLog.i("on start app get user infos" + Auth.token);
+			mLog.i("on start app get user infos" + Auth.username);
+		}
 	}
 	
 	
-	
+	/**
+	 * init control view
+	 */
 	private void initView(){
 		mWeiboButton = (Button)findViewById(R.id.weibo_auth_btn);
 		mWeiboButton.setOnClickListener(new OnClickListener() {
@@ -160,6 +187,18 @@ public class HomeActivity extends BaseSlidingActivity
 			}
 		});
 		
+		mRegisterButton = (Button)findViewById(R.id.register);
+		mRegisterButton.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent(HomeActivity.this,RegisterActivity.class);
+				startActivity(intent);
+				
+			}
+		});
+		
 		
 		mAuthInfoTextView = (TextView)findViewById(R.id.auth_info);
 	}
@@ -179,30 +218,18 @@ public class HomeActivity extends BaseSlidingActivity
 	private void configureActionBar(ActionBar actionBar){
 		
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
-		
-		mHomeDropDownListAdapter = new HomeDropdownListAdapter(this, new UserProfile());
-		actionBar.setListNavigationCallbacks(mHomeDropDownListAdapter, new OnNavigationListener() {
+		mGroupsDownListAdapter = new GroupsDropDownListAdapter(this);
+		actionBar.setListNavigationCallbacks(mGroupsDownListAdapter, new OnNavigationListener() {
 			
 			@Override
 			public boolean onNavigationItemSelected(int arg0, long arg1) {
 				// TODO Auto-generated method stub
-				Intent intent = new Intent();
-				switch(arg0){
-				case 1:
-					intent.setClass(HomeActivity.this, UserProfileActivity.class);
-					startActivity(intent);
-					break;
-				case 2:
-					intent.setClass(HomeActivity.this, GroupDetailActivity.class);
-					startActivity(intent);
-					break;
-				default:
-					return false;
-				}
+				mCurrentGroup = mGroupsDownListAdapter.getGroupId(arg0);
+				mHomeFragment.setCurrentGroup(mCurrentGroup);
+				mHomeFragment.refresh();
 				return true;
 			}
 		});
-		
 	}
 	
 	/**
@@ -221,7 +248,47 @@ public class HomeActivity extends BaseSlidingActivity
         mSlidingMenu.setBehindScrollScale(0);
     }
 	
+
+
+
+	@Override
+	public Loader<List<GroupItem>> onCreateLoader(int id, Bundle args) {
+		// TODO Auto-generated method stub
+		return new AsyncLoader<List<GroupItem>>(HomeActivity.this) {
+			@Override
+			protected List<GroupItem> loadData() {
+				// TODO Auto-generated method stub
+				GroupService service = new GroupService();
+				GroupPage page = null;
+				page = service.getGroupsByUser(1);
+				if(page == null)
+					return null;
+				mLog.i(page.toString());
+				List<GroupItem> results = page.getResults();
+				return results;
+			}
+		};
+	}
+
+	@Override
+	public void onLoadFinished(Loader<List<GroupItem>> arg0, List<GroupItem> arg1) {
+		// TODO Auto-generated method stub
+		if(arg1 != null){
+			mLog.i(arg1.get(0).toString());
+			mGroupsDownListAdapter.setOrgs(arg1);
+		}
+	}
+
+	@Override
+	public void onLoaderReset(Loader<List<GroupItem>> arg0) {
+		// TODO Auto-generated method stub
+		
+	}
 	
+	
+	
+	
+		
 	/**
 	 * weibo authentication callback class
 	 * @author absurd
@@ -233,7 +300,6 @@ public class HomeActivity extends BaseSlidingActivity
 		public void onCancel() {
 			// TODO Auto-generated method stub
 			 Toast.makeText(getApplicationContext(), "Auth cancel", Toast.LENGTH_LONG).show();
-		        
 		}
 
 		@SuppressLint("SimpleDateFormat")
@@ -251,9 +317,7 @@ public class HomeActivity extends BaseSlidingActivity
 				// write accesskey to sharedPreferences
 				AccessTokenKeeper.keepAccessToken(HomeActivity.this,mAccessToken);
 				Toast.makeText(HomeActivity.this, "auth successful", Toast.LENGTH_SHORT).show();
-				
 			}
-			
 		}
 
 		@Override
@@ -268,41 +332,11 @@ public class HomeActivity extends BaseSlidingActivity
 			// TODO Auto-generated method stub
             Toast.makeText(getApplicationContext(), 
                     "Auth exception : " + arg0.getMessage(), Toast.LENGTH_LONG).show();
-			
 		}
 		
 	}
 
 
-	@Override
-	public Loader<UserProfile> onCreateLoader(int id, Bundle args) {
-		// TODO Auto-generated method stub
-		return new AsyncLoader<UserProfile>(HomeActivity.this) {
-			@Override
-			protected UserProfile loadData() {
-				// TODO Auto-generated method stub
-				UserProfile user;
-				UserService service = new UserService();
-				user = service.getProfile();
-				return user;
-			}
-		};
-	}
 
-	@Override
-	public void onLoadFinished(Loader<UserProfile> arg0, UserProfile arg1) {
-		// TODO Auto-generated method stub
-		Auth.user = arg1;
-		mLog.i(Auth.user.toString());
-		
-	}
-
-	@Override
-	public void onLoaderReset(Loader<UserProfile> arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	
 	
 }

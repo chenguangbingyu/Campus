@@ -10,9 +10,17 @@ public class GroupPage extends PageBase{
 	}
 
 	@Override
-	public List<?> getResults() {
+	public List<GroupItem> getResults() {
 		// TODO Auto-generated method stub
 		return results;
 	}
-	
+	@Override
+	public String toString() {
+		String r = "";
+		for(Object result:results){
+			r += ((GroupItem) result).toString();
+		}
+		return r; 
+	}
+
 }
