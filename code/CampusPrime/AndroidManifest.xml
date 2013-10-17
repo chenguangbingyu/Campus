@@ -19,7 +19,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.campus.prime.ui.HomeActivity"
+            android:name="com.campus.prime.ui.home.HomeActivity"
             android:label="@string/app_name"
             android:theme="@style/Theme.Campus" >
             <intent-filter>
@@ -37,12 +37,12 @@
                 android:value="com.campus.prime.ui.HomeActivity" />
         </activity>
         <activity
-            android:name="com.campus.prime.ui.UserProfileActivity"
+            android:name="com.campus.prime.ui.user.UserActivity"
             android:label="@string/title_activity_user_profile"
             android:theme="@style/Theme.AppCompat.Light" >
         </activity>
         <activity
-            android:name="com.campus.prime.ui.GroupDetailActivity"
+            android:name="com.campus.prime.ui.group.GroupActivity"
             android:label="@string/title_activity_group_detail"
             android:theme="@style/Theme.AppCompat.Light" >
         </activity>
@@ -52,12 +52,12 @@
             android:theme="@style/Theme.Campus" >
         </activity>
         <activity
-            android:name="com.campus.prime.ui.LoginActivity"
+            android:name="com.campus.prime.ui.home.LoginActivity"
             android:label="@string/title_activity_login"
             android:windowSoftInputMode="adjustResize|stateVisible" >
         </activity>
         <activity
-            android:name="com.campus.prime.ui.RegisterActivity"
+            android:name="com.campus.prime.ui.home.RegisterActivity"
             android:label="@string/title_activity_register"
             android:windowSoftInputMode="adjustResize|stateVisible" >
         </activity>
