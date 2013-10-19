@@ -5,9 +5,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 
-import com.campus.prime.slidingmenu.SlidingActivityBase;
-import com.campus.prime.slidingmenu.SlidingActivityHelper;
-import com.campus.prime.slidingmenu.SlidingMenu;
+import com.campus.prime.ui.slidingmenu.SlidingActivityBase;
+import com.campus.prime.ui.slidingmenu.SlidingActivityHelper;
+import com.campus.prime.ui.slidingmenu.SlidingMenu;
 
 
 /**

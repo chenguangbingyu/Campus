@@ -26,7 +26,12 @@ public class UserProfileFragment extends Fragment
 	
 	
 	protected User load(){
-		User result = service.getProfile();
+		User result = null;
+		int userId = ((UserActivity)getActivity()).getUserId();
+		if(userId != -1)
+			result = service.getProfile(userId);
+		else
+			result = service.getProfile();
 		return result;
 	}
 	

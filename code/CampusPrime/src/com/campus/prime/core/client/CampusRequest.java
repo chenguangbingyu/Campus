@@ -3,7 +3,7 @@ package com.campus.prime.core.client;
 import java.lang.reflect.Type;
 import java.util.Map;
 
-import com.campus.prime.utils.UrlUtils;
+import com.campus.prime.core.utils.UrlUtils;
 
 public class CampusRequest {
 	private String uri;

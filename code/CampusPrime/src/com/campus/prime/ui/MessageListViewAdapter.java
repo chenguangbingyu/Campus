@@ -38,7 +38,7 @@ public class MessageListViewAdapter extends SingleTypeAdapter<Message>{
 	@Override
 	protected void update(int position, Message item) {
 		// TODO Auto-generated method stub
-		mBitmapManager.loadBitmap(item.getUser().getAvatar(), imageView(0), null, 0, 0);
+		mBitmapManager.loadBitmap("/media/test.jpg", imageView(0), null, 0, 0);
 		setText(1, item.getId() + "");
 		setText(2,item.getContent());
 		setText(3,item.getLocation());

@@ -12,8 +12,8 @@ import java.lang.ref.SoftReference;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import Network.Network;
-import android.app.ApplicationErrorReport;
+import com.campus.prime.core.utils.BCSUtils;
+
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Handler;
@@ -78,31 +78,34 @@ public class BitmapManager {
 	 * @param height
 	 */
 	public void loadBitmap(String url, ImageView imageView, Bitmap defaultBmp, int width, int height){
-		imageViews.put(imageView, url);
-		
-		Bitmap bitmap = getBitmapFromCache(url);
-		//如果cache中已经有该图片，直接加载该图片
-		if(bitmap != null){
-			imageView.setImageBitmap(bitmap);
-		}else{
-			//检查文件中是否缓存图片
-			String filename = FileUtils.getFileName(url);
-			String filepath = imageView.getContext().getFilesDir() + File.separator + filename;
+		if(!StringUtils.isEmpty(url)){
+			imageViews.put(imageView, url);
 			
-			File file = new File(filepath);
-			if(file.exists()){
-				Bitmap bmp = ImageUtils.getBitmap(imageView.getContext(),filename);
-				imageView.setImageBitmap(bmp);
+			Bitmap bitmap = getBitmapFromCache(url);
+			//如果cache中已经有该图片，直接加载该图片
+			if(bitmap != null){
+				imageView.setImageBitmap(bitmap);
 			}else{
-				//如果没有  从网络中获取
-				imageView.setImageBitmap(defaultBmp);
-				queueJob(url,imageView,width,height);
+				//检查文件中是否缓存图片
+				String filename = FileUtils.getFileName(url);
+				String filepath = imageView.getContext().getFilesDir() + File.separator + filename;
+				
+				File file = new File(filepath);
+				if(file.exists()){
+					Bitmap bmp = ImageUtils.getBitmap(imageView.getContext(),filename);
+					imageView.setImageBitmap(bmp);
+				}else{
+					// if not,get from net
+					imageView.setImageBitmap(defaultBmp);
+					queueJob("/media/" + filename,imageView,width,height);
+				}
 			}
 		}
 	}
 	
+	
 	/**
-	 * 从网络中加载图片
+	 * load photo from net
 	 * @param url
 	 * @param imageView
 	 * @param width
@@ -148,16 +151,22 @@ public class BitmapManager {
 		Bitmap bitmap = null;
 		try{
 			//http请求   获取图片
+			/**
 			URL url = new URL(urlPath);
 			HttpURLConnection conn = (HttpURLConnection)url.openConnection();
 			conn.setRequestMethod("GET");
 			conn.setConnectTimeout(6 * 1000);
-			if(conn.getResponseCode() == 200){
+			int responseCode = conn.getResponseCode();
+			if(responseCode == 200){
 				InputStream inputStream = conn.getInputStream();
 				byte[] data = (byte[]) readStream(inputStream);
 				bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
 				
 			}
+			**/
+			InputStream inputStream = BCSUtils.getObjectContent("/media/test.jpg");
+			byte[] data = (byte[]) readStream(inputStream);
+			bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
 			if(width > 0 && height > 0){
 				//制定显示图片的大小
 				bitmap = Bitmap.createScaledBitmap(bitmap, width, height, true);

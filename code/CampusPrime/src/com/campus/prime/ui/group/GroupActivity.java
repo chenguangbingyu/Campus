@@ -1,26 +1,13 @@
 package com.campus.prime.ui.group;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.campus.prime.R;
-import com.campus.prime.ui.BaseTabActivity;
-import com.campus.prime.utils.CommonLog;
-import com.campus.prime.utils.LogFactory;
+import com.campus.prime.ui.indicator.PageIndicator;
+import com.campus.prime.ui.indicator.TitlePageIndicator;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
-import android.support.v4.view.ViewPager.OnPageChangeListener;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBar.OnNavigationListener;
-import android.support.v7.app.ActionBar.Tab;
-import android.support.v7.app.ActionBar.TabListener;
-import android.test.RenamingDelegatingContext;
-import android.view.Menu;
 
 /**
  * 群组详细资料的activity
@@ -28,127 +15,44 @@ import android.view.Menu;
  * @author absurd
  *
  */
-public class GroupActivity  extends BaseTabActivity{
-	/**
-	 * log
-	 */
-	private CommonLog log = LogFactory.createLog();
-
-	private static final String BASIC_TITLE = "BASIC";
-	private static final String MEMBERS_TITLE = "MEMBERS";
-	private static final String RECENT_TITLE = "RECENT";
-	private static final int TAB_NUM = 3;
-	
-	
+public class GroupActivity extends FragmentActivity{
 	
 	private int groupId;
 	
+	GroupPagerAdapter mAdapter;
+	ViewPager mPager;
+	PageIndicator mIndicator;
+	
+	/**
+	 * get groupId
+	 * @return
+	 */
+	public int getGroupId(){
+		return groupId;
+	}
+	
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	protected void onCreate(Bundle arg0) {
 		// TODO Auto-generated method stub
-		super.onCreate(savedInstanceState);
+		super.onCreate(arg0);
+		setContentView(R.layout.group_pager);
+		mAdapter = new GroupPagerAdapter(getSupportFragmentManager());
+		mPager = (ViewPager)findViewById(R.id.group_pager);
+		mPager.setAdapter(mAdapter);
+		mIndicator = (TitlePageIndicator)findViewById(R.id.group_indicator);
+		mIndicator.setViewPager(mPager);
+
 		
-		Bundle bundle = new Bundle();
-		groupId = bundle.getInt("groupId");
-		log.i("groupId is " + groupId + "");
+		Intent intent = getIntent();
+		groupId = intent.getIntExtra("groupId", -1);
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
+	public void finish() {
 		// TODO Auto-generated method stub
-		getMenuInflater().inflate(R.menu.group_detail, menu);
-		return true;
+		super.finish();
+		overridePendingTransition(R.anim.push_right_in, R.anim.push_right_out);
 	}
 	
-	public static class TabAdapter extends FragmentPagerAdapter{
-
-		public TabAdapter(FragmentManager fm) {
-			super(fm);
-			// TODO Auto-generated constructor stub
-		}
-
-		@Override
-		public Fragment getItem(int arg0) {
-			// TODO Auto-generated method stu
-			Fragment ft = null;
-			switch(arg0){
-			case 0:
-				ft = new GroupBasicFragment();
-				break;
-			case 1:
-				ft = new GroupRecentFragment();
-				break;
-			case 2:
-				ft = new GroupMembersFragment();
-				break;
-			default:
-				break;
-			}
-			return ft;
-		}
-
-		@Override
-		public int getCount() {
-			// TODO Auto-generated method stub
-			return TAB_NUM;
-		}
-		
-		@Override
-		public CharSequence getPageTitle(int position) {
-			// TODO Auto-generated method stub
-			if(position == 0)
-				return BASIC_TITLE;
-			else if(position == 1)
-				return RECENT_TITLE;
-			else
-				return MEMBERS_TITLE;
-		}
-	
-		
-	}
-
-	@Override
-	protected int id() {
-		// TODO Auto-generated method stub
-		return R.layout.activity_group_detail;
-	}
-
-
-	@Override
-	protected ViewPager viewPager() {
-		// TODO Auto-generated method stub
-		return (ViewPager)findViewById(R.id.group_pager);
-	}
-
-
-	@Override
-	protected FragmentPagerAdapter adapter() {
-		// TODO Auto-generated method stub
-		return new TabAdapter(getSupportFragmentManager());
-	}
-
-
-	@Override
-	protected List<String> tabNames() {
-		// TODO Auto-generated method stub
-		List<String> list = new ArrayList<String>();
-		list.add(BASIC_TITLE);
-		list.add(RECENT_TITLE);
-		list.add(MEMBERS_TITLE);
-		return list;
-	}
 	
 }

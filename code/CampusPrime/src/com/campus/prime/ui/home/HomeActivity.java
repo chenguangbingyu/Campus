@@ -6,6 +6,7 @@ import static com.campus.prime.constant.AppConstant.USERNAME;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Map;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -27,16 +28,17 @@ import android.widget.Toast;
 import com.campus.prime.R;
 import com.campus.prime.app.Auth;
 import com.campus.prime.constant.AppConstant;
-import com.campus.prime.core.Group;
 import com.campus.prime.core.GroupItem;
 import com.campus.prime.core.GroupPage;
 import com.campus.prime.core.service.GroupService;
-import com.campus.prime.slidingmenu.SlidingMenu;
 import com.campus.prime.ui.AsyncLoader;
 import com.campus.prime.ui.BaseSlidingActivity;
 import com.campus.prime.ui.group.GroupActivity;
+import com.campus.prime.ui.slidingmenu.SlidingMenu;
+import com.campus.prime.ui.user.UserActivity;
 import com.campus.prime.ui.user.UserActivity;
 import com.campus.prime.utils.CommonLog;
+import com.campus.prime.utils.IntentUtil;
 import com.campus.prime.utils.LogFactory;
 import com.weibo.sdk.android.Oauth2AccessToken;
 import com.weibo.sdk.android.Weibo;
@@ -78,7 +80,6 @@ public class HomeActivity extends BaseSlidingActivity
 	private Button mLogginButton;
 	private Button mRegisterButton;
 	private Button mUserProfileButton;
-	private Button mGroupProfileButton;
 	
 	/**
 	 * current showed Group
@@ -198,22 +199,9 @@ public class HomeActivity extends BaseSlidingActivity
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent intent = new Intent(HomeActivity.this,UserActivity.class);
-				startActivity(intent);
+				IntentUtil.start_activity(HomeActivity.this, UserActivity.class, (Map<String,Integer>)null);
 			}
 		});
-		
-		mGroupProfileButton = (Button)findViewById(R.id.group_profile);
-		mGroupProfileButton.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				Intent intent = new Intent(HomeActivity.this,GroupActivity.class);
-				startActivity(intent);
-			}
-		});
-		
 		
 		mAuthInfoTextView = (TextView)findViewById(R.id.auth_info);
 	}
@@ -239,17 +227,9 @@ public class HomeActivity extends BaseSlidingActivity
 			@Override
 			public boolean onNavigationItemSelected(int arg0, long arg1) {
 				// TODO Auto-generated method stub
-				/**
 				mCurrentGroup = mGroupsDownListAdapter.getGroupId(arg0);
 				mHomeFragment.setCurrentGroup(mCurrentGroup);
 				mHomeFragment.refresh();
-				**/
-				Intent intent = new Intent(HomeActivity.this,GroupActivity.class);
-				Bundle bundle = new Bundle();
-				int groupId = mGroupsDownListAdapter.getGroupId(arg0);
-				bundle.putInt("groupId", groupId);
-				intent.putExtras(bundle);
-				startActivity(intent);
 				return true;
 			}
 		});
@@ -296,10 +276,7 @@ public class HomeActivity extends BaseSlidingActivity
 	@Override
 	public void onLoadFinished(Loader<List<GroupItem>> arg0, List<GroupItem> arg1) {
 		// TODO Auto-generated method stub
-		if(arg1 != null){
-			mLog.i(arg1.get(0).toString());
-			mGroupsDownListAdapter.setOrgs(arg1);
-		}
+		mGroupsDownListAdapter.setOrgs(arg1);
 	}
 
 	@Override
@@ -308,8 +285,12 @@ public class HomeActivity extends BaseSlidingActivity
 		
 	}
 	
-	
-	
+	@Override
+	public void finish() {
+		// TODO Auto-generated method stub
+		super.finish();
+		overridePendingTransition(R.anim.push_right_in, R.anim.push_right_out);
+	}
 	
 		
 	/**

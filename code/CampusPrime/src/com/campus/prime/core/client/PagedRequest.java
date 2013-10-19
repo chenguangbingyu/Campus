@@ -1,6 +1,6 @@
 package com.campus.prime.core.client;
 
-import com.campus.prime.utils.UrlUtils;
+import com.campus.prime.core.utils.UrlUtils;
 
 public class PagedRequest<V> extends CampusRequest{
 	

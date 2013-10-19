@@ -7,6 +7,7 @@ import org.apache.http.client.ClientProtocolException;
 
 import com.campus.prime.core.Message;
 import com.campus.prime.core.MessagePage;
+import com.campus.prime.ui.MessagePageFragment;
 
 import android.os.Bundle;
 

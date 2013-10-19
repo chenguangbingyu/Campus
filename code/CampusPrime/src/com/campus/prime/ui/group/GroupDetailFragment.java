@@ -25,7 +25,7 @@ public class GroupDetailFragment extends Fragment
 	
 	
 	protected Group load(){
-		return null;
+		return service.getDetail(((GroupActivity)this.getActivity()).getGroupId());
 	}
 	
 	@Override

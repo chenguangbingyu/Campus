@@ -1,14 +1,23 @@
 package com.campus.prime.ui.user;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.http.message.BasicNameValuePair;
+
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ListView;
 
 import com.campus.prime.core.GroupItem;
 import com.campus.prime.core.GroupPage;
 import com.campus.prime.core.service.GroupService;
 import com.campus.prime.ui.PagedItemFragment;
 import com.campus.prime.ui.SingleTypeAdapter;
+import com.campus.prime.ui.group.GroupActivity;
+import com.campus.prime.utils.IntentUtil;
 
 public class GroupPageFragment extends PagedItemFragment<GroupItem> {
 	
@@ -54,5 +63,16 @@ public class GroupPageFragment extends PagedItemFragment<GroupItem> {
 		// TODO Auto-generated method stub
 		return new GroupListViewAdapter(getActivity(),items);
 	}
+	
+	@Override
+	public void onListItemClick(ListView l, View v, int position, long id) {
+		// TODO Auto-generated method stub
+		super.onListItemClick(l, v, position, id);
+		int groupId = ((GroupItem)adapter.getItem(position-1)).getId();
+		Map<String,Integer> params = new HashMap<String,Integer>();
+		params.put("groupId", groupId);
+		IntentUtil.start_activity(this.getActivity(), GroupActivity.class, params);
+	}
+	
 
 }

@@ -29,9 +29,7 @@ public class GroupListViewAdapter extends SingleTypeAdapter<GroupItem>{
 		// TODO Auto-generated method stub
 		mBitmapManager.loadBitmap(item.getAvatar(), imageView(0), null, 0, 0);
 		setText(1,item.getName());
-		
 	}
-	
 	
 }
 

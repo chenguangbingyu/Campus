@@ -19,6 +19,8 @@ public class GroupsDropDownListAdapter extends SingleTypeAdapter<GroupItem>{
 	private final LayoutInflater mInflater;
 	private final BitmapManager mBitmapManager;
 	
+	private List<GroupItem> items;
+	
 	
 	public GroupsDropDownListAdapter(Context context) {
 		super(context, R.layout.org_item);
@@ -38,6 +40,7 @@ public class GroupsDropDownListAdapter extends SingleTypeAdapter<GroupItem>{
 		square.setAvatar("http://bcs.duapp.com//campus-media%2Fmedia%2Ftest.jpg?sign=MBO%3A3de4772c4c4d00162c355b7f0d803f41%3Ad3kF0Ruy3VYtTwa1AJzSPXedmSA%3D");
 		square.setName("square");
 		if(groups != null){
+			this.items = groups;
 			for(GroupItem group : groups){
 				temp.add(group);
 			}
@@ -59,7 +62,7 @@ public class GroupsDropDownListAdapter extends SingleTypeAdapter<GroupItem>{
 		if(selectedId == 0)
 			return -1;
 		else
-			return getItem(selectedId - 1).getId();
+			return items.get(selectedId - 1).getId();
 	}
 	
 	@Override

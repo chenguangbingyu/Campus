@@ -8,7 +8,6 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.HttpVersion;
@@ -38,8 +37,8 @@ import org.apache.http.util.EntityUtils;
 
 import android.util.Base64;
 
+import com.campus.prime.core.utils.JsonUtil;
 import com.campus.prime.utils.CommonLog;
-import com.campus.prime.utils.JsonUtil;
 import com.campus.prime.utils.LogFactory;
 
 public class CampusClient {
