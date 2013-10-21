@@ -14,14 +14,9 @@
     </style>
 
     <style name="AppTheme" parent="android:Theme.Holo.Light.DarkActionBar">
-        <item name="android:actionBarStyle">@style/ActionBar</item>
     </style>
 
-    <style name="ActionBar" parent="@android:style/Widget.Holo.Light.ActionBar.Solid.Inverse">
-        <item name="android:background">@color/sa_green</item>
-        <item name="android:backgroundStacked">@color/stacked_green</item>
-        <item name="android:backgroundSplit">@color/sa_green</item>
-    </style>
+
 
     <style name="AvatarActionBar">
         <item name="android:layout_width">28dp</item>
@@ -105,5 +100,8 @@
         <item name="android:layout_width">32dp</item>
         <item name="android:layout_height">32dp</item>
     </style>
+    
+    
+    
 
 </resources>

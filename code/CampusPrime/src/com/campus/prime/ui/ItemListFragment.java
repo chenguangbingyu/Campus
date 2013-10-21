@@ -182,24 +182,6 @@ public abstract class ItemListFragment<E> extends Fragment implements
 	
 	
 	
-	@Override
-	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-		// TODO Auto-generated method stub
-		inflater.inflate(R.menu.refresh, menu);
-	}
-	
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// TODO Auto-generated method stub
-		switch(item.getItemId()){
-		case R.id.m_refresh:
-			forceRefresh();
-			return true;
-		default:
-			return super.onOptionsItemSelected(item);
-		}
-	}
-	
 	/**
 	 * force to refresh
 	 */
@@ -215,6 +197,8 @@ public abstract class ItemListFragment<E> extends Fragment implements
 	}
 	
 	protected void refresh(final Bundle args){
+		getActivity().setProgressBarIndeterminateVisibility(true);
+		
 		getLoaderManager().restartLoader(0, args, this);
 	}
 	
@@ -324,7 +308,11 @@ public abstract class ItemListFragment<E> extends Fragment implements
     	return this;
     }
 	
-	
+	@Override
+	public void onLoadFinished(Loader<List<E>> arg0, List<E> arg1) {
+		// TODO Auto-generated method stub
+		getActivity().setProgressBarIndeterminateVisibility(false);
+	}
 	
 	 /**
      * Callback when a list view item is clicked

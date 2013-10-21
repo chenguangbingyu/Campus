@@ -7,6 +7,9 @@ import java.util.List;
 import org.apache.http.client.ClientProtocolException;
 
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
+import android.view.View;
 
 import com.campus.prime.core.Message;
 import com.campus.prime.core.MessagePage;
@@ -14,8 +17,6 @@ import com.campus.prime.ui.MessagePageFragment;
 
 
 public class UserRecentFragment extends MessagePageFragment{
-
-	
 	
 	@SuppressWarnings("unchecked")
 	@Override
@@ -42,6 +43,7 @@ public class UserRecentFragment extends MessagePageFragment{
 			return page.getResults();
 		return null;
 	}
+	
 	
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {

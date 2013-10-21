@@ -123,10 +123,4 @@ public class BCSUtils {
 	
 	
 	
-	
-	
-	
-	
-	
-	
 }

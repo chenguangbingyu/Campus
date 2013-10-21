@@ -32,24 +32,21 @@
             android:name="com.campus.prime.ui.CreateMessageActivity"
             android:label="@string/title_activity_create_message"
             android:theme="@style/Theme.Campus" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.campus.prime.ui.HomeActivity" />
         </activity>
         <activity
             android:name="com.campus.prime.ui.user.UserActivity"
             android:label="@string/title_activity_user_profile"
-            android:theme="@style/Theme.AppCompat.Light" >
+            android:theme="@style/Theme.Campus" >
         </activity>
         <activity
             android:name="com.campus.prime.ui.group.GroupActivity"
             android:label="@string/title_activity_group_detail"
-            android:theme="@style/Theme.AppCompat.Light" >
+            android:theme="@style/Theme.Campus" >
         </activity>
         <activity
             android:name="com.campus.prime.ui.MessageDetailActivity"
             android:label="@string/title_activity_message_detail"
-            android:theme="@style/Theme.Campus" >
+            android:theme="@style/Theme.AppCompat.Light" >
         </activity>
         <activity
             android:name="com.campus.prime.ui.home.LoginActivity"

@@ -110,6 +110,7 @@ public abstract class PagedItemFragment<E> extends ItemListFragment<E>{
 	@Override
 	public void onLoadFinished(Loader<List<E>> arg0, List<E> arg1) {
 		// TODO Auto-generated method stub
+		super.onLoadFinished(arg0, arg1);
 		if(!isUsable())
 			return;
 		this.items = arg1;

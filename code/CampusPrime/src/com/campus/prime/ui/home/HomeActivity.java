@@ -18,9 +18,13 @@ import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBar.OnNavigationListener;
+import android.support.v7.view.ActionMode;
 import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -86,6 +90,10 @@ public class HomeActivity extends BaseSlidingActivity
 	 * -1 refer to public
 	 */
 	private int mCurrentGroup = -1;
+	/**
+	 * is first time loading data when create the activity
+	 */
+	private boolean mStart = true;
 		
 	
 	/**
@@ -96,13 +104,14 @@ public class HomeActivity extends BaseSlidingActivity
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
+		setProgressBarIndeterminateVisibility(false);
+		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		
 		FragmentManager fm = getSupportFragmentManager();
 		FragmentTransaction ft = fm.beginTransaction();
 		mHomeFragment= new HomeFragment();
-		
 		ft.add(R.id.container,mHomeFragment);
 		ft.commit();
 		
@@ -213,7 +222,20 @@ public class HomeActivity extends BaseSlidingActivity
 		return true;
 	}
 
-	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// TODO Auto-generated method stub
+		switch(item.getItemId()){
+		case R.id.action_edit:
+			break;
+		case R.id.action_refresh:
+			mHomeFragment.refresh();
+			break;
+		default:
+			super.onOptionsItemSelected(item);
+		}
+		return true;
+	}
 	/**
 	 * configure ActionBar
 	 * @param actionBar
@@ -229,11 +251,17 @@ public class HomeActivity extends BaseSlidingActivity
 				// TODO Auto-generated method stub
 				mCurrentGroup = mGroupsDownListAdapter.getGroupId(arg0);
 				mHomeFragment.setCurrentGroup(mCurrentGroup);
-				mHomeFragment.refresh();
+				if(mStart&&arg0 != 0)
+					mStart = false;
+				if(!mStart)
+					mHomeFragment.refresh();
 				return true;
 			}
 		});
 	}
+	
+	
+	
 	
 	/**
 	 * init sliding menu
@@ -339,6 +367,8 @@ public class HomeActivity extends BaseSlidingActivity
 		}
 		
 	}
-
+	
+	
+	
 
 }
