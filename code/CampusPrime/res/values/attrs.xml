@@ -102,5 +102,15 @@
         <!-- View background -->
         <attr name="android:background"/>
     </declare-styleable>
+    
+    
+    <!--   zhangzhen views -->
+    <attr name="state_dark" format="boolean" />
+	<attr name="state_sepia" format="boolean" />
+	<attr name="state_black" format="boolean" />
+	<attr name="state_light" format="boolean"/>
+	<attr name="fontface" format="integer" />
+	<attr name="label" format="string"/>
+	<attr name = "state_style_holo" format = "boolean"/>
 
 </resources>

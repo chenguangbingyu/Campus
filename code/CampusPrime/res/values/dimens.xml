@@ -10,4 +10,13 @@
     <dimen name="slidingmenu_offset">150dp</dimen>
     <dimen name="list_padding">10dp</dimen>
     <dimen name="shadow_width">15dp</dimen>
+    
+    <!--  zhanzhen views -->
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+	<dimen name="form_vertical_padding">20.0dip</dimen>
+    <dimen name="form_horizontal_padding">20.0dip</dimen>
+    <dimen name="form_text_size">16.0dip</dimen>
+    <dimen name="form_header_text_size">13.5dip</dimen>
 </resources>

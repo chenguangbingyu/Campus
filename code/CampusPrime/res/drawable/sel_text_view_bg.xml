@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:campus="http://schemas.android.com/apk/res.com.example.campusprime">
+    <item 
+        android:state_focused="true" 
+        android:drawable="@drawable/textfield_focused_dark"
+        campus:state_dark="true"/>
+    <item 
+        android:state_pressed="true" 
+        android:drawable="@drawable/textfield_focused_dark" 
+        campus:state_dark="true"/>
+    <item 
+        android:state_selected="true" 
+        android:drawable="@drawable/textfield_active_dark" 
+        campus:state_dark="true"/>
+    <item 
+        android:drawable="@drawable/textfield_empty_dark" 
+        campus:state_dark="true"/>
+    
+    
+    
+      <item 
+        android:state_focused="true"
+        android:drawable="@drawable/textfield_focused"
+        />
+    <item 
+        android:state_pressed="true" 
+        android:drawable="@drawable/textfield_focused"
+        />
+    <item
+        android:state_selected="true"
+        android:drawable="@drawable/textfield_active"
+        />
+     <item 
+        android:drawable="@drawable/textfield_empty"
+        />
+   
+  
+  
+</selector>

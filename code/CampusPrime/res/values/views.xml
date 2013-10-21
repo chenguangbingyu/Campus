@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="TextField">
+        <item name="android:textSize">@dimen/form_text_size</item>
+        <item name="android:textColor">@color/sel_text</item>
+        <item name="android:textColorHint">@color/sel_text_hint</item>
+        <item name="android:gravity">left</item>
+        <item name="android:layout_gravity">left</item>
+        <item name="android:background">@drawable/sel_edit_text_bg</item>
+        <item name="android:paddingBottom">12.0dip</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">8.0dip</item>
+        <item name="android:inputType">text</item>
+    </style>
+    
+    <style name="TextFieldLink" parent="@style/TextField">
+        <item name="android:background">@drawable/sel_text_holo_bg</item>
+        <item name="android:padding">12.0dip</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+    
+    <style name="label_text1">
+        <item name="android:textSize">@dimen/form_text_size</item>
+        <item name="android:textColor">@color/sel_text</item>
+        <item name="android:textColorHint">@color/sel_text_hint</item>
+        <item name="android:gravity">left</item>
+        <item name="android:layout_gravity">left</item>
+        <item name="android:background">@drawable/sel_text_view_bg</item>
+        <item name="android:paddingBottom">12.0dip</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">8.0dip</item>
+    </style>
+    
+    
+    
+    
+    
+    <style name="ListItem">
+        <item name="android:textSize">@dimen/form_text_size</item>
+        <item name="android:textColor">@color/sel_text</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_gravity">left</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingBottom">8.0dip</item>
+        <item name="android:paddingTop">8.0dip</item>
+        <item name="android:background">@drawable/sel_text_holo_bg</item>      
+    </style>
+    
+    <style name="Header">
+        <item name="android:textSize">@dimen/form_header_text_size</item>
+        <item name="android:textColor">@color/sel_header</item>
+        <item name="android:gravity">left</item>
+        <item name="android:paddingLeft">9.0dip</item>
+        <item name="android:paddingTop">27.0dip</item>
+        <item name="android:paddingRight">9.0dip</item>
+        <item name="android:paddingBottom">7.0dip</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+    
+	
+	<style name="my_dialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">false</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:background">@android:color/background_light</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:backgroundDimEnabled">true</item>
+    </style>
+    
+    <style name="dialog_title" >
+        <item name="android:textSize">@dimen/form_text_size</item>
+        <item name="android:textColor">@color/sel_text</item>
+        <item name="android:textColorHint">@color/sel_text_hint</item>
+        <item name="android:gravity">left</item>
+        <item name="android:layout_gravity">left</item>
+        <item name="android:background">@drawable/dia_title_bg</item>
+        <item name="android:paddingBottom">12.0dip</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">8.0dip</item>
+        
+    </style>
+    <style name="ListHeader">
+        <item name="android:textSize">@dimen/form_header_text_size</item>
+        <item name="android:textColor">@color/sel_header</item>
+        <item name="android:gravity">left</item>
+        <item name="android:paddingLeft">9.0dip</item>
+        <item name="android:paddingTop">9.0dip</item>
+        <item name="android:paddingRight">9.0dip</item>
+        <item name="android:paddingBottom">7.0dip</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+</resources>

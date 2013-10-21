@@ -23,5 +23,19 @@
     <color name="stacked_green">#118504</color>
     <color name="accent_green">#97e08f</color>
     
+    
+    <!-- zhangzhen  views -->
+    <color name="bg_light">#ffffffff</color>
+    <color name="bg_sepia">#fffbf0d9</color>
+    <color name="bg_dark">#ff252525</color>
+    <color name="bg_black">#ff000000</color>  
+    <color name="text_dark">#ffbbbbbb</color>
+    <color name="text_light">#ff000000</color>
+    <color name="text_hint_dark">#ff888888</color>
+    <color name="text_hint_light">#ff787878</color>
+    <color name="pocket_blue">#ff32bcb6</color>
+    <color name="header_light">@color/pocket_blue</color>
+    <color name="header_dark">@color/pocket_blue</color>
+    
 
 </resources>

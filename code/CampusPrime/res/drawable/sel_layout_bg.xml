@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector
+  	xmlns:android="http://schemas.android.com/apk/res/android" 
+  	xmlns:campus="http://schemas.android.com/apk/res/com.campus.prime"
+  	>
+   
+    <item android:drawable="@color/bg_black" campus:state_black="true" />
+    <item android:drawable="@color/bg_dark"  campus:state_dark="true" />
+    <item android:drawable="@color/bg_sepia" campus:state_sepia="true" />
+    <item android:drawable="@color/bg_light" />
+    
+</selector>

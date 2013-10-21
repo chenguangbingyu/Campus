@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector
+  xmlns:android="http://schemas.android.com/apk/res/android" 
+  xmlns:campus = "http://schemas.android.com/apk/res/com.campus.prime">
+    <item 
+        android:state_pressed="true" 
+        android:drawable="@drawable/toolbar_holo_press_sepia" 
+        campus:state_sepia="true" 
+        campus:state_style_holo="false" />
+    <item 
+        android:state_pressed="true" 
+        android:drawable="@drawable/toolbar_holo_press" />
+    
+    <item android:drawable="@android:color/transparent" />
+</selector>
+

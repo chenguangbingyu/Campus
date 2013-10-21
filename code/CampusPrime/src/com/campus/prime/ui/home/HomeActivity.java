@@ -39,6 +39,7 @@ import com.campus.prime.ui.AsyncLoader;
 import com.campus.prime.ui.BaseSlidingActivity;
 import com.campus.prime.ui.group.GroupActivity;
 import com.campus.prime.ui.slidingmenu.SlidingMenu;
+import com.campus.prime.ui.user.EditUserActivity;
 import com.campus.prime.ui.user.UserActivity;
 import com.campus.prime.ui.user.UserActivity;
 import com.campus.prime.utils.CommonLog;
@@ -208,7 +209,7 @@ public class HomeActivity extends BaseSlidingActivity
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				IntentUtil.start_activity(HomeActivity.this, UserActivity.class, (Map<String,Integer>)null);
+				IntentUtil.start_activity(HomeActivity.this, EditUserActivity.class, (Map<String,Integer>)null);
 			}
 		});
 		

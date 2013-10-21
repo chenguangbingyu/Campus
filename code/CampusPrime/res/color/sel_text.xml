@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector
+  	xmlns:android="http://schemas.android.com/apk/res/android" 
+  	xmlns:campus="http://schemas.android.com/apk/res/com.campus.prime"
+  	>
+   
+    <item android:color="@color/text_dark"  campus:state_dark="true" />
+    <item android:color="@color/text_light" />
+    
+</selector>
