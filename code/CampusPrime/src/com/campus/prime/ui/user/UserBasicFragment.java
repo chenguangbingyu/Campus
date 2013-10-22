@@ -1,26 +1,22 @@
 package com.campus.prime.ui.user;
 
 import android.os.Bundle;
+import android.support.v4.content.Loader;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.campus.prime.R;
+import com.campus.prime.core.User;
 import com.campus.prime.ui.view.LabelTextView;
 import com.campus.prime.ui.view.ThemeTextView;
 
 public class UserBasicFragment extends UserProfileFragment{
 	
-	private Boolean isDark= false;
 	
-	private String user_nickname;
-	private String user_realname;
-	private String user_gender;
-	private String user_description;
-	private String user_school;
-	private String user_academy;
-	private String user_grade;
+	private Boolean isDark= false;
 	
 	ThemeTextView view_nickname;
 	LabelTextView view_realname;
@@ -45,7 +41,8 @@ public class UserBasicFragment extends UserProfileFragment{
 		// TODO Auto-generated method stub
 		super.onViewCreated(view, savedInstanceState);
 		getView(view);
-		setParams();
+		
+		
 	}
 	
 	@Override
@@ -54,17 +51,6 @@ public class UserBasicFragment extends UserProfileFragment{
 		super.onActivityCreated(savedInstanceState);
 		getLoaderManager().initLoader(0, null, this);
 	}
-	
-	
-	@Override
-	protected void onLoadedFinish() {
-		// TODO Auto-generated method stub
-		super.onLoadedFinish();
-		
-	}
-	
-	
-	
 	
 	
 	public void getView(View view)
@@ -80,23 +66,38 @@ public class UserBasicFragment extends UserProfileFragment{
 	
 	public void setParams()
 	{
-		view_nickname.setText("会跑的猪");
+		
+		
+		
+		view_nickname.setText(user.getNick_name());
 		view_realname.setLabel("姓名");
-		view_realname.setText("小七");
+		view_realname.setText(user.getReal_name());
 		view_lovestate.setLabel("恋爱状态");
 		view_lovestate.setText("单身");
 		view_description.setLabel("个人描述");
-		view_description.setText("我是来自哈姆雷特星球的小七，初到宝地，请多多关照!");
+		view_description.setText(user.getDescription());
 		view_school.setLabel("学校");
-		view_school.setText("菲律宾大学");
+		view_school.setText("user.getSchool()");
 		view_academy.setLabel("学院");
-		view_academy.setText("扛饿继续教育学院");
+		view_academy.setText("user.getAcademy().getName()");
 		view_grade.setLabel("年级");
-		view_grade.setText("2013级");
+		view_grade.setText("user.getGrade()");
 		
 	}
 	
-	
-	
+	@Override
+	protected void onLoadedFinish() {
+		// TODO Auto-generated method stub
+		super.onLoadedFinish();
+		if(user == null)
+		{
+			Log.i("GetUser","NUll");
+		}
+		else
+		{
+			setParams();
+		}
+		
+	}
 	
 }

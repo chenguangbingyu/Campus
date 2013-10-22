@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.campus.prime.core.GroupItem;
 import com.campus.prime.core.GroupPage;
+import com.campus.prime.ui.SingleTypeAdapter;
 
 import android.os.Bundle;
 
@@ -17,7 +18,6 @@ public class UserGroupsFragment extends GroupPageFragment{
 		super.onActivityCreated(savedInstanceState);
 		setEmptyText("No Groups");
 	}
-	
 	
 	@SuppressWarnings("unchecked")
 	@Override
@@ -34,5 +34,10 @@ public class UserGroupsFragment extends GroupPageFragment{
 			result = page.getResults();
 		return result;
 	}
-	
+
+	@Override
+	protected GroupListViewAdapter createAdapter(List<GroupItem> items) {
+		// TODO Auto-generated method stub
+		return new GroupListViewAdapter(getActivity(),items);
+	}
 }

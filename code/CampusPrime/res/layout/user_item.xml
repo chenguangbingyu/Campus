@@ -14,23 +14,65 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 -->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/ListItem"
-    android:gravity="center_vertical"
-    android:orientation="horizontal" >
-
+<com.campus.prime.ui.view.DetectLinearLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:campus="http://schemas.android.com/apk/res/com.campus.prime.ui.home"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"   
+    android:orientation="horizontal"
+    style="@style/TextFieldLink"
+    >
     <ImageView
-        android:id="@+id/iv_avatar"
-        style="@style/AvatarLarge"
-        android:contentDescription="@string/avatar" />
+        android:id="@+id/user_avactar"
+        android:layout_width="60dip"
+        android:layout_height="60dip"
+        android:padding="4.0dip"
+        android:layout_gravity="center_vertical"
+        android:src="@drawable/ic_avactar"
+        >
+    </ImageView>
+   <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_gravity="center_vertical"
+        >
+        <com.campus.prime.ui.view.ThemeTextView
+            android:id="@+id/user_name"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10.0dip"
+           	android:layout_above="@id/user_school"
+            android:text="UserName"
+            android:textSize="18dip"
+            />            
+        <com.campus.prime.ui.view.ThemeTextView
+            android:id="@+id/user_school"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10.0dip"
+            android:hint="School"
+            android:textSize="13dip"
+            >            
+        </com.campus.prime.ui.view.ThemeTextView>
 
-    <TextView
-        android:id="@+id/tv_login"
-        style="@style/ListTitleText"
-        android:layout_width="match_parent"
-        android:paddingLeft="10dp"
-        android:paddingTop="4dp"
-        android:singleLine="true"
-        android:textStyle="normal" />
+            
 
-</LinearLayout>
+
+        <com.campus.prime.ui.view.ThemeTextView
+            android:id="@+id/user_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/user_school"
+            android:layout_toRightOf="@+id/user_avactar"
+            android:layout_marginLeft="10.0dip"
+            
+           	android:singleLine="true"
+           	android:ellipsize="end"
+            
+            android:hint="academy"
+            android:textSize="15dip" />
+        
+    </RelativeLayout>
+	
+</com.campus.prime.ui.view.DetectLinearLayout >

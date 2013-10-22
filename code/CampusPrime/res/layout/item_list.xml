@@ -1,25 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.campus.prime.ui.view.DetectRelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:andorid="http://schmes.andorid.com/apk/res/com.campus.prime.ui.home"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
-
-    <com.handmark.pulltorefresh.library.PullToRefreshListView
-        android:id="@+id/list"
-        style="@style/ListView"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent" />
-
-    <TextView
-        android:id="@+id/empty"
-        style="@style/ListSubtitleText"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:visibility="gone" />
-
-    <ProgressBar
-        android:id="@+id/pb_loading"
-        style="@style/ListSpinner"
-        android:layout_centerInParent="true" />
-
-</RelativeLayout>
+    android:layout_height="match_parent" 
+    android:orientation="vertical"
+    android:background="@drawable/sel_layout_bg"
+ 	>
+	<LinearLayout
+	    android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:paddingLeft="@dimen/form_horizontal_padding"
+        android:paddingRight="@dimen/form_horizontal_padding"           
+        android:paddingBottom="@dimen/form_vertical_padding"
+        android:orientation="vertical">
+	    <com.handmark.pulltorefresh.library.PullToRefreshListView
+	        android:id="@+id/list"
+	        style="@style/ListView"
+	        android:layout_width="fill_parent"
+	        android:layout_height="fill_parent" />
+	
+	 	<TextView
+	        android:id="@+id/empty"
+	        style="@style/ListSubtitleText"
+	        android:layout_width="match_parent"
+	        android:layout_height="match_parent"
+	        android:gravity="center"
+	        android:visibility="gone" />
+	    <ProgressBar
+	        android:id="@+id/pb_loading"
+	        style="@style/ListSpinner"
+	        android:layout_centerInParent="true" />
+    
+    </LinearLayout>    
+</com.campus.prime.ui.view.DetectRelativeLayout>

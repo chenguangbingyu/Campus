@@ -52,4 +52,8 @@ public class UserRecentFragment extends MessagePageFragment{
 		setEmptyText("No user Recent");
 	}
 	
+	
+	
+	
+	
 }

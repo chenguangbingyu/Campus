@@ -209,7 +209,7 @@ public class HomeActivity extends BaseSlidingActivity
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				IntentUtil.start_activity(HomeActivity.this, EditUserActivity.class, (Map<String,Integer>)null);
+				IntentUtil.start_activity(HomeActivity.this, UserActivity.class, (Map<String,Integer>)null);
 			}
 		});
 		

@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
+import android.util.Log;
 
 
 public class UserProfileFragment extends Fragment
@@ -28,6 +29,7 @@ public class UserProfileFragment extends Fragment
 	protected User load(){
 		User result = null;
 		int userId = ((UserActivity)getActivity()).getUserId();
+		Log.i("tag",userId + " ");
 		if(userId != -1)
 			result = service.getProfile(userId);
 		else

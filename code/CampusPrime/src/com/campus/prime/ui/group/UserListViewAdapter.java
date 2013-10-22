@@ -22,7 +22,7 @@ public class UserListViewAdapter extends SingleTypeAdapter<UserItem>{
 	@Override
 	protected int[] getChildViewIds() {
 		// TODO Auto-generated method stub
-		return new int[]{R.id.iv_avatar,R.id.tv_login};
+		return new int[]{R.id.user_avactar,R.id.user_name,R.id.user_school,R.id.user_description};
 	}
 
 
@@ -31,6 +31,8 @@ public class UserListViewAdapter extends SingleTypeAdapter<UserItem>{
 		// TODO Auto-generated method stub
 		mBitmapManager.loadBitmap(item.getAvatar(),imageView(0),null,0,0);
 		setText(1,item.getNick_name());
+		setText(2,"user_school");
+		setText(3,"user_description");
 	}
 	
 }

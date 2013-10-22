@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.campus.prime.ui.view.DetectRelativeLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:campus="http://schmes.android.com/apk/res/com.campus.prime.ui.home"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/sel_layout_bg"
+    >
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        >
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:paddingLeft="@dimen/form_horizontal_padding"
+            android:paddingRight="@dimen/form_horizontal_padding"
+            android:paddingTop="@dimen/form_vertical_padding"
+            android:paddingBottom="@dimen/form_vertical_padding"
+            android:orientation="vertical"
+            >
+		   <RelativeLayout
+		        android:layout_width="fill_parent"
+		        android:layout_height="wrap_content"
+		        
+		        >
+		        <com.campus.prime.ui.view.ThemeImageView
+		            android:id="@+id/group_avactar"
+		            android:layout_width="80dip"
+		            android:layout_height="80dip"
+		            android:layout_marginLeft="4.0dip"
+		            android:layout_gravity="center_vertical"
+		            android:src="@drawable/ic_avactar"
+		            />	            
+
+		        
+		        <com.campus.prime.ui.view.ThemeTextView
+		            android:id="@+id/group_name"
+		            android:layout_width="fill_parent"
+		            android:layout_height="wrap_content"
+		            android:layout_toRightOf="@id/group_avactar"
+		            android:layout_marginLeft="10dip"
+		            android:text="向上协会" 
+		            android:textSize="30dip"
+		            />	            
+		        <LinearLayout
+		            android:layout_width="fill_parent"
+		            android:layout_height="wrap_content"
+		            android:layout_marginLeft="10dip"
+		            android:layout_toRightOf="@id/group_avactar"
+		            android:layout_below="@id/group_name"
+		            android:orientation="horizontal"
+		            >
+		            <com.campus.prime.ui.view.ThemeTextView
+		                android:layout_width="wrap_content"
+		                android:layout_height="wrap_content"
+		                android:text="关注"
+		                android:textSize="18.dip"/>
+		                
+		            <com.campus.prime.ui.view.ThemeTextView
+		                android:id="@+id/group_cares"
+		                android:layout_width="wrap_content"
+		                android:layout_height="wrap_content"
+		                android:layout_marginLeft="10dip"
+		                android:text="80"
+		                android:textSize="18.0dip"
+		                />		                
+		            <com.campus.prime.ui.view.ThemeTextView
+		                android:layout_width="wrap_content"
+		                android:layout_height="wrap_content"
+		                 android:layout_marginLeft="10dip"
+		                android:text="成员"
+		                android:textSize="18.0dip"/>		                
+		            <com.campus.prime.ui.view.ThemeTextView
+		                android:id="@+id/group_mems"
+		                android:layout_width="wrap_content"
+		                android:layout_height="wrap_content"
+		                android:layout_marginLeft="10.0dip"
+		                android:text="76"
+		                android:textSize="18.0dip"               
+		                />
+		            
+		  		</LinearLayout>
+		              
+		    </RelativeLayout>
+		    
+		    <com.campus.prime.ui.view.Header
+		        android:layout_width="fill_parent"
+		        android:layout_height="wrap_content"
+		        android:text="@string/general_label"
+		        android:textSize="20dip"
+		        style="@style/Header"	        
+		        />	        
+		    <com.campus.prime.ui.view.LabelTextView
+		        android:id="@+id/group_type"
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content"
+				android:text="学生社团"
+				style="@style/label_text1"
+				/>
+			<com.campus.prime.ui.view.LabelTextView
+			    android:id="@+id/group_description"
+			    android:layout_width="fill_parent"
+			    android:layout_height="wrap_content"
+			    android:text="本社团属于人民，立志投身和平事业，为维护世界和平尽自己的一份力量，，，"
+			    style="@style/label_text1"
+			    />			    
+		    <com.campus.prime.ui.view.Header
+		        android:layout_width="fill_parent"
+		        android:layout_height="wrap_content"
+		        android:text="Infomation"
+		        android:textSize="20dip"
+		        style="@style/Header"
+		        />		        
+		    <com.campus.prime.ui.view.LabelTextView
+		        android:id="@+id/group_creator"
+		        android:layout_width="fill_parent"
+		        android:layout_height="wrap_content"
+		        android:text="会飞的猪"
+		        style="@style/label_text1"
+		        />		        
+		    <com.campus.prime.ui.view.LabelTextView
+		        android:id="@+id/group_information"
+		        android:layout_width="fill_parent"
+		        android:layout_height="wrap_content"
+		        android:text="最近将要发动一场维护和平的战争，请各位社员看到公告后，携带有利武器来图书馆门前集合."
+		        style="@style/label_text1"
+		        />	        
+		    
+		    
+		 </LinearLayout>
+    </ScrollView>
+    
+
+</com.campus.prime.ui.view.DetectRelativeLayout>
