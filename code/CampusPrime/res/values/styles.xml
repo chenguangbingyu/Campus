@@ -69,7 +69,7 @@
         <item name="android:layout_width">64dp</item>
         <item name="android:layout_height">64dp</item>
     </style>
-
+<!-- 
     <style name="user_face_image">
         <item name="android:layout_width">40.0dip</item>
         <item name="android:layout_height">40.0dip</item>
@@ -77,9 +77,9 @@
         <item name="android:padding">1.0dip</item>
         <item name="android:clickable">true</item>
         <item name="android:background">@drawable/widget_dface_border</item>
-        <!-- <item name="android:src">@drawable/widget_dface_loading</item>-->
+        <item name="android:src">@drawable/widget_dface_loading</item>
     </style>
-
+-->
     <style name="LoginFormContainer">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>

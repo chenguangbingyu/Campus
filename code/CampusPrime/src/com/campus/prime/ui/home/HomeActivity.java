@@ -12,20 +12,21 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBar.OnNavigationListener;
-import android.support.v7.view.ActionMode;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,10 +38,7 @@ import com.campus.prime.core.GroupPage;
 import com.campus.prime.core.service.GroupService;
 import com.campus.prime.ui.AsyncLoader;
 import com.campus.prime.ui.BaseSlidingActivity;
-import com.campus.prime.ui.group.GroupActivity;
 import com.campus.prime.ui.slidingmenu.SlidingMenu;
-import com.campus.prime.ui.user.EditUserActivity;
-import com.campus.prime.ui.user.UserActivity;
 import com.campus.prime.ui.user.UserActivity;
 import com.campus.prime.utils.CommonLog;
 import com.campus.prime.utils.IntentUtil;
@@ -60,8 +58,10 @@ import com.weibo.sdk.android.util.AccessTokenKeeper;
  *
  */
 
-public class HomeActivity extends BaseSlidingActivity 
+public class HomeActivity extends DrawerActivity
 		implements LoaderCallbacks<List<GroupItem>>{
+	
+	
 	/**
 	 * log
 	 */
@@ -74,7 +74,6 @@ public class HomeActivity extends BaseSlidingActivity
 	private GroupsDropDownListAdapter mGroupsDownListAdapter;
 	private SlidingMenu mSlidingMenu;
 	
-	private HomeFragment mHomeFragment;
 	
 	/**
 	 * UserService
@@ -91,10 +90,7 @@ public class HomeActivity extends BaseSlidingActivity
 	 * -1 refer to public
 	 */
 	private int mCurrentGroup = -1;
-	/**
-	 * is first time loading data when create the activity
-	 */
-	private boolean mStart = true;
+	
 		
 	
 	/**
@@ -105,6 +101,7 @@ public class HomeActivity extends BaseSlidingActivity
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		/**
 		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 		setProgressBarIndeterminateVisibility(false);
 		
@@ -115,13 +112,13 @@ public class HomeActivity extends BaseSlidingActivity
 		mHomeFragment= new HomeFragment();
 		ft.add(R.id.container,mHomeFragment);
 		ft.commit();
-		
-		
+	**/
+		super.onCreate(savedInstanceState);
 		final ActionBar actionBar = getSupportActionBar();
 		configureActionBar(actionBar);
-		initSlidingMenu();
+		//initSlidingMenu();
 		
-		initView();
+		//initView();
 		getInfos();
 		
 		/*
@@ -139,6 +136,7 @@ public class HomeActivity extends BaseSlidingActivity
 		
 		*/
 	}
+	
 	
 	@Override
 	protected void onStart() {
@@ -165,6 +163,7 @@ public class HomeActivity extends BaseSlidingActivity
 	/**
 	 * init control view
 	 */
+	/**
 	private void initView(){
 		mWeiboButton = (Button)findViewById(R.id.weibo_auth_btn);
 		mWeiboButton.setOnClickListener(new OnClickListener() {
@@ -209,13 +208,13 @@ public class HomeActivity extends BaseSlidingActivity
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				IntentUtil.start_activity(HomeActivity.this, EditUserActivity.class, (Map<String,Integer>)null);
+				IntentUtil.start_activity(HomeActivity.this, UserActivity.class, (Map<String,Integer>)null);
 			}
 		});
 		
 		mAuthInfoTextView = (TextView)findViewById(R.id.auth_info);
 	}
-	
+	**/
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -230,7 +229,7 @@ public class HomeActivity extends BaseSlidingActivity
 		case R.id.action_edit:
 			break;
 		case R.id.action_refresh:
-			mHomeFragment.refresh();
+			mFragment.refresh();
 			break;
 		default:
 			super.onOptionsItemSelected(item);
@@ -242,7 +241,7 @@ public class HomeActivity extends BaseSlidingActivity
 	 * @param actionBar
 	 */
 	private void configureActionBar(ActionBar actionBar){
-		
+		/**
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
 		mGroupsDownListAdapter = new GroupsDropDownListAdapter(this);
 		actionBar.setListNavigationCallbacks(mGroupsDownListAdapter, new OnNavigationListener() {
@@ -259,6 +258,7 @@ public class HomeActivity extends BaseSlidingActivity
 				return true;
 			}
 		});
+		**/
 	}
 	
 	
@@ -267,6 +267,7 @@ public class HomeActivity extends BaseSlidingActivity
 	/**
 	 * init sliding menu
 	 */
+	/**
 	private void initSlidingMenu() {
         setBehindContentView(R.layout.behind_slidingmenu);
         // customize the SlidingMenu
@@ -279,7 +280,7 @@ public class HomeActivity extends BaseSlidingActivity
         //slidingMenu.setShadowWidth(20);
         mSlidingMenu.setBehindScrollScale(0);
     }
-	
+	**/
 
 
 
@@ -305,7 +306,8 @@ public class HomeActivity extends BaseSlidingActivity
 	@Override
 	public void onLoadFinished(Loader<List<GroupItem>> arg0, List<GroupItem> arg1) {
 		// TODO Auto-generated method stub
-		mGroupsDownListAdapter.setOrgs(arg1);
+		//mGroupsDownListAdapter.setOrgs(arg1);
+		setGroups(arg1);
 	}
 
 	@Override

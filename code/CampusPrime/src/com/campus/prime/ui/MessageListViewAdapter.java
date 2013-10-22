@@ -28,7 +28,7 @@ public class MessageListViewAdapter extends SingleTypeAdapter<Message>{
 	@Override
 	protected int[] getChildViewIds() {
 		// TODO Auto-generated method stub
-		return new int[]{R.id.message_listitem_avater,R.id.message_listitem_commentCount,
+		return new int[]{R.id.message_listitem_avatar,R.id.message_listitem_commentCount,
 				R.id.message_listitem_content,R.id.message_listitem_date,R.id.message_listitem_username};
 		
 	}

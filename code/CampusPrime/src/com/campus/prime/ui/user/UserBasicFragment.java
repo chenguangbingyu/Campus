@@ -14,6 +14,7 @@ public class UserBasicFragment extends UserProfileFragment{
 	
 	private Boolean isDark= false;
 	
+	
 	private String user_nickname;
 	private String user_realname;
 	private String user_gender;
@@ -65,8 +66,6 @@ public class UserBasicFragment extends UserProfileFragment{
 	
 	
 	
-	
-	
 	public void getView(View view)
 	{
 		view_nickname = (ThemeTextView) view.findViewById(R.id.user_nickname);
@@ -80,7 +79,7 @@ public class UserBasicFragment extends UserProfileFragment{
 	
 	public void setParams()
 	{
-		view_nickname.setText("»áÅÜµÄÖí");
+		view_nickname.setText("xiaoqi");
 		view_realname.setLabel("ÐÕÃû");
 		view_realname.setText("Ð¡Æß");
 		view_lovestate.setLabel("Áµ°®×´Ì¬");

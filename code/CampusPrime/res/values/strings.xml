@@ -11,14 +11,10 @@
     <string name="action_send">send</string>
     <string name="action_refresh">refresh</string>
     <string name="title_activity_create_message">CreateMessageActivity</string>
-
-
     <string name="title_activity_user_profile">UserProfileActivity</string>
     <string name="title_activity_group_detail">GroupDetailActivity</string>
-
     <string name="avatar">avatar</string>
-    
-    
+
     <!-- profile -->
     <string name="app_name">CampusPrime</string>
     <string name="action_settings">Settings</string>
@@ -28,9 +24,16 @@
     <string name="general_label">General</string>
     <string name="personal_label">Personal</string>
     <string name="education_label">Education</string>
-	<string name="user_name">UserName</string>
-	<string name="user_love">LoveState</string>
-	<string name="user_description">descriptino...</string>
-	<string name="user_email">353185080@qq.com</string>
-	<string name="change_love_state">LoveState</string>
+    <string name="user_name">UserName</string>
+    <string name="user_love">LoveState</string>
+    <string name="user_description">descriptino...</string>
+    <string name="user_email">353185080@qq.com</string>
+    <string name="change_love_state">LoveState</string>
+    <string name="title_activity_home_activity2">HomeActivity2</string>
+    
+    
+    <!--  Drawer -->
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+
 </resources>

@@ -21,8 +21,10 @@ public class BaseActivity extends ActionBarActivity{
 	}
 	
 	private void configureActionBar(ActionBar actionBar){
+		/**
 		actionBar.setDisplayShowTitleEnabled(false);
 		actionBar.setDisplayHomeAsUpEnabled(false);
 		actionBar.setIcon(null);
+		**/
 	}
 }
