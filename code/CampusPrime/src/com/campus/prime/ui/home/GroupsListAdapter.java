@@ -15,7 +15,7 @@ public class GroupsListAdapter extends SingleTypeAdapter<GroupItem>{
 	BitmapManager mBitmapManager = BitmapManager.getInstance();
 	
 	public GroupsListAdapter(Context context,List<GroupItem> groups){
-		super(context,R.layout.user_item);
+		super(context,R.layout.group_item);
 		setItems(groups);
 	}
 

@@ -1,60 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout 
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:campus="http://schemas.android.com/apk/res/com.campus.prime.ui.home"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"   
-    android:orientation="horizontal"
-    style="@style/TextFieldLink"
-    >
-    <com.campus.prime.ui.view.ThemeImageView
-        android:id="@+id/group_avactar"
-        android:layout_width="60dip"
-        android:layout_height="60dip"
-        android:padding="4.0dip"
-        android:layout_gravity="center_vertical"
-        android:background="@drawable/ic_avactar"
-        />
-   <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_gravity="center_vertical"
-        >
-        <com.campus.prime.ui.view.ThemeTextView
-            android:id="@+id/group_type"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="10.0dip"
-            android:hint="School"
-            android:textSize="13dip"
-            />            
-        <com.campus.prime.ui.view.ThemeTextView
-            android:id="@+id/group_name"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10.0dip"
-           	android:layout_above="@id/group_type"
-            android:text="UserName"
-            android:textSize="18dip"
-            />            
-        
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    <ImageView
+        android:id="@+id/iv_avatar"
+        style="@style/AvatarActionBar"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="6dp"
+        android:contentDescription="avatar" />
 
-        <com.campus.prime.ui.view.ThemeTextView
-            android:id="@+id/group_description"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/group_type"
-     		android:layout_marginLeft="10.0dip"      
-            android:text="本社团属于人民，立志投身和平事业，为维护世界和平尽自己的一份力量。"
-            android:textSize="15dip"
-     		android:singleLine="true"
-           	android:ellipsize="end"
-		   />
+    <TextView
+        android:id="@+id/tv_login"
+        style="@style/TitleText"
+        android:text="test"
+        android:paddingBottom="0dp"
+        android:singleLine="true"
+        android:textStyle="normal" />
 
-
-     
-        
-    </RelativeLayout>
-	
 </LinearLayout>

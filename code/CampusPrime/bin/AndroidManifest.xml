@@ -22,11 +22,7 @@
             android:name="com.campus.prime.ui.home.HomeActivity"
             android:label="@string/app_name"
             android:theme="@style/Theme.Campus" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            
         </activity>
         <activity
             android:name="com.campus.prime.ui.CreateMessageActivity"
@@ -37,11 +33,17 @@
             android:name="com.campus.prime.ui.user.UserActivity"
             android:label="@string/title_activity_user_profile"
             android:theme="@style/Theme.Campus" >
+            
         </activity>
         <activity
             android:name="com.campus.prime.ui.group.GroupActivity"
             android:label="@string/title_activity_group_detail"
             android:theme="@style/Theme.Campus" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name="com.campus.prime.ui.MessageDetailActivity"

@@ -79,7 +79,7 @@ public class DrawerActivity extends BaseActivity {
 		 /**
         mDrawerList.setAdapter(new ArrayAdapter<String>(this,
                 R.layout.drawer_list_item, mGroupsTitles));
-                **/
+        **/
 		mGroupsListAdapter = new GroupsListAdapter(this,mGroups);
 		mDrawerList.setAdapter(mGroupsListAdapter);
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
