@@ -63,6 +63,11 @@
             android:label="@string/title_activity_register"
             android:windowSoftInputMode="adjustResize|stateVisible" >
         </activity>
+        <activity
+            android:name="com.campus.prime.ui.home.DrawerActivity"
+            android:label="@string/title_activity_home_activity2"
+            android:theme="@style/Theme.AppCompat.Light" >
+        </activity>
     </application>
 
 </manifest>

@@ -1,0 +1,107 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".CreateMessageActivity" >
+  
+ <RelativeLayout
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_weight="1"
+    android:background="#eee" >
+    
+     
+     
+     
+     
+     <LinearLayout
+            android:id="@+id/ll_comment_limittext"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="#00ffffff"
+            android:orientation="horizontal" >
+
+         
+         
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp" >
+    
+                <LinearLayout
+                    android:id="@+id/ll_comment_textlimit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="false"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:onClick="deleteWeiboComment" >
+
+                    <TextView
+                        android:id="@+id/tv_comment_counter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="5dp"
+                        android:text="140"
+                        android:textColor="#333" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        />
+                </LinearLayout>
+        
+    </RelativeLayout>
+    
+            
+            
+  </LinearLayout>
+     
+     
+     
+
+         
+    
+    
+    <LinearLayout
+      android:layout_width="fill_parent"
+      android:layout_height="fill_parent"
+      android:layout_above="@id/ll_comment_limittext"
+      android:layout_alignParentTop="true"
+      android:layout_margin="3dp"
+      android:background="#00ffffff"
+      android:orientation="vertical" >
+   
+   
+      <EditText
+	      android:id="@+id/editMsg"
+	      android:layout_width="fill_parent"
+          android:layout_height="fill_parent"
+          android:gravity="top|left"
+	      android:hint="皇上，臣妾做不到啊..."
+	      android:imeOptions="actionDone"
+          android:inputType="textMultiLine"
+          android:isScrollContainer="true"
+          android:singleLine="false" />   
+        
+  </LinearLayout>
+ 
+    
+    
+</RelativeLayout>
+	  
+  
+               
+               
+	   
+</LinearLayout>

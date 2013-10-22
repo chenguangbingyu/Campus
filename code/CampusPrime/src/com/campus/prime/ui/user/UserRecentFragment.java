@@ -14,6 +14,7 @@ import android.view.View;
 import com.campus.prime.core.Message;
 import com.campus.prime.core.MessagePage;
 import com.campus.prime.ui.MessagePageFragment;
+import com.campus.prime.ui.SingleTypeAdapter;
 
 
 public class UserRecentFragment extends MessagePageFragment{
@@ -51,6 +52,7 @@ public class UserRecentFragment extends MessagePageFragment{
 		super.onActivityCreated(savedInstanceState);
 		setEmptyText("No user Recent");
 	}
+
 	
 	
 	

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="groups_array">
+        <item>group1</item>
+        <item>group2</item>
+        <item>group3</item>
+        <item>group4</item>
+        <item>group5</item>
+        <item>group6</item>
+        <item>group7</item>
+        <item>group8</item>
+    </string-array>
+</resources>

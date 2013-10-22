@@ -16,7 +16,18 @@ import com.campus.prime.ui.view.ThemeTextView;
 public class UserBasicFragment extends UserProfileFragment{
 	
 	
+<<<<<<< HEAD
 	private Boolean isDark= false;
+=======
+	
+	private String user_nickname;
+	private String user_realname;
+	private String user_gender;
+	private String user_description;
+	private String user_school;
+	private String user_academy;
+	private String user_grade;
+>>>>>>> 07fb70464a4d8897e7411c585bd0e11a0c0f1e8b
 	
 	ThemeTextView view_nickname;
 	LabelTextView view_realname;
@@ -53,6 +64,18 @@ public class UserBasicFragment extends UserProfileFragment{
 	}
 	
 	
+<<<<<<< HEAD
+=======
+	@Override
+	protected void onLoadedFinish() {
+		// TODO Auto-generated method stub
+		super.onLoadedFinish();
+		
+	}
+	
+	
+	
+>>>>>>> 07fb70464a4d8897e7411c585bd0e11a0c0f1e8b
 	public void getView(View view)
 	{
 		view_nickname = (ThemeTextView) view.findViewById(R.id.user_nickname);
@@ -66,10 +89,14 @@ public class UserBasicFragment extends UserProfileFragment{
 	
 	public void setParams()
 	{
+<<<<<<< HEAD
 		
 		
 		
 		view_nickname.setText(user.getNick_name());
+=======
+		view_nickname.setText("xiaoqi");
+>>>>>>> 07fb70464a4d8897e7411c585bd0e11a0c0f1e8b
 		view_realname.setLabel("ÐÕÃû");
 		view_realname.setText(user.getReal_name());
 		view_lovestate.setLabel("Áµ°®×´Ì¬");
